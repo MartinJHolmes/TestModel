@@ -1,7 +1,8 @@
 package TestModel.SDF.Bank4;
 
 import TestModel.Support.TestWebElement;
-import io.cucumber.java.en.When;
+import cucumber.api.Scenario;
+import cucumber.api.java.en.When;
 
 public class Bank5 {
 	//private Scenario scenario;
@@ -11,7 +12,6 @@ public class Bank5 {
 		TestWebElement.setValueTo("Date", "16031968");
 		TestWebElement.trySomething();
 		Thread.sleep(3000);
-		TestWebElement.driver.get("https://jsonplaceholder.typicode.com/todos/1");
 	}
 
 }
