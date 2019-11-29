@@ -5,10 +5,11 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import TestModel.Environ.GlobalVariables;
+
 import TestModel.Support.TestWebElement;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
 
 public class AmazonBookSearch {
 	@When("I am on the Amazon Page")

@@ -1,8 +1,8 @@
 package TestModel.SDF.Bank4;
 
 import TestModel.Support.TestWebElement;
-import cucumber.api.Scenario;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.When;
+
 
 public class Bank5 {
 	//private Scenario scenario;
