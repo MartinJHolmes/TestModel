@@ -13,11 +13,8 @@ import TestModel.Environ.GlobalVariables;
 import TestModel.Support.LoadData;
 import TestModel.Support.RunData;
 import TestModel.Support.TestWebElement;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.When;
+
 
 public class Bank4 {
 	

@@ -1,9 +1,10 @@
 package TestModel;
 
 import org.junit.runner.RunWith;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+
 
 
 @RunWith(Cucumber.class) 
@@ -17,7 +18,7 @@ import cucumber.api.junit.Cucumber;
 		
 		)
 
-public class RunTestModel02 {
+public class RunnerTestModel {
 
 }
 
