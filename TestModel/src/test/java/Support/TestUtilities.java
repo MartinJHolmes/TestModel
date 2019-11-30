@@ -1,5 +1,7 @@
 package Support;
 
+import TestModel.SDF.GlobalVariables;
+
 public class TestUtilities {
 	
 	public static void sleepTime(int timeMilliseconds) {

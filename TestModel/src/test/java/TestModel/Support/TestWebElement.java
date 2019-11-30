@@ -12,8 +12,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import Support.GlobalVariables;
 import Support.TestUtilities;
+import TestModel.SDF.GlobalVariables;
 
 public class TestWebElement {
 	

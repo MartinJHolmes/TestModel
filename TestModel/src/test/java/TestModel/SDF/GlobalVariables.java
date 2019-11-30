@@ -1,4 +1,4 @@
-package Support;
+package TestModel.SDF;
 
 public class GlobalVariables {
 	public static String webDriverFileLocation = "C:\\Martin_Holmes_Files\\Downloads\\chromedriver.exe";
@@ -9,5 +9,6 @@ public class GlobalVariables {
 	public static boolean highlightWebElementRequired = false;
 	public static int highlightTime = 300;
 	public static Boolean debugOn = true;
+	public static int threadCount = -1;
 
 }

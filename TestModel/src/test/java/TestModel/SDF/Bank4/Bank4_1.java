@@ -1,7 +1,7 @@
 package TestModel.SDF.Bank4;
 
-import Support.GlobalVariables;
 import Support.World;
+import TestModel.SDF.GlobalVariables;
 import TestModel.Support.LoadData;
 import io.cucumber.java.en.When;
 
