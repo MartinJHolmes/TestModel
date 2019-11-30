@@ -1,4 +1,4 @@
-package TestModel.Environ;
+package Support;
 
 public class GlobalVariables {
 	public static String webDriverFileLocation = "C:\\Martin_Holmes_Files\\Downloads\\chromedriver.exe";

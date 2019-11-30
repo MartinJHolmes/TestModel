@@ -1,4 +1,4 @@
-package TestModel.Support;
+package Support;
 
 import java.io.File;
 import java.util.Iterator;
@@ -12,26 +12,25 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import Support.GlobalVariables;
-import Support.TestUtilities;
-
-public class TestWebElement {
+public class TestWebElementNS {
 	
 	
-	public static WebDriver driver;
+	public WebDriver driver;
+	public String myName = "Martin";
 
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public TestWebElement(WebDriver driver) {
+	public TestWebElementNS() {
 		// Get Classes passed to the class
 		// ===========================
 		//this.driver = driver;
+		System.out.println("TestWebElementNS constructor");
 		
 
 	}
 	
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public static void trySomething() throws Exception {
+	public void trySomething() throws Exception {
 		WebElement myElem = driver.findElement(By.id("aDate"));
 		String eMessage = myElem.getTagName();
 		
@@ -43,7 +42,7 @@ public class TestWebElement {
 		//TestWebElement.takeSnapShot("c://Martin_Holmes_Files//Test HTML//screen.png");
 	}
 		
-	public static void takeSnapShot(String fileWithPath) throws Exception{
+	public void takeSnapShot(String fileWithPath) throws Exception{
 		//public static void takeSnapShot(WebDriver webdriver,String fileWithPath) throws Exception{
 
         //Convert web driver object to TakeScreenshot
@@ -66,13 +65,13 @@ public class TestWebElement {
 	
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public static void gotoURL(String URL) {
+	public void gotoURL(String URL) {
 		driver.get(URL);
 		
 		
 	}
 	
-	public static WebElement findCollectionItem(String Collection, String Item, String Value) {
+	public WebElement findCollectionItem(String Collection, String Item, String Value) {
 		WebElement aWe = null;
 //		String Collection = "//div[@class=(\"s-expand-height s-include-content-margin s-border-bottom\")]";
 //		String Item = 	".//*[@class=\"a-size-base a-color-secondary a-text-normal\"]";
@@ -104,7 +103,7 @@ public class TestWebElement {
 	}
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public static void setValueTo(String fieldName, String fieldValue) {
+	public void setValueTo(String fieldName, String fieldValue) {
 		
 	    WebElement child = null;
         //WebDriver driver = RunLabelSearchTest.driver;
@@ -140,7 +139,7 @@ public class TestWebElement {
 	}
 	
 	//####################################################################
-	protected static void highlightWebElement(WebElement myWebElement, String highlightColour) {
+	protected void highlightWebElement(WebElement myWebElement, String highlightColour) {
 //		int remSleep = GlobalVariables.sleepBetweenSteps;
 //		GlobalVariables.sleepBetweenSteps = 200;
 		

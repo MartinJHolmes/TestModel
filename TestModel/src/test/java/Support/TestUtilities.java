@@ -1,6 +1,4 @@
-package TestModel.Support;
-
-import TestModel.Environ.GlobalVariables;
+package Support;
 
 public class TestUtilities {
 	

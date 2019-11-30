@@ -1,7 +1,7 @@
 package TestModel.SDF.Bank4;
 
+import Support.GlobalVariables;
 import Support.World;
-import TestModel.Environ.GlobalVariables;
 import TestModel.Support.LoadData;
 import TestModel.Support.TestWebElement;
 import io.cucumber.java.en.When;
@@ -28,10 +28,10 @@ public class Bank4_1 {
 		System.out.println("myString = " + world.myString);
 		switch(bankNumber) {
 		case 4:
-			TestWebElement.gotoURL(GlobalVariables.detailsPage);
+			world.myTestWebElement.gotoURL(GlobalVariables.detailsPage);
 			break;
 		case 5:
-			TestWebElement.gotoURL("file:///c://Martin_Holmes_Files//Test HTML//BankDate.html");
+			world.myTestWebElement.gotoURL("file:///c://Martin_Holmes_Files//Test HTML//BankDate.html");
 			break;
 		}
 		
