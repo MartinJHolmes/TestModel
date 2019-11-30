@@ -1,4 +1,4 @@
-package TestModel;
+package TestModel.SDF;
 
 
 import io.cucumber.java.en.Given;

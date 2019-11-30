@@ -1,8 +1,8 @@
 package TestModel.SDF.Bank4;
 
+import Support.LoadData;
 import Support.World;
 import TestModel.SDF.GlobalVariables;
-import TestModel.Support.LoadData;
 import io.cucumber.java.en.When;
 
 
@@ -14,15 +14,10 @@ public class Bank4_1 {
 		this.world = world;
 	}
 	
-//	// Would like to included these into a single method that can be called from any where
-//	WebDriver driver = null;
-//     public myTestWebElement WebTest = new TestWebElement(driver);
-//	RunData myRunData = new RunData();
-	//private Scenario scenario;
-	
+
 	@When("I am on the Bank{int} page")
 	public void i_am_on_the_Bank_page(int bankNumber) {
-		System.out.println(">>>>>> I am on the Bank page was called");
+		
 		world.myString = "Hello";
 		System.out.println("myString = " + world.myString);
 		switch(bankNumber) {
@@ -33,6 +28,7 @@ public class Bank4_1 {
 			world.myTestWebElement.gotoURL("file:///c://Martin_Holmes_Files//Test HTML//BankDate.html");
 			break;
 		}
+		world.myRunData.setValuePair("PreviousStep", "I am on the Bank page");
 		
 	}
 
@@ -47,6 +43,7 @@ public class Bank4_1 {
 		world.myTestWebElement.setValueTo("House Number", string4);
 		world.myTestWebElement.setValueTo("Line 1", string5);
 		world.myTestWebElement.setValueTo("Line 2", string6);
+		System.out.println("The test scope should be blank '" + world.myRunData.getValuePair("TestScope") + "'");
 
 	}
 	

@@ -19,8 +19,9 @@ public class Bank4_2 {
 		world.myTestWebElement.setValueTo("First Name", string);
 		world.myTestWebElement.setValueTo("Last Name", string2);
 		Thread.sleep(3000);
-		System.out.println(">>> myString = " + world.myString);
-		System.out.println(">>>>> I enter the First Name ... was called");
+	
+		System.out.println("The previous step was '" + world.myRunData.getValuePair("PreviousStep") + "'");
+		world.myRunData.setValuePair("TestScope", "Not available");
 	}
 
 };

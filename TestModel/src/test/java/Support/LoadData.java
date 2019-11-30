@@ -1,4 +1,4 @@
-package TestModel.Support;
+package Support;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,7 +22,6 @@ String[][] testData = new String[5][2];
            int i = 0;
            while(inputStream.hasNext()){
                String line= inputStream.nextLine();
-               System.out.println("The line reads " + line);
                testData[i] = line.split(";");
                i++;
            }
@@ -40,16 +39,15 @@ String[][] testData = new String[5][2];
     public String getItem(String findLogicalName){
     	
     	// Debug
-    	for (int j=0; j<testData.length; j++) {
-    		System.out.println(testData[j][0]);
-    	}
+    	//for (int j=0; j<testData.length; j++) {
+    	//	System.out.println(testData[j][0]);
+    	//}
     	
     	
     	String returnString;
     	returnString = "";
     	for (int i=0; i<testData.length; i++ ) {
     		if (findLogicalName.equals(testData[i][0])) {
-    			System.out.println("Reached here");
     			returnString = testData[i][1];
     			return returnString;
     		}

@@ -14,25 +14,23 @@ import org.openqa.selenium.WebElement;
 
 import TestModel.SDF.GlobalVariables;
 
-public class TestWebElementNS {
+public class TestWebElement_Static {
 	
 	
-	public WebDriver driver;
-	public String myName = "Martin";
+	public static WebDriver driver;
 
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public TestWebElementNS() {
+	public TestWebElement_Static(WebDriver driver) {
 		// Get Classes passed to the class
 		// ===========================
 		//this.driver = driver;
-		System.out.println("TestWebElementNS constructor");
 		
 
 	}
 	
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void trySomething() throws Exception {
+	public static void trySomething() throws Exception {
 		WebElement myElem = driver.findElement(By.id("aDate"));
 		String eMessage = myElem.getTagName();
 		
@@ -44,7 +42,7 @@ public class TestWebElementNS {
 		//TestWebElement.takeSnapShot("c://Martin_Holmes_Files//Test HTML//screen.png");
 	}
 		
-	public void takeSnapShot(String fileWithPath) throws Exception{
+	public static void takeSnapShot(String fileWithPath) throws Exception{
 		//public static void takeSnapShot(WebDriver webdriver,String fileWithPath) throws Exception{
 
         //Convert web driver object to TakeScreenshot
@@ -67,13 +65,13 @@ public class TestWebElementNS {
 	
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void gotoURL(String URL) {
+	public static void gotoURL(String URL) {
 		driver.get(URL);
 		
 		
 	}
 	
-	public WebElement findCollectionItem(String Collection, String Item, String Value) {
+	public static WebElement findCollectionItem(String Collection, String Item, String Value) {
 		WebElement aWe = null;
 //		String Collection = "//div[@class=(\"s-expand-height s-include-content-margin s-border-bottom\")]";
 //		String Item = 	".//*[@class=\"a-size-base a-color-secondary a-text-normal\"]";
@@ -105,7 +103,7 @@ public class TestWebElementNS {
 	}
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void setValueTo(String fieldName, String fieldValue) {
+	public static void setValueTo(String fieldName, String fieldValue) {
 		
 	    WebElement child = null;
         //WebDriver driver = RunLabelSearchTest.driver;
@@ -141,7 +139,7 @@ public class TestWebElementNS {
 	}
 	
 	//####################################################################
-	protected void highlightWebElement(WebElement myWebElement, String highlightColour) {
+	protected static void highlightWebElement(WebElement myWebElement, String highlightColour) {
 //		int remSleep = GlobalVariables.sleepBetweenSteps;
 //		GlobalVariables.sleepBetweenSteps = 200;
 		

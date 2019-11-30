@@ -1,4 +1,4 @@
-package TestModel.Support;
+package Support;
 
 public class OnError {
 	public static int errorCode = 0;

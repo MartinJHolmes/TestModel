@@ -1,4 +1,4 @@
-package TestModel.Support;
+package Support;
 
 public class RunData {
 	
@@ -11,15 +11,13 @@ public class RunData {
 		for (int i=0;i<MapData.length;i++) {
 			tempString = tempString + "'" + MapData[i][0] + "','" + MapData[i][1] + "'";
 		}
-//		if (GlobalVariables.debugOn) {
-			System.out.println("RunData: Printing... " + tempString);
-//		}
+
 		return;
 	}
 	
 	public void setValuePair(String field, String fieldValue) {
 		// find the next blank row and insert the values
-		//System.out.println("setValuePair " + field + " " + fieldValue);
+
 		for (int i=0;i<MapData.length;i++) {
 			String tempValue = MapData[i][0] + "";
 			//System.out.println(tempValue);
@@ -29,8 +27,7 @@ public class RunData {
 				i = MapData.length;
 			}
 		}
-		//MapData[0][0] = field;
-		//MapData[0][1] = fieldValue;
+
 		printValue();
 		return;
 	}
@@ -40,14 +37,14 @@ public class RunData {
 		printValue();
 		for (int i=0;i<MapData.length;i++) {
 			String tempValue = MapData[i][0] + "";
-			//System.out.println(tempValue);
+		
 			if (tempValue.equals(field)) {
 				return MapData[i][1];
 			}
 		}
 		
-//		OnError.errorMessage = "RunData.getValuePair() variable'" + field + "' does not exist" ;
-//		OnError.printMessage();
+		OnError.errorMessage = "RunData.getValuePair() variable'" + field + "' does not exist" ;
+		OnError.printMessage();
 		return "No item found";
 	}
 	
