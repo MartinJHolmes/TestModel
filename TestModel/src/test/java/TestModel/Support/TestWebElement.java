@@ -39,7 +39,7 @@ public class TestWebElement {
 		//TakesScreenshot srcShot = ((TakesScreenshot)myElem);
 		//File SrcFile= srcShot.getScreenshotAs(OutputType.FILE);
 		
-		TestWebElement.takeSnapShot("c://Martin_Holmes_Files//Test HTML//screen.png");
+		//TestWebElement.takeSnapShot("c://Martin_Holmes_Files//Test HTML//screen.png");
 	}
 		
 	public static void takeSnapShot(String fileWithPath) throws Exception{

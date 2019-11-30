@@ -14,27 +14,27 @@ import TestModel.Environ.GlobalVariables;
 import TestModel.Support.LoadData;
 import TestModel.Support.RunData;
 import TestModel.Support.TestWebElement;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.core.api.Scenario;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+
 
 public class BeforeAfter {
 	
 	// Would like to included these into a single method that can be called from any where
 	WebDriver driver = null;
-	//public TestWebElement WebTest = new TestWebElement(driver);
+	public TestWebElement myTestWebElement = new TestWebElement(driver);
 	RunData myRunData = new RunData();
 	private Scenario scenario;
 
 	@Before
 	public void before(Scenario scenario) {
+		System.out.println(">>>>>>>> STARTED <<<<<<<<<<<<");
 	    this.scenario = scenario;
-	    List<Integer> lines = scenario.getLines();
+	    Integer lines = scenario.getLine();
 	    //Integer myNumber = lines(0);
 	    //System.out.println("List is " + lines.get(0));
-	    System.out.println("The scenario = " + scenario.getName() + " " + lines.get(0));
+	    System.out.println("The scenario = " + scenario.getName() + " " + lines);
 	    System.setProperty(GlobalVariables.webDriverType,GlobalVariables.webDriverFileLocation);
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
@@ -46,8 +46,9 @@ public class BeforeAfter {
 	@After
 	public void after(Scenario scenario) {
 		System.out.println(scenario.getStatus());
-		System.out.println(">>>>>>>> FINISHED <<<<<<<<<<<<");
+		
 		TestWebElement.driver.close();
+		System.out.println(">>>>>>>> FINISHED <<<<<<<<<<<<");
 	}
 	
 

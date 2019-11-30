@@ -4,7 +4,7 @@ public class RunData {
 	
 	String[][] MapData = new String[5][2];
 	
-	public static String Value = "2";
+	public String Value = "2";
 	
 	public void printValue() {
 		String tempString = "";

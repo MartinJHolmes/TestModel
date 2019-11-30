@@ -10,7 +10,7 @@ public class Bank4 {
 	
 //	// Would like to included these into a single method that can be called from any where
 //	WebDriver driver = null;
-//	//public TestWebElement WebTest = new TestWebElement(driver);
+//     public myTestWebElement WebTest = new TestWebElement(driver);
 //	RunData myRunData = new RunData();
 	//private Scenario scenario;
 	
