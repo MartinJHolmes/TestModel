@@ -6,7 +6,7 @@ import TestModel.Support.TestWebElement;
 import io.cucumber.java.en.When;
 
 
-public class Bank4 {
+public class Bank4_1 {
 	
 //	// Would like to included these into a single method that can be called from any where
 //	WebDriver driver = null;
@@ -16,6 +16,7 @@ public class Bank4 {
 	
 	@When("I am on the Bank{int} page")
 	public void i_am_on_the_Bank_page(int bankNumber) {
+		System.out.println(">>>>>> I am on the Bank page was called");
 		switch(bankNumber) {
 		case 4:
 			TestWebElement.gotoURL(GlobalVariables.detailsPage);
@@ -27,12 +28,7 @@ public class Bank4 {
 		
 	}
 
-	@When("I enter the First Name as {string} and Last Name as {string}")
-	public void i_enter_the_First_Name_as_and_Last_Name_as(String string, String string2) {
-		TestWebElement.setValueTo("First Name", string);
-		TestWebElement.setValueTo("Last Name", string2);
-		
-	}
+
 	
 	@When("I type in {string}, {string}, {string}, {string}, {string}, {string}")
 	public void i_enter(String string, String string2, String string3, String string4, String string5, String string6) {
@@ -73,7 +69,8 @@ public class Bank4 {
 	@When("I enter in one step")
 	public void i_enter_in_one_step() throws InterruptedException {
 		i_am_on_the_Bank_page(4);
-		i_enter_the_First_Name_as_and_Last_Name_as("Father","Christmas");
+		//i_enter_the_First_Name_as_and_Last_Name_as("Father","Christmas");
+		// Cannot call this method because it is in another java class
 		Thread.sleep(2000);
 	}
 
