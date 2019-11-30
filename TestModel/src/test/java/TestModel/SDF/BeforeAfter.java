@@ -19,8 +19,8 @@ public class BeforeAfter {
 	
 	private World world;
 
-	private Integer myThreadCount = 0;
-	private Long myThreadId = (long) 0;
+	//private Integer myThreadCount = 0;
+	//private Long myThreadId = (long) 0;
 	private Long realThreadId;
 	
 	public BeforeAfter(World world) {
@@ -31,29 +31,49 @@ public class BeforeAfter {
 	WebDriver driver = null;
 
 	@Before
-	public void before(Scenario scenario) {
+	public void before(Scenario scenario) throws InterruptedException {
 		System.out.println(">>>>>>>> STARTED <<<<<<<<<<<<");
 		
         realThreadId = Thread.currentThread().getId();
         
-        if(realThreadId == myThreadId) {
-        	Integer i = 5;
-        	i = i + 1;
-        } else {
-        	myThreadId = Thread.currentThread().getId();
-        	TestModel.SDF.GlobalVariables.threadCount = TestModel.SDF.GlobalVariables.threadCount + 1;
-        	myThreadCount = TestModel.SDF.GlobalVariables.threadCount;
+        Thread.sleep(realThreadId * 100);
+        
+        System.out.println("The actural thread = " + Long.toString(realThreadId));
+        
+        String logicalThreadId = Support.ThreadData.getValuePair(Long.toString(realThreadId));
+        
+        if(logicalThreadId.equals("No item found")) {
+        	GlobalVariables.threadCount = GlobalVariables.threadCount + 1;
+        	Support.ThreadData.setValuePair(Long.toString(realThreadId),Integer.toString(GlobalVariables.threadCount) );
+        	logicalThreadId = Long.toString(GlobalVariables.threadCount);
+        	
         }
         
-        //System.out.println("Thread ID " + Thread.currentThread().getId() + " " + scenario.getName() + " ThreadCount = " + myThreadCount);
+//        if(realThreadId == myThreadId) {
+//        	Integer i = 5;
+//        	i = i + 1;
+//        } else {
+//        	myThreadId = Thread.currentThread().getId();
+//        	TestModel.SDF.GlobalVariables.threadCount = TestModel.SDF.GlobalVariables.threadCount + 1;
+//        	myThreadCount = TestModel.SDF.GlobalVariables.threadCount;
+//        }
+        
+        //TestModel.SDF.GlobalVariables.threadCount = 0;
+        
+        System.out.println("Thread ID " + Thread.currentThread().getId() + " " + scenario.getName() );
 		
 	    Integer lines = scenario.getLine();
 	    System.out.println("The scenario = " + scenario.getName() + " " + lines);
 	    System.setProperty(GlobalVariables.webDriverType,GlobalVariables.webDriverFileLocation);
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
-		driver.manage().window().setPosition(new Point(myThreadCount * 100,myThreadCount * 100));
+		System.out.println(">>>>>>>>> " + logicalThreadId);
+		Integer xPos = (Integer.parseInt(logicalThreadId) * 480) - 480;
+		System.out.println("The x position = " + Integer.toString(xPos));
+		driver.manage().window().setPosition(new Point(xPos,0));
 		driver.manage().window().setSize(new Dimension(400,500));
+		
+		//Thread.sleep(1000);
 		
 		world.myTestWebElement.driver = driver;
 	    

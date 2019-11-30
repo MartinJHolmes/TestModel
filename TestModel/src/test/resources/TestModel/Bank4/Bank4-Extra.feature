@@ -8,9 +8,10 @@ Feature: Bank4 Extra
 #Scenario 3
 Scenario: Enter minumum personal data
    When I am on the Bank4 page
-   And I enter the First Name as "Martin" and Last Name as "Holmes"
+   And I enter the First Name as "Maia" and Last Name as "Crates"
  
 @BE-02
 #Scenario 4
-Scenario: Combined Steps
-	When I enter in one step
+Scenario: Combined Steps - Didn't work
+   When I am on the Bank4 page
+   And I enter the First Name as "Father" and Last Name as "Christmas"

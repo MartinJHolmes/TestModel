@@ -9,6 +9,6 @@ public class GlobalVariables {
 	public static boolean highlightWebElementRequired = false;
 	public static int highlightTime = 300;
 	public static Boolean debugOn = true;
-	public static int threadCount = -1;
+	public static int threadCount = 0;
 
 }

@@ -76,7 +76,7 @@ public class Bank4_1 {
 		i_am_on_the_Bank_page(4);
 		//i_enter_the_First_Name_as_and_Last_Name_as("Father","Christmas");
 		// Cannot call this method because it is in another java class
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 	}
 
 };
