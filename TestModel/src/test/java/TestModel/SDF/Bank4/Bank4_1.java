@@ -42,12 +42,12 @@ public class Bank4_1 {
 	@When("I type in {string}, {string}, {string}, {string}, {string}, {string}")
 	public void i_enter(String string, String string2, String string3, String string4, String string5, String string6) {
 		
-			TestWebElement.setValueTo("First Name", string);
-			TestWebElement.setValueTo("Middle Name", string2);
-			TestWebElement.setValueTo("Last Name", string3);
-			TestWebElement.setValueTo("House Number", string4);
-			TestWebElement.setValueTo("Line 1", string5);
-			TestWebElement.setValueTo("Line 2", string6);
+		world.myTestWebElement.setValueTo("First Name", string);
+		world.myTestWebElement.setValueTo("Middle Name", string2);
+		world.myTestWebElement.setValueTo("Last Name", string3);
+		world.myTestWebElement.setValueTo("House Number", string4);
+		world.myTestWebElement.setValueTo("Line 1", string5);
+		world.myTestWebElement.setValueTo("Line 2", string6);
 
 	}
 	
@@ -68,9 +68,9 @@ public class Bank4_1 {
 		}
 		
 
-		TestWebElement.setValueTo("First Name",myLoadData.getItem("First Name"));
-		TestWebElement.setValueTo("Last Name",myLoadData.getItem("Last Name"));
-		TestWebElement.setValueTo("Line 1",myLoadData.getItem("Line 1"));
+		world.myTestWebElement.setValueTo("First Name",myLoadData.getItem("First Name"));
+		world.myTestWebElement.setValueTo("Last Name",myLoadData.getItem("Last Name"));
+		world.myTestWebElement.setValueTo("Line 1",myLoadData.getItem("Line 1"));
 		
 //		Thread.sleep(2000);
 	}
