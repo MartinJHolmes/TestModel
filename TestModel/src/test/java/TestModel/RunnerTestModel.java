@@ -13,7 +13,7 @@ import io.cucumber.junit.Cucumber;;
 		//features = {"src/test/java/TestModel/Features/Bank4"},
 		//features = {"classpath:Bank4"},
 		//tags = {"@Bank4","@MUST"},
-		tags = {"@Bank5"},
+		tags = {"@Bank4"},
 		plugin = {"pretty","html:C:/TestFolder"}
 		//tags = {"@Bank4"}
 		

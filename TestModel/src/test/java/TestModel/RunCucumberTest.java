@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 		//features = {"src/test/java/TestModel/Features/Bank4"},
 		//features = {"classpath:Bank4"},
 		//tags = {"@Bank4","@MUST"},
-		tags = {"@parallel"}
+		tags = {"@Bank4"}
 		//plugin = {"pretty","html:C:/TestFolder"}
 		//tags = {"@Bank4"}
 		
