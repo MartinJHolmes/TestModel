@@ -1,5 +1,6 @@
 package TestModel.SDF.Bank4;
 
+import Support.World;
 import TestModel.Environ.GlobalVariables;
 import TestModel.Support.LoadData;
 import TestModel.Support.TestWebElement;
@@ -7,6 +8,12 @@ import io.cucumber.java.en.When;
 
 
 public class Bank4_1 {
+	
+	private World world;
+	
+	public Bank4_1(World world) {
+		this.world = world;
+	}
 	
 //	// Would like to included these into a single method that can be called from any where
 //	WebDriver driver = null;
@@ -17,6 +24,8 @@ public class Bank4_1 {
 	@When("I am on the Bank{int} page")
 	public void i_am_on_the_Bank_page(int bankNumber) {
 		System.out.println(">>>>>> I am on the Bank page was called");
+		world.myString = "Hello";
+		System.out.println("myString = " + world.myString);
 		switch(bankNumber) {
 		case 4:
 			TestWebElement.gotoURL(GlobalVariables.detailsPage);
