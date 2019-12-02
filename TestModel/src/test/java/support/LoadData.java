@@ -11,6 +11,10 @@ public class LoadData {
 String[][] testData = new String[5][2];
 
 
+public LoadData() {
+	
+}
+
    public void insertData(String testDataFilename) {
 	   
 
