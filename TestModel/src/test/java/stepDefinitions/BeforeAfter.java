@@ -82,6 +82,7 @@ public class BeforeAfter {
 		//Thread.sleep(1000);
 		
 		world.myTestWebElement.driver = driver;
+		world.initialisePages();
 	    
 	}
 	

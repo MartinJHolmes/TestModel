@@ -38,3 +38,8 @@ Scenario: Populate User type data
 	When I am on the Bank4 page
     When enter the details for a "Advanced" User
    
+@Bank4-04
+#Scenario 3
+Scenario: Enter minumum personal data B
+   When I am on the Bank4 page
+   And I use a Page Factory"   
