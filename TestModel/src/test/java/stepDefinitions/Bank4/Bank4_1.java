@@ -51,22 +51,24 @@ public class Bank4_1 {
 	public void enter_the_details_for_a_Standard_User(String string1) throws InterruptedException {
 //		Thread.sleep(2000);
 		System.out.println(">>>>>>>>>>> " + string1);
-		LoadData myLoadData = null;
+		LoadData myLocalData = null;
 		switch(string1) {
 		case "Standard":
-			myLoadData = new LoadData("StandardUser.txt");
+			myLocalData = new LoadData();
+			myLocalData.insertData("StandardUser.txt");
 			break;
 		case "Advanced":
-			myLoadData = new LoadData("AdvancedUser.txt");
+			myLocalData = new LoadData();
+			myLocalData.insertData("AdvancedUser.txt");
 			break;
 		default:
 			System.out.println("User type not recognised");
 		}
 		
 
-		world.myTestWebElement.setValueTo("First Name",myLoadData.getItem("First Name"));
-		world.myTestWebElement.setValueTo("Last Name",myLoadData.getItem("Last Name"));
-		world.myTestWebElement.setValueTo("Line 1",myLoadData.getItem("Line 1"));
+		world.myTestWebElement.setValueTo("First Name",myLocalData.getItem("First Name"));
+		world.myTestWebElement.setValueTo("Last Name",myLocalData.getItem("Last Name"));
+		world.myTestWebElement.setValueTo("Line 1",myLocalData.getItem("Line 1"));
 		
 //		Thread.sleep(2000);
 	}

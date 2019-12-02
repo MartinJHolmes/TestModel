@@ -35,6 +35,11 @@ public class BeforeAfter {
 	public void before(Scenario scenario) throws InterruptedException {
 		System.out.println(">>>>>>>> STARTED <<<<<<<<<<<<");
 		
+		// Testing World scope
+		System.out.println("The current value of testWorldScope = " + world.testWorldScope);
+		world.testWorldScope = scenario.getName();
+		System.out.println("The set value of testWorldScope = " + world.testWorldScope);
+		
         realThreadId = Thread.currentThread().getId();
         
         Thread.sleep(realThreadId * 100);

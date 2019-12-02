@@ -6,9 +6,17 @@ Feature: Bank4 Basic
 
 @Bank4-01
 #Scenario 3
-Scenario: Enter minumum personal data
+Scenario: Enter minumum personal data A
    When I am on the Bank4 page
    And I enter the First Name as "Martin" and Last Name as "Holmes"
+   
+@Bank4-01
+#Scenario 3
+Scenario: Enter minumum personal data B
+   When I am on the Bank4 page
+   And I enter the First Name as "Maia" and Last Name as "Crates"   
+ 
+ 
  
 
 @Bank4-02

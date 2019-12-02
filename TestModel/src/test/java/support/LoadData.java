@@ -11,7 +11,7 @@ public class LoadData {
 String[][] testData = new String[5][2];
 
 
-   public LoadData(String testDataFilename) {
+   public void insertData(String testDataFilename) {
 	   
 
        // Open test data file associated with the test
