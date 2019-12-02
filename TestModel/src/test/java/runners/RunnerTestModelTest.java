@@ -14,7 +14,7 @@ import io.cucumber.junit.Cucumber;;
 		features = {"classpath:TestModel"},
 		//glue = {"classpath:TestModel"},
 		glue = {"classpath:stepDefinitions"},
-		tags = {"@Bank4-03"},
+		tags = {"@Bank4-02"},
 		plugin = {"pretty","html:C:/TestFolder"}
 		//tags = {"@Bank4"}
 		

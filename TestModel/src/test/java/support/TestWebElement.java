@@ -71,6 +71,20 @@ public class TestWebElement {
 	public void setValueTo(String fieldName, String fieldValue) {
 		
 	    WebElement child = null;
+	    
+	    
+	    // <<<< TODO
+	    // Replaces _* with "Special"
+	    // Needs to lookup in Load or Run Data
+	    Character c1 = '_'; 
+	    Character c2 = fieldValue.charAt(0);
+	    
+	    if(c1.equals(c2)) {
+	    	fieldValue = "Special";
+	    	// TODO get actual vale
+	    }
+	    
+	    // >>>> 
  
 		
 		// Check if Label exists for fieldName

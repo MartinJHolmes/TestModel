@@ -44,6 +44,12 @@ public class Bank4_1 {
 		world.myTestWebElement.setValueTo("Line 1", string5);
 		world.myTestWebElement.setValueTo("Line 2", string6);
 		System.out.println("The test scope should be blank '" + world.myRunData.getValuePair("TestScope") + "'");
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 	
