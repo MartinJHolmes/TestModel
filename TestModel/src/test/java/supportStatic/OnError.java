@@ -1,4 +1,4 @@
-package helper;
+package supportStatic;
 
 public class OnError {
 	public static int errorCode = 0;

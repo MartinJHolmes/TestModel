@@ -1,6 +1,4 @@
-package support;
-
-import helper.OnError;
+package supportStatic;
 
 public class ThreadData {
 	

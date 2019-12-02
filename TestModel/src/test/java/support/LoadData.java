@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import helper.OnError;
+import supportStatic.OnError;
 
 public class LoadData {
 

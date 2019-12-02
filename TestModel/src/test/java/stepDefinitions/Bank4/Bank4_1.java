@@ -1,9 +1,9 @@
 package stepDefinitions.Bank4;
 
 import io.cucumber.java.en.When;
-import stepDefinitions.GlobalVariables;
 import support.LoadData;
 import support.World;
+import supportStatic.GlobalVariables;
 
 
 public class Bank4_1 {

@@ -1,6 +1,4 @@
-package support;
-
-import stepDefinitions.GlobalVariables;
+package supportStatic;
 
 public class TestUtilities {
 	

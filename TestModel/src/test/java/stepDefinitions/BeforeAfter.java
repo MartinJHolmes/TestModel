@@ -13,6 +13,7 @@ import io.cucumber.core.api.Scenario;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import support.World;
+import supportStatic.GlobalVariables;
 
 
 public class BeforeAfter {
@@ -40,11 +41,11 @@ public class BeforeAfter {
         
         System.out.println("The actural thread = " + Long.toString(realThreadId));
         
-        String logicalThreadId = support.ThreadData.getValuePair(Long.toString(realThreadId));
+        String logicalThreadId = supportStatic.ThreadData.getValuePair(Long.toString(realThreadId));
         
         if(logicalThreadId.equals("No item found")) {
         	GlobalVariables.threadCount = GlobalVariables.threadCount + 1;
-        	support.ThreadData.setValuePair(Long.toString(realThreadId),Integer.toString(GlobalVariables.threadCount) );
+        	supportStatic.ThreadData.setValuePair(Long.toString(realThreadId),Integer.toString(GlobalVariables.threadCount) );
         	logicalThreadId = Long.toString(GlobalVariables.threadCount);
         	
         }
