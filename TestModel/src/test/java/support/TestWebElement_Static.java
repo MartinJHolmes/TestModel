@@ -1,43 +1,81 @@
-package Support;
+package support;
 
-
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import TestModel.SDF.GlobalVariables;
+import stepDefinitions.GlobalVariables;
 
-public class TestWebElement {
+public class TestWebElement_Static {
 	
 	
-	public WebDriver driver;
-	public String myName = "Martin";
+	public static WebDriver driver;
 
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public TestWebElement() {
+	public TestWebElement_Static(WebDriver driver) {
 		// Get Classes passed to the class
 		// ===========================
 		//this.driver = driver;
-		System.out.println("TestWebElementNS constructor");
 		
 
 	}
 	
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void gotoURL(String URL) {
+	public static void trySomething() throws Exception {
+		WebElement myElem = driver.findElement(By.id("aDate"));
+		String eMessage = myElem.getTagName();
+		
+		System.out.println("The class = " + eMessage);
+		
+		//TakesScreenshot srcShot = ((TakesScreenshot)myElem);
+		//File SrcFile= srcShot.getScreenshotAs(OutputType.FILE);
+		
+		//TestWebElement.takeSnapShot("c://Martin_Holmes_Files//Test HTML//screen.png");
+	}
+		
+	public static void takeSnapShot(String fileWithPath) throws Exception{
+		//public static void takeSnapShot(WebDriver webdriver,String fileWithPath) throws Exception{
+
+        //Convert web driver object to TakeScreenshot
+
+        TakesScreenshot scrShot =((TakesScreenshot)driver);
+
+        //Call getScreenshotAs method to create image file
+
+                File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+
+            //Move image file to new destination
+
+                File DestFile=new File(fileWithPath);
+
+                //Copy file at destination
+
+                FileUtils.copyFile(SrcFile, DestFile);
+
+    }
+	
+	
+	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public static void gotoURL(String URL) {
 		driver.get(URL);
 		
 		
 	}
 	
-	public WebElement findCollectionItem(String Collection, String Item, String Value) {
+	public static WebElement findCollectionItem(String Collection, String Item, String Value) {
 		WebElement aWe = null;
+//		String Collection = "//div[@class=(\"s-expand-height s-include-content-margin s-border-bottom\")]";
+//		String Item = 	".//*[@class=\"a-size-base a-color-secondary a-text-normal\"]";
+//		String Value = "2015";
 		
 		driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS) ;
 		List<WebElement> parent = driver.findElements(By.xpath(Collection));
@@ -65,17 +103,24 @@ public class TestWebElement {
 	}
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void setValueTo(String fieldName, String fieldValue) {
+	public static void setValueTo(String fieldName, String fieldValue) {
 		
 	    WebElement child = null;
- 
+        //WebDriver driver = RunLabelSearchTest.driver;
+        
+		//System.out.println("The value = '" + fieldName + "'");
+				
+		
+		//WebElement myElem = driver.findElement(By.id(fieldName));
+		//myElem.sendKeys(fieldValue);
 		
 		// Check if Label exists for fieldName
+		//System.out.println("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]");
 		try {
 			child = driver.findElement(
                     By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
 			
-			
+			//System.out.println("Found by Label");
 			child.clear();
 			child.sendKeys(fieldValue);
 		} catch (Exception e) {
@@ -83,17 +128,20 @@ public class TestWebElement {
 			child = driver.findElement(By.id(fieldName));
 			child.clear();
 			child.sendKeys(fieldValue);
-			
+			//System.out.println("Found by Name");
 		}
-
+		// Check if field with that name exists
+		// Check if fieldName in fieldmap
+		// Else
 		highlightWebElement(child, "blue");
     
 
 	}
 	
 	//####################################################################
-	protected void highlightWebElement(WebElement myWebElement, String highlightColour) {
-
+	protected static void highlightWebElement(WebElement myWebElement, String highlightColour) {
+//		int remSleep = GlobalVariables.sleepBetweenSteps;
+//		GlobalVariables.sleepBetweenSteps = 200;
 		
 		if (GlobalVariables.highlightWebElementRequired == true) {
 	

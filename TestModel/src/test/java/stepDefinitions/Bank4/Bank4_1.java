@@ -1,9 +1,9 @@
-package TestModel.SDF.Bank4;
+package stepDefinitions.Bank4;
 
-import Support.LoadData;
-import Support.World;
-import TestModel.SDF.GlobalVariables;
 import io.cucumber.java.en.When;
+import stepDefinitions.GlobalVariables;
+import support.LoadData;
+import support.World;
 
 
 public class Bank4_1 {

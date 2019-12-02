@@ -1,4 +1,4 @@
-package TestModel.SDF;
+package stepDefinitions;
 
 public class GlobalVariables {
 	public static String webDriverFileLocation = "C:\\Martin_Holmes_Files\\Downloads\\chromedriver.exe";

@@ -1,4 +1,4 @@
-package TestModel.SDF;
+package stepDefinitions;
 
 
 import io.cucumber.java.en.Given;

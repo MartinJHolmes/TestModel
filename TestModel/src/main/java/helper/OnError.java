@@ -1,4 +1,4 @@
-package Support;
+package helper;
 
 public class OnError {
 	public static int errorCode = 0;
@@ -19,7 +19,7 @@ public class OnError {
 		errorOutPut = errorOutPut + "LOGICALFIELDNAME (" + logicalFieldName + ") ";
 		errorOutPut = errorOutPut + errorMessage;
 		
-		
+		 
 		System.out.println(errorOutPut);
 	}
 

@@ -1,8 +1,7 @@
-package TestModel.SDF.Bank4;
-
-import Support.World;
+package stepDefinitions.Bank4;
 
 import io.cucumber.java.en.When;
+import support.World;
 
 
 public class Bank5 {

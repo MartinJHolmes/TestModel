@@ -1,6 +1,6 @@
-package Support;
+package support;
 
-import TestModel.SDF.GlobalVariables;
+import stepDefinitions.GlobalVariables;
 
 public class TestUtilities {
 	

@@ -1,4 +1,4 @@
-package TestModel.SDF;
+package stepDefinitions;
 
 
 import java.util.concurrent.TimeUnit;
@@ -9,10 +9,10 @@ import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import Support.World;
 import io.cucumber.core.api.Scenario;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import support.World;
 
 
 public class BeforeAfter {
@@ -40,11 +40,11 @@ public class BeforeAfter {
         
         System.out.println("The actural thread = " + Long.toString(realThreadId));
         
-        String logicalThreadId = Support.ThreadData.getValuePair(Long.toString(realThreadId));
+        String logicalThreadId = support.ThreadData.getValuePair(Long.toString(realThreadId));
         
         if(logicalThreadId.equals("No item found")) {
         	GlobalVariables.threadCount = GlobalVariables.threadCount + 1;
-        	Support.ThreadData.setValuePair(Long.toString(realThreadId),Integer.toString(GlobalVariables.threadCount) );
+        	support.ThreadData.setValuePair(Long.toString(realThreadId),Integer.toString(GlobalVariables.threadCount) );
         	logicalThreadId = Long.toString(GlobalVariables.threadCount);
         	
         }

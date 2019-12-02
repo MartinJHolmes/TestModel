@@ -18,5 +18,5 @@ import io.cucumber.junit.Cucumber;
 		//tags = {"@Bank4"}
 		
 		)
-public class zRunCucumberTest {
+public class zRunCucumber {
 }

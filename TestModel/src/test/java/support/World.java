@@ -1,5 +1,4 @@
-package Support;
-
+package support;
 
 public class World {
 	
