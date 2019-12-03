@@ -31,6 +31,12 @@ public class TestWebElement {
 
 	}
 	
+	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public void checkValue(WebElement we,String fieldName, String fieldValue) {
+		WebElement returnWE = we.findElement(By.xpath(".//span[@class=(\"a-color-base\")]"));
+		System.out.println(returnWE.getText());
+		
+	}
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void gotoURL(String URL) {
@@ -88,6 +94,7 @@ public class TestWebElement {
  
 		
 		// Check if Label exists for fieldName
+	    System.out.println("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]");
 		try {
 			child = driver.findElement(
                     By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));

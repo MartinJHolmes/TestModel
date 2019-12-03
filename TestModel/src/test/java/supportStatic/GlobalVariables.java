@@ -10,5 +10,6 @@ public class GlobalVariables {
 	public static int highlightTime = 300;
 	public static Boolean debugOn = true;
 	public static int threadCount = 0;
+	public static String fieldMapLocation = "C:\\Martin_Holmes_Files\\Test HTML\\fieldMap.txt";
 
 }

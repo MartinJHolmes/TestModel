@@ -1,5 +1,10 @@
 package stepDefinitions.Bank4;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+
 import io.cucumber.java.en.When;
 import support.LoadData;
 import support.World;
@@ -16,7 +21,7 @@ public class Bank4_1 {
 	
 
 	@When("I am on the Bank{int} page")
-	public void i_am_on_the_Bank_page(int bankNumber) {
+	public void i_am_on_the_Bank_page(int bankNumber) throws InterruptedException {
 		
 		world.myString = "Hello";
 		System.out.println("myString = " + world.myString);
@@ -29,6 +34,13 @@ public class Bank4_1 {
 			break;
 		}
 		world.myRunData.setValuePair("PreviousStep", "I am on the Bank page");
+		
+		// Sets the zoom of the page - Chrome
+		JavascriptExecutor executor = (JavascriptExecutor)world.myTestWebElement.driver;
+		executor.executeScript("document.body.style.zoom = '0.75'");
+		WebElement html = world.myTestWebElement.driver.findElement(By.tagName("html"));
+		html.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
+		Thread.sleep(3000);
 		
 	}
 

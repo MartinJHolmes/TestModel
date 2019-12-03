@@ -43,6 +43,7 @@ public class AmazonBookSearch {
 		String Item = 	".//*[@class=\"a-size-base a-color-secondary a-text-normal\"]";
 		String Value = "1987";
 		WebElement eItem = world.myTestWebElement.findCollectionItem(Collection, Item, Value);
+		world.myTestWebElement.checkValue(eItem, "hello", "hello");
 		Thread.sleep(3000);
 		eItem.click();
 //		System.out.println("The class = " + eItem.getAttribute("class"));
