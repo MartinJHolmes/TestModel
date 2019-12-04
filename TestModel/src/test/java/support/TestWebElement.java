@@ -29,7 +29,7 @@ public class TestWebElement {
 	public void checkValue(WebElement we, String fieldName, String fieldValue) {
 		WebElement returnWE = we.findElement(By.xpath(".//span[@class=(\"a-color-base\")]"));
 		System.out.println("checkValue: METHOD NOT COMPLETE");
-
+		TestUtilities.sleepTime();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -37,27 +37,27 @@ public class TestWebElement {
 		WebElement returnWE = driver.findElement(By.xpath("//h1"));
 
 		assertEquals(fieldName + " did not match expected", returnWE.getText(), fieldValue);
-
+		TestUtilities.sleepTime();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkPage(String fieldValue) {
 		WebElement element = driver.findElement(By.xpath("//*[contains(.,.)]"));
 		assertTrue(fieldValue + " was not found", element.getText().contains(fieldValue));
-	
+		TestUtilities.sleepTime();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void gotoURL(String URL) {
 		driver.get(URL);
-
+		TestUtilities.sleepTime();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void click(String fieldName) {
 		WebElement myWE = driver.findElement(By.id(fieldName));
 		myWE.click();
-
+		TestUtilities.sleepTime();
 	}
 
 	public WebElement findCollectionItem(String Collection, String Item, String Value) {
@@ -82,8 +82,8 @@ public class TestWebElement {
 			}
 			highlightWebElement(we, "red");
 		}
+		TestUtilities.sleepTime();
 		return aWe;
-
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -102,7 +102,7 @@ public class TestWebElement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		TestUtilities.sleepTime();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -146,7 +146,7 @@ public class TestWebElement {
 		}
 
 		highlightWebElement(child, "blue");
-
+		TestUtilities.sleepTime();
 	}
 
 	// ####################################################################
