@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 
 import supportStatic.GlobalVariables;
 import supportStatic.TestUtilities;
+import supportStatic.WebElementMap;
 
 public class TestWebElement {
 
@@ -112,6 +113,15 @@ public class TestWebElement {
 		}
 
 		// >>>>
+		
+
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// Check if Label exists for fieldName
 		System.out.println("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]");
@@ -123,8 +133,11 @@ public class TestWebElement {
 			child.sendKeys(fieldValue);
 		} catch (Exception e) {
 			// Check if field with that name exists
-			child = driver.findElement(By.id(fieldName));
-			child.clear();
+//			child = driver.findElement(By.id(fieldName));
+//			child.clear();
+//			child.sendKeys(fieldValue);
+			
+			child = driver.findElement(By.xpath(WebElementMap.getWebElementIdentifyBy(fieldName)));
 			child.sendKeys(fieldValue);
 
 		}
