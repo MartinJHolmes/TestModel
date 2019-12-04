@@ -11,7 +11,7 @@ public class ThreadData {
 		for (int i=0;i<MapData.length;i++) {
 			tempString = tempString + "'" + MapData[i][0] + "','" + MapData[i][1] + "'";
 		}
-		System.out.println("ThreadData = " + tempString);
+		//System.out.println("ThreadData = " + tempString);
 		return;
 	}
 	
@@ -28,7 +28,7 @@ public class ThreadData {
 			}
 		}
 
-		printValue();
+		//printValue();
 		return;
 	}
 	

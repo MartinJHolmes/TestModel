@@ -32,7 +32,7 @@ public class RunData {
 			}
 		}
 
-		printValue();
+		//printValue();
 		return;
 	}
 	

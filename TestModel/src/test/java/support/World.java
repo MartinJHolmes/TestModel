@@ -17,7 +17,7 @@ public class World {
     public String testWorldScope = "initial"; // used to proving scope of the World Class
     
     public World(){
-    	System.out.println("World Created");
+    	//System.out.println("World Created");
     }
     
     public void initialisePages() {

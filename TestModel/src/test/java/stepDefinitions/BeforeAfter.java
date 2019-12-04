@@ -36,7 +36,7 @@ public class BeforeAfter {
 
 	@Before
 	public void before(Scenario scenario) throws InterruptedException {
-		System.out.println(">>>>>>>> STARTED <<<<<<<<<<<<");
+		System.out.println(">>>>>>>> SCENARIO STARTED <<<<<<<<<<<<");
 		
 		WebElementMap.WebElementMap_Initialise();
 		// TEST field map contents
@@ -71,12 +71,12 @@ public class BeforeAfter {
 	    // Setup the Web Driver
 	    System.setProperty(GlobalVariables.webDriverType,GlobalVariables.webDriverFileLocation);
 		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
-		System.out.println(">>>>>>>>> " + logicalThreadId);
+		driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS) ;
+		//System.out.println(">>>>>>>>> " + logicalThreadId);
 		Integer xPos = (Integer.parseInt(logicalThreadId) * 480) - 480;
-		System.out.println("The x position = " + Integer.toString(xPos));
+		//System.out.println("The x position = " + Integer.toString(xPos));
 		driver.manage().window().setPosition(new Point(xPos,0));
-		driver.manage().window().setSize(new Dimension(400,500));
+		driver.manage().window().setSize(new Dimension(400,1000));
 		
 
 	
@@ -92,7 +92,7 @@ public class BeforeAfter {
 	public void after(Scenario scenario) throws InterruptedException {
 		
 		world.myTestWebElement.driver.close();
-		System.out.println(">>>>>>>> FINISHED <<<<<<<<<<<<");
+		System.out.println(">>>>>>>> SCENARIO FINISHED <<<<<<<<<<<<");
 	}
 	
 

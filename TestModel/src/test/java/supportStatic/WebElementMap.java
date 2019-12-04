@@ -12,7 +12,7 @@ public class WebElementMap {
 
 
 	   public static void WebElementMap_Initialise() {
-		   System.out.println("It started !!!!!!");
+		   
 		   
 		   //this.myTest = test;
 		   myString = "It changed";
@@ -43,8 +43,8 @@ public class WebElementMap {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		System.out.println("WebElmentMap created");
-		printFieldMap();
+		//System.out.println("WebElmentMap created");
+		//printFieldMap();
 
 	       
 //	       Scanner inputStream;

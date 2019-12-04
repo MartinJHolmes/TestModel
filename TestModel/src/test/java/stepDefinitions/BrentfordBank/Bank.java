@@ -23,7 +23,7 @@ public class Bank {
 
 		world.myTestWebElement.gotoURL("file:///c://Martin_Holmes_Files//Test HTML//Website//BrentfordBank.html");
 
-		Thread.sleep(1000);
+		Thread.sleep(GlobalVariables.sleepBetweenSteps);
 
 	}
 
@@ -31,14 +31,21 @@ public class Bank {
 	public void i_set_field(String fieldName, String fieldValue) throws InterruptedException {
 		// Write code here that turns the phrase above into concrete actions
 		world.myTestWebElement.setValueTo(fieldName, fieldValue);
-		Thread.sleep(1000);
+		Thread.sleep(GlobalVariables.sleepBetweenSteps);
+	}
+	
+	@Then("I set RadioButton {string} to {string}")
+	public void i_set_radiobutton(String fieldName, String fieldValue) throws InterruptedException {
+		// Write code here that turns the phrase above into concrete actions
+		world.myTestWebElement.setRadioButtonTo(fieldName, fieldValue);
+		Thread.sleep(GlobalVariables.sleepBetweenSteps);
 	}
 
 	@Then("I click {string}")
 	public void i_click(String fieldName) throws InterruptedException {
 		// Write code here that turns the phrase above into concrete actions
 		world.myTestWebElement.click(fieldName);
-		Thread.sleep(1000);
+		Thread.sleep(GlobalVariables.sleepBetweenSteps);
 	}
 
 	@Then("I check {string} is {string}")
@@ -47,7 +54,7 @@ public class Bank {
 
 		world.myTestWebElement.checkValue(fieldName, fieldValue);
 
-		Thread.sleep(1000);
+		Thread.sleep(GlobalVariables.sleepBetweenSteps);
 	}
 
 	@Then("page contains {string}")

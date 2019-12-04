@@ -22,17 +22,13 @@ public class TestWebElement {
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public TestWebElement() {
-		// Get Classes passed to the class
-		// ===========================
-		// this.driver = driver;
-		System.out.println("TestWebElementNS constructor");
 
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkValue(WebElement we, String fieldName, String fieldValue) {
 		WebElement returnWE = we.findElement(By.xpath(".//span[@class=(\"a-color-base\")]"));
-		System.out.println(returnWE.getText());
+		System.out.println("checkValue: METHOD NOT COMPLETE");
 
 	}
 
@@ -47,12 +43,8 @@ public class TestWebElement {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkPage(String fieldValue) {
 		WebElement element = driver.findElement(By.xpath("//*[contains(.,.)]"));
-		assertTrue(fieldValue + " was not found",element.getText().contains(fieldValue));
-		if (element.getText().contains(fieldValue)) {
-			System.out.println(">>>>> FOUND!!!!!!!!");
-		} else {
-			System.out.println(">>>>> NOT FOUND!!!!!!!!");
-		}
+		assertTrue(fieldValue + " was not found", element.getText().contains(fieldValue));
+	
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -80,19 +72,36 @@ public class TestWebElement {
 			try {
 				WebElement child = we.findElement(By.xpath(Item));
 				highlightWebElement(child, "yellow");
-				System.out.println("The years is " + child.getText());
 				if (child.getText().equals(Value)) {
-					System.out.println("ITEM FOUND");
 					highlightWebElement(child, "blue");
 					aWe = we;
 					return we;
 				}
 			} catch (Exception e) {
-				System.out.println("Did not find");
+				System.out.println("findCollection: Did not find");
 			}
 			highlightWebElement(we, "red");
 		}
 		return aWe;
+
+	}
+
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public void setRadioButtonTo(String fieldName, String fieldValue) {
+		WebElement child = null;
+		String xPathString = "";
+
+		xPathString = "//input[@type='radio' and @value='" + fieldValue + "' and @name='" + fieldName + "']";
+
+		child = driver.findElement(By.xpath(xPathString));
+		child.click();
+
+		try {
+			Thread.sleep(GlobalVariables.sleepBetweenSteps);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -113,18 +122,16 @@ public class TestWebElement {
 		}
 
 		// >>>>
-		
 
-		
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(GlobalVariables.sleepBetweenSteps);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
 		// Check if Label exists for fieldName
-		System.out.println("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]");
+		
 		try {
 			child = driver.findElement(
 					By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
@@ -132,11 +139,7 @@ public class TestWebElement {
 			child.clear();
 			child.sendKeys(fieldValue);
 		} catch (Exception e) {
-			// Check if field with that name exists
-//			child = driver.findElement(By.id(fieldName));
-//			child.clear();
-//			child.sendKeys(fieldValue);
-			
+
 			child = driver.findElement(By.xpath(WebElementMap.getWebElementIdentifyBy(fieldName)));
 			child.sendKeys(fieldValue);
 
@@ -178,7 +181,7 @@ public class TestWebElement {
 				}
 
 			} catch (Exception e) {
-				System.out.println("Could not highlight");
+				System.out.println("highlightWebElement: Could not highlight");
 			}
 
 		}
