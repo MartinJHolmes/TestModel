@@ -7,6 +7,7 @@ Feature: BB Basic
 Scenario: Successful Logon
    When I am on the home page
    Then I set "Username" to "holmesm"
+   Then I check "Username" is "holmesm"
    Then I set "Password" to "Password"
    Then chose product
    Then I click "Logon"

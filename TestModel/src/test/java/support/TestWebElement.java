@@ -29,15 +29,28 @@ public class TestWebElement {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkValue(WebElement we, String fieldName, String fieldValue) {
 		WebElement returnWE = we.findElement(By.xpath(".//span[@class=(\"a-color-base\")]"));
-		System.out.println("checkValue: METHOD NOT COMPLETE");
+		System.out.println("checkValue: METHOD NOT WRITTEN");
 		TestUtilities.sleepTime();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkValue(String fieldName, String fieldValue) {
-		WebElement returnWE = driver.findElement(By.xpath("//h1"));
-
-		assertEquals(fieldName + " did not match expected", returnWE.getText(), fieldValue);
+		String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
+		WebElement returnWE = driver.findElement(By.xpath(fieldXPath));
+		highlightWebElement(returnWE, "green");
+System.out.println(WebElementMap.getWebElementType(fieldName));
+		switch(WebElementMap.getWebElementType(fieldName)) {
+		case "Input":
+			System.out.println("Input reached");
+			assertEquals(fieldName + " did not match expected", returnWE.getAttribute("value"), fieldValue);
+			break;
+			
+		default:
+			assertEquals(fieldName + " did not match expected", returnWE.getText(), fieldValue);
+			break;
+			
+		}
+	
 		TestUtilities.sleepTime();
 	}
 
@@ -160,12 +173,12 @@ public class TestWebElement {
 	public void highlightWebElement(WebElement myTest, String highlightColour) {
 
 		if (GlobalVariables.highlightWebElementRequired == true) {
-			System.out.println(myTest.getAttribute("id"));
+			//System.out.println(myTest.getAttribute("id"));
 			int w = myTest.getSize().getWidth() + 8;
 			int h = myTest.getSize().getHeight() + 8;
 			int t = myTest.getLocation().getY() - 6;
 			int l = myTest.getLocation().getX() - 8;
-			System.out.println(myTest.getAttribute("id") + "Width = " + w);
+			//System.out.println(myTest.getAttribute("id") + "Width = " + w);
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript(" " + "var btn=document.createElement('DIV');" + "btn.id = 'Hello';"
 					+ "btn.style = 'border:3px solid " + highlightColour + ";"
