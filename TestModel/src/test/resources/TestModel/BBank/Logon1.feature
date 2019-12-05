@@ -8,6 +8,7 @@ Scenario: Successful Logon
    When I am on the home page
    Then I set "Username" to "holmesm"
    Then I set "Password" to "Password"
+   Then chose product
    Then I click "Logon"
    Then I check "Title" is "Brentford Building Society"
    Then page contains "Withdraw"

@@ -57,6 +57,7 @@ public class TestWebElement {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void click(String fieldName) {
 		WebElement myWE = driver.findElement(By.id(fieldName));
+		highlightWebElement(myWE, "green");
 		myWE.click();
 		TestUtilities.sleepTime();
 	}
@@ -69,12 +70,13 @@ public class TestWebElement {
 		Iterator<WebElement> iter = parent.iterator();
 		while (iter.hasNext()) {
 			WebElement we = iter.next();
-			highlightWebElement(we, "red");
+			highlightWebElement(we, "blue");
 			try {
 				WebElement child = we.findElement(By.xpath(Item));
-				highlightWebElement(child, "yellow");
+				highlightWebElement(child, "blue");
+				System.out.println("findCollection " + child.getText());
 				if (child.getText().equals(Value)) {
-					highlightWebElement(child, "blue");
+					highlightWebElement(child, "green");
 					aWe = we;
 					return we;
 				}
@@ -95,6 +97,7 @@ public class TestWebElement {
 		xPathString = "//input[@type='radio' and @value='" + fieldValue + "' and @name='" + fieldName + "']";
 
 		child = driver.findElement(By.xpath(xPathString));
+		highlightWebElement(child, "green");
 		child.click();
 
 		try {
@@ -103,7 +106,7 @@ public class TestWebElement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		highlightWebElement(child, "blue");
+		
 		TestUtilities.sleepTime();
 	}
 
@@ -137,22 +140,24 @@ public class TestWebElement {
 		try {
 			child = driver.findElement(
 					By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
+			highlightWebElement(child, "green");
 
 			child.clear();
 			child.sendKeys(fieldValue);
 		} catch (Exception e) {
 
 			child = driver.findElement(By.xpath(WebElementMap.getWebElementIdentifyBy(fieldName)));
+			highlightWebElement(child, "green");
 			child.sendKeys(fieldValue);
 
 		}
 
-		highlightWebElement(child, "blue");
+		
 		TestUtilities.sleepTime();
 	}
 
 	// ####################################################################
-	protected void highlightWebElement(WebElement myTest, String highlightColour) {
+	public void highlightWebElement(WebElement myTest, String highlightColour) {
 
 		if (GlobalVariables.highlightWebElementRequired == true) {
 			System.out.println(myTest.getAttribute("id"));
@@ -163,7 +168,8 @@ public class TestWebElement {
 			System.out.println(myTest.getAttribute("id") + "Width = " + w);
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript(" " + "var btn=document.createElement('DIV');" + "btn.id = 'Hello';"
-					+ "btn.style = 'border:3px solid #dd0000; position: absolute;" + "width: " + w + "px; " + "height:"
+					+ "btn.style = 'border:3px solid " + highlightColour + ";"
+					+ " position: absolute;" + "width: " + w + "px; " + "height:"
 					+ h + "px; " + "top:" + t + "px; " + "left:" + l + "px';" + "document.body.appendChild(btn);");
 			TestUtilities.sleepTime(GlobalVariables.highlightTime);
 			js.executeScript(

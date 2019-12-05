@@ -1,8 +1,12 @@
 package stepDefinitions.BrentfordBank;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import support.World;
+import supportStatic.TestUtilities;
 
 public class Bank {
 
@@ -41,6 +45,23 @@ public class Bank {
 	public void page_contains(String fieldValue) {
 		world.myTestWebElement.checkPage(fieldValue);
 	}
-	
+	@Then("chose product")
+	public void chose_product() {
+		WebElement myWE = world.myTestWebElement.driver.findElement(By.xpath("//div[@class='products']"));
+		world.myTestWebElement.highlightWebElement(myWE, "blue");
+		
+		String Collection = "//div[@class='product']";
+
+//		String Item = 	".//*[@src='images/savings.jpg']";
+//		String Item = 	".//*[contains(text(),'Saving')]";
+		String Item = 	".//a";
+		
+		String Value = "Mortgages";
+		myWE = world.myTestWebElement.findCollectionItem(Collection, Item, Value);
+		world.myTestWebElement.highlightWebElement(myWE, "green");
+		myWE.findElement(By.xpath(".//a")).click();
+		System.out.println(myWE.getTagName());
+		TestUtilities.sleepTime(1000);
+	}
 
 }
