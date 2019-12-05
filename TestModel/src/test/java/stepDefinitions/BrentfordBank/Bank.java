@@ -41,4 +41,6 @@ public class Bank {
 	public void page_contains(String fieldValue) {
 		world.myTestWebElement.checkPage(fieldValue);
 	}
+	
+
 }

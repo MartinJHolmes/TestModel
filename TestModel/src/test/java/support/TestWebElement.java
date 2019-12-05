@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -102,6 +103,7 @@ public class TestWebElement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		highlightWebElement(child, "blue");
 		TestUtilities.sleepTime();
 	}
 
@@ -131,7 +133,7 @@ public class TestWebElement {
 		}
 
 		// Check if Label exists for fieldName
-		
+
 		try {
 			child = driver.findElement(
 					By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
@@ -150,41 +152,27 @@ public class TestWebElement {
 	}
 
 	// ####################################################################
-	protected void highlightWebElement(WebElement myWebElement, String highlightColour) {
+	protected void highlightWebElement(WebElement myTest, String highlightColour) {
 
 		if (GlobalVariables.highlightWebElementRequired == true) {
+			System.out.println(myTest.getAttribute("id"));
+			int w = myTest.getSize().getWidth() + 8;
+			int h = myTest.getSize().getHeight() + 8;
+			int t = myTest.getLocation().getY() - 6;
+			int l = myTest.getLocation().getX() - 8;
+			System.out.println(myTest.getAttribute("id") + "Width = " + w);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript(" " + "var btn=document.createElement('DIV');" + "btn.id = 'Hello';"
+					+ "btn.style = 'border:3px solid #dd0000; position: absolute;" + "width: " + w + "px; " + "height:"
+					+ h + "px; " + "top:" + t + "px; " + "left:" + l + "px';" + "document.body.appendChild(btn);");
+			TestUtilities.sleepTime(GlobalVariables.highlightTime);
+			js.executeScript(
+					"var element = document.getElementById('Hello');" + "element.parentNode.removeChild(element);");
 
-			try {
-				for (int i = 0; i < 2; i++) {
-					if (driver instanceof org.openqa.selenium.JavascriptExecutor) {
-						((org.openqa.selenium.JavascriptExecutor) driver).executeScript(
-								"arguments[0].style.border='3px solid " + highlightColour + "';", myWebElement);
-					}
-
-					TestUtilities.sleepTime(GlobalVariables.highlightTime);
-					if (driver instanceof org.openqa.selenium.JavascriptExecutor) {
-						((org.openqa.selenium.JavascriptExecutor) driver)
-								.executeScript("arguments[0].style.border='1px solid green'", myWebElement);
-
-					}
-				}
-			} catch (Exception e) {
-				// System.out.println("Could not highlight");
-			}
-
-			try {
-
-				if (driver instanceof org.openqa.selenium.JavascriptExecutor) {
-					((org.openqa.selenium.JavascriptExecutor) driver)
-							.executeScript("arguments[0].style.border='1px solid green'", myWebElement);
-
-				}
-
-			} catch (Exception e) {
-				System.out.println("highlightWebElement: Could not highlight");
-			}
-
+			
 		}
+		
+
 	}
 
 }
