@@ -68,5 +68,11 @@ public class Bank {
 	public void i_try_to_click()  {
 		world.myTestWebElement.clickAble("hello");
 	}
+	
+	@Then("I try something different")
+	public void i_try_something_different() {
+	    // Write code here that turns the phrase above into concrete actions
+	    world.myTestWebElement.doSomething();
+	}
 
 }

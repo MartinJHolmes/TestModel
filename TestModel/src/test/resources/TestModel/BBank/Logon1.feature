@@ -21,3 +21,4 @@ Scenario: Successful Logon
 Scenario: Successful Logon
    When I am on the home page
    Then I try to click
+   Then I try something different
