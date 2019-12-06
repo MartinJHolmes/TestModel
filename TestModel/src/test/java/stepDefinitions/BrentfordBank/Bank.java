@@ -63,5 +63,10 @@ public class Bank {
 		System.out.println(myWE.getTagName());
 		TestUtilities.sleepTime(1000);
 	}
+	
+	@Then("I try to click")
+	public void i_try_to_click()  {
+		world.myTestWebElement.clickAble("hello");
+	}
 
 }

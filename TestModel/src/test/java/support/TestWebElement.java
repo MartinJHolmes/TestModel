@@ -74,6 +74,17 @@ System.out.println(WebElementMap.getWebElementType(fieldName));
 		myWE.click();
 		TestUtilities.sleepTime();
 	}
+	
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public void clickAble(String fieldName) {
+		//WebElement myWE = driver.findElement(By.xpath("//img[@src='images/savings.jpg']"));
+		WebElement myWE = driver.findElement(By.xpath("//div[@class='product']"));
+		
+		
+		highlightWebElement(myWE, "green");
+		myWE.click();
+		TestUtilities.sleepTime();
+	}
 
 	public WebElement findCollectionItem(String Collection, String Item, String Value) {
 		WebElement aWe = null;

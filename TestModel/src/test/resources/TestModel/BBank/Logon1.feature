@@ -20,4 +20,4 @@ Scenario: Successful Logon
 #Scenario 2
 Scenario: Successful Logon
    When I am on the home page
-   Then I draw a line
+   Then I try to click
