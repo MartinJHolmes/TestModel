@@ -74,5 +74,10 @@ public class Bank {
 	    // Write code here that turns the phrase above into concrete actions
 	    world.myTestWebElement.doSomething();
 	}
+	
+	@Then("I find the entry where {string} is {string}")
+	public void i_find_the_entry_where_is(String string, String string2) {
+	    System.out.println("I find the entry.. IS NOT COMPLETE");
+	}
 
 }

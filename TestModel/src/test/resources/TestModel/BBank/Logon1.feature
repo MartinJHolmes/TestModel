@@ -10,6 +10,7 @@ Scenario: Successful Logon
    Then I check "Username" is "holmesm"
    Then I set "Password" to "Password"
    Then chose product
+   Then I find the entry where "text" is "Mortgages"
    Then I click "Logon"
    Then I check "Title" is "Brentford Building Society"
    Then page contains "Withdraw"

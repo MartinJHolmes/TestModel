@@ -29,16 +29,12 @@ public class TestWebElementCommon {
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	private static String getCallerClassName() {
+	private static Boolean calledOutsideOfTestWebElement() {
 		StackTraceElement[] stElements = Thread.currentThread().getStackTrace();
-		for (int i = 1; i < stElements.length; i++) {
-			StackTraceElement ste = stElements[i];
-			// if (!ste.getClassName().equals(KDebug.class.getName()) &&
-			// ste.getClassName().indexOf("java.lang.Thread")!=0) {
-			return ste.getClassName();
-			// }
+		if (stElements[3].getClassName().contains("TestWebElement")) {
+			return false;
 		}
-		return null;
+		return true;
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -56,23 +52,31 @@ public class TestWebElementCommon {
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkValue(String fieldName, String fieldValue) {
-		if (!getCallerClassName().contains("TestWebElement")) {
+		//System.out.println("Caller Class = " + getCallerClassName());
+		if (calledOutsideOfTestWebElement()) {
 			myFieldName = returnValue(fieldName);
 			myFieldValue = returnValue(fieldValue);
 		}
+		System.out.println("checkValue: myFieldName = " + myFieldName);
 		String fieldXPath = WebElementMap.getWebElementIdentifyBy(myFieldName);
 		WebElement returnWE = driver.findElement(By.xpath(fieldXPath));
 		highlightWebElement(returnWE, "green");
-		System.out.println(WebElementMap.getWebElementType(myFieldName));
-		switch (WebElementMap.getWebElementType(myFieldName)) {
-		case "Input":
-			System.out.println("Input reached");
+		
+		//System.out.println("Tag Name = " + returnWE.getTagName());
+		
+		switch (returnWE.getTagName()) {
+		case "input":
+			//System.out.println("Input reached");
 			assertEquals(myFieldName + " did not match expected", returnWE.getAttribute("value"), myFieldValue);
+			break;
+			
+		case "h1":
+			assertEquals(myFieldName + " did not match expected", returnWE.getText(), myFieldValue);
 			break;
 
 		default:
-			assertEquals(myFieldName + " did not match expected", returnWE.getText(), myFieldValue);
-			break;
+			System.out.println("*** Default Reached ***");
+
 
 		}
 		TestUtilities.sleepTime();

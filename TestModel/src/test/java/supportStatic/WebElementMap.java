@@ -100,7 +100,7 @@ public class WebElementMap {
 	    		fieldMapColumn = 2;
 	    		break;
 	    	case "IdentifyBy":
-	    		fieldMapColumn = 3;
+	    		fieldMapColumn = 1;
 	    		break;
 	    	case "Frame":
 	    		fieldMapColumn = 4;
@@ -110,20 +110,20 @@ public class WebElementMap {
 				OnError.printMessage();
 	    	}
 	    	returnString = findLogicalName;
-	    	//System.out.println("findLogialName = " + findLogicalName + fieldMapColumn + MapData.length);
+	    	//System.out.println("Map: findLogialName = " + findLogicalName + fieldMapColumn + MapData.length);
 	    	
 
 		    	for (int i=0; i<MapData.length; i++ ) {
 		    		if (findLogicalName.equals(MapData[i][0])) {
 		    			returnString = MapData[i][fieldMapColumn];
-		    			//System.out.println("counter = " + i);
+		    			//System.out.println("counter = " + i + " value = " + returnString);
 		    			return returnString;
 		    			
 		    		}
 		    	}	
 	    	OnError.errorMessage = "FieldMap - logicalWebElementName '" + findLogicalName + "' does not exist in the map";
 			OnError.printMessage();
-            //System.out.println("Field Map = " + returnString);
+            System.out.println("Field Map = " + returnString);
 			int i = 1 /0;
 			return null;	
 	    }
