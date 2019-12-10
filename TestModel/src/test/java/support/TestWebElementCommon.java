@@ -84,8 +84,12 @@ public class TestWebElementCommon {
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkPage(String fieldValue) {
-		WebElement element = driver.findElement(By.xpath("//*[contains(.,.)]"));
-		assertTrue(fieldValue + " was not found", element.getText().contains(fieldValue));
+		String xPathString = "//*[contains(.,'" + fieldValue + "')]";
+		//System.out.println("XPATH = " + xPathString);
+		//TestUtilities.sleepTime(2000);
+		List<WebElement> elements = driver.findElements(By.xpath(xPathString));
+		//System.out.println("Found number of times = " + elements.size());
+		//assertTrue(fieldValue + " was not found", element.getText().contains(fieldValue));
 		TestUtilities.sleepTime();
 	}
 

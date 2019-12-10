@@ -8,11 +8,11 @@ import io.cucumber.java.en.When;
 import support.World;
 import supportStatic.TestUtilities;
 
-public class Bank {
+public class Common {
 
 	private World world;
 
-	public Bank(World world) {
+	public Common(World world) {
 		this.world = world;
 	}
 
@@ -41,8 +41,8 @@ public class Bank {
 		world.myTestWebElement.checkValue(fieldName, fieldValue);
 	}
 
-	@Then("page contains {string}")
-	public void page_contains(String fieldValue) {
+	@Then("I see {string} on the page")
+	public void i_see_on_the_page(String fieldValue) {
 		world.myTestWebElement.checkPage(fieldValue);
 	}
 	@Then("chose product")
