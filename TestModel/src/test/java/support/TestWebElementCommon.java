@@ -19,6 +19,8 @@ import supportStatic.WebElementMap;
 public class TestWebElementCommon {
 
 	public WebDriver driver;
+	private WebElement currentEntry;
+	
 	public String myName = "Martin";
 	private String myFieldName;
 	private String myFieldValue;
@@ -117,6 +119,54 @@ public class TestWebElementCommon {
 		myWE.click();
 		TestUtilities.sleepTime();
 	}
+	
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public void findEntry(String entryName,String fieldName, String fieldValue) {
+		String entryLocation = WebElementMap.getWebElementName(entryName);
+		String fieldLocation = WebElementMap.getWebElementName(fieldName);
+		
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		List<WebElement> entries = driver.findElements(By.xpath(entryLocation));
+		Iterator<WebElement> iter = entries.iterator();
+		while (iter.hasNext()) {
+			WebElement entry = iter.next();
+			
+			// highlight each entry
+			highlightWebElement(entry, "blue");
+			System.out.println("BLUE >>>>>>>>>>>>>>");
+			
+			try {
+				// find the field
+				WebElement element = entry.findElement(By.xpath(fieldLocation));
+				highlightWebElement(element, "blue");
+				
+				// check the value is correct
+				String tagName = element.getTagName();
+				String elementValue = null;
+				switch (tagName) {
+				case "a":
+					elementValue = element.getText();
+					break;
+				default:
+					System.out.println("FIND ENTRY - SWITCH VALUE NOT RECOGNISED");
+				}
+				
+				if (elementValue.equals(fieldValue)) {
+					highlightWebElement(element, "green");
+					//save entry as current
+					currentEntry = entry;
+				} else {
+					highlightWebElement(element, "red");
+				}
+			} catch (Exception e) {
+				System.out.println("findCollection: Did not find");
+			}
+		}
+		TestUtilities.sleepTime(1000);	
+		
+		
+		
+	}
 
 	public WebElement findCollectionItem(String Collection, String Item, String Value) {
 		WebElement aWe = null;
@@ -167,48 +217,58 @@ public class TestWebElementCommon {
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void setValueTo(String fieldName, String fieldValue) {
-
-		WebElement child = null;
-
-		// <<<< TODO
-		// Replaces _* with "Special"
-		// Needs to lookup in Load or Run Data
-		Character c1 = '_';
-		Character c2 = fieldValue.charAt(0);
-
-		if (c1.equals(c2)) {
-			fieldValue = "Special";
-			// TODO get actual vale
+	public void setValue(String fieldName, String fieldValue) {
+		// transform input values if special characters are used
+		fieldName = returnValue(fieldName);
+		fieldValue = returnValue(fieldValue);
+		
+		setValue(null,fieldName,fieldValue);
+	}
+	
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public void setValueCurrentEntry(String fieldName, String fieldValue) {
+		// transform input values if special characters are used
+		fieldName = returnValue(fieldName);
+		fieldValue = returnValue(fieldValue);
+		
+		if (currentEntry==null) {
+			System.out.println("ERROR");
 		}
-
-		// >>>>
-
-		try {
-			Thread.sleep(GlobalVariables.sleepBetweenSteps);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		setValue(currentEntry,fieldName,fieldValue);
+	}
+	
+	// ---------------------------------------------------------------------
+	private void setValue(WebElement currentEntry,String fieldName, String fieldValue) {
+		// initialise local values
+		WebElement currentElement = null;
+		
+		currentElement = findElement(fieldName);
+		
+		String tagName = currentElement.getTagName();
+		switch(tagName) {
+		case "input":
+			currentElement.sendKeys(fieldValue);
+			break;
+		default:
+			System.out.println("SET VALUE = Tag Name not recognised");		
 		}
+	}
 
-		// Check if Label exists for fieldName
-
-		try {
-			child = driver.findElement(
-					By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
-			highlightWebElement(child, "green");
-
-			child.clear();
-			child.sendKeys(fieldValue);
-		} catch (Exception e) {
-
-			child = driver.findElement(By.xpath(WebElementMap.getWebElementIdentifyBy(fieldName)));
-			highlightWebElement(child, "green");
-			child.sendKeys(fieldValue);
-
-		}
-
-		TestUtilities.sleepTime();
+	// ####################################################################
+	private WebElement findElement(String fieldName) {
+		WebElement currentElement = null;
+		String fieldLocation = WebElementMap.getWebElementName(fieldName);
+		//System.out.println("fieldLocation = " + fieldLocation);
+		if(fieldLocation!=null) {
+			currentElement = driver.findElement(By.xpath(fieldLocation));
+			highlightWebElement(currentElement, "green");
+			TestUtilities.sleepTime(1000);
+		} else {
+			//// TODO
+			//// By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
+		}	
+		
+		return currentElement;
 	}
 
 	// ####################################################################

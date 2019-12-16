@@ -23,7 +23,7 @@ public class Common {
 
 	@Then("I set {string} to {string}")
 	public void i_set_field(String fieldName, String fieldValue)  {
-		world.myTestWebElement.setValueTo(fieldName, fieldValue);
+		world.myTestWebElement.setValue(fieldName, fieldValue);
 	}
 	
 	@Then("I set RadioButton {string} to {string}")
@@ -43,6 +43,7 @@ public class Common {
 
 	@Then("I see {string} on the page")
 	public void i_see_on_the_page(String fieldValue) {
+		System.out.println(fieldValue);
 		world.myTestWebElement.checkPage(fieldValue);
 	}
 	@Then("chose product")
@@ -78,6 +79,11 @@ public class Common {
 	@Then("I find the entry where {string} is {string}")
 	public void i_find_the_entry_where_is(String string, String string2) {
 	    System.out.println("I find the entry.. IS NOT COMPLETE");
+	}
+	
+	@Then("I find the {string} where {string} is {string}")
+	public void i_find_the_where_is(String string, String string2, String string3) {
+		world.myTestWebElement.findEntry(string, string2, string3);
 	}
 
 }

@@ -3,6 +3,7 @@
 Feature: BB Basic
 #This is a comment
 @BB01-01
+@SMOKE
 #Scenario 1
 Scenario: Successful Logon Basic
    When I am on the home page
@@ -37,3 +38,10 @@ Scenario: Successful Logon 3
    Then page contains "Withdraw"
    Then I set "When" to "06-12-2019"
    Then I set RadioButton "Speed" to "Quick"
+   
+@BB01-04
+#Scenario 4
+Scenario: Test Set Method
+   When I am on the home page
+   Then I set "Username" to "holmesm"
+   Then I find the "ProductEntry" where "ProductTitle" is "Mortgages"

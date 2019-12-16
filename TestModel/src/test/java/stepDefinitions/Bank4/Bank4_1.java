@@ -49,12 +49,12 @@ public class Bank4_1 {
 	@When("I type in {string}, {string}, {string}, {string}, {string}, {string}")
 	public void i_enter(String string, String string2, String string3, String string4, String string5, String string6) {
 		
-		world.myTestWebElement.setValueTo("First Name", string);
-		world.myTestWebElement.setValueTo("Middle Name", string2);
-		world.myTestWebElement.setValueTo("Last Name", string3);
-		world.myTestWebElement.setValueTo("House Number", string4);
-		world.myTestWebElement.setValueTo("Line 1", string5);
-		world.myTestWebElement.setValueTo("Line 2", string6);
+		world.myTestWebElement.setValue("First Name", string);
+		world.myTestWebElement.setValue("Middle Name", string2);
+		world.myTestWebElement.setValue("Last Name", string3);
+		world.myTestWebElement.setValue("House Number", string4);
+		world.myTestWebElement.setValue("Line 1", string5);
+		world.myTestWebElement.setValue("Line 2", string6);
 		System.out.println("The test scope should be blank '" + world.myRunData.getValuePair("TestScope") + "'");
 		try {
 			Thread.sleep(1000);
@@ -84,9 +84,9 @@ public class Bank4_1 {
 		}
 		
 
-		world.myTestWebElement.setValueTo("First Name",myLocalData.getItem("First Name"));
-		world.myTestWebElement.setValueTo("Last Name",myLocalData.getItem("Last Name"));
-		world.myTestWebElement.setValueTo("Line 1",myLocalData.getItem("Line 1"));
+		world.myTestWebElement.setValue("First Name",myLocalData.getItem("First Name"));
+		world.myTestWebElement.setValue("Last Name",myLocalData.getItem("Last Name"));
+		world.myTestWebElement.setValue("Line 1",myLocalData.getItem("Line 1"));
 		
 //		Thread.sleep(2000);
 	}
