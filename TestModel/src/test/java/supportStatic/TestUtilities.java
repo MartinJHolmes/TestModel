@@ -21,7 +21,7 @@ public class TestUtilities {
 	}
 	
 	//####################################################################
-	protected static void printDebugMessage(String debugMessage) {
+	public static void printDebugMessage(String debugMessage) {
 		if (GlobalVariables.debugOn) {
 			String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
 			

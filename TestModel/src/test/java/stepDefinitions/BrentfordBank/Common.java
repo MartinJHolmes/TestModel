@@ -62,6 +62,11 @@ public class Common {
 	    world.myTestWebElement.clickEntry();
 	}
 	
+	@Then("I sleep {int} ms")
+	public void i_sleep_ms(Integer int1) {
+	    TestUtilities.sleepTime(int1);
+	}
+	
 	@Then("I test java method")
 	public void i_test_java_method() {
 	    // ONLY USED FOR TESTING JAVA METHODS
