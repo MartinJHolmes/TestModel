@@ -29,8 +29,18 @@ public class TestWebElementCommon {
 	public TestWebElementCommon() {
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	// --------------------------------------------------------------------
 	private static Boolean calledOutsideOfTestWebElement() {
 		StackTraceElement[] stElements = Thread.currentThread().getStackTrace();
 		if (stElements[3].getClassName().contains("TestWebElement")) {
@@ -109,8 +119,9 @@ public class TestWebElementCommon {
 		TestUtilities.sleepTime();
 	}
 
+	// <<<<<<<<<<<<<< TO BE REMOVED
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void clickAble(String fieldName) {
+	public void clickAble99(String fieldName) {
 		// WebElement myWE =
 		// driver.findElement(By.xpath("//img[@src='images/savings.jpg']"));
 		WebElement myWE = driver.findElement(By.xpath("//div[@class='product']"));
@@ -119,6 +130,9 @@ public class TestWebElementCommon {
 		myWE.click();
 		TestUtilities.sleepTime();
 	}
+	// >>>>>>>>>>>>>>
+	
+	
 	
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void findEntry(String entryName,String fieldName, String fieldValue) {
@@ -162,13 +176,19 @@ public class TestWebElementCommon {
 				System.out.println("findCollection: Did not find");
 			}
 		}
-		TestUtilities.sleepTime(1000);	
-		
-		
+		TestUtilities.sleepTime();		
+	}
+	
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public void clickEntry() {
+		System.out.println("TAG NAME = " + currentEntry.getTagName());
+		currentEntry.findElement(By.xpath(".//a")).click();;
+		TestUtilities.sleepTime();	
 		
 	}
-
-	public WebElement findCollectionItem(String Collection, String Item, String Value) {
+	
+// <<<<<<<<<<<<<< TO BE REMOVED
+	public WebElement findCollectionItem99(String Collection, String Item, String Value) {
 		WebElement aWe = null;
 
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -194,28 +214,10 @@ public class TestWebElementCommon {
 		TestUtilities.sleepTime();
 		return aWe;
 	}
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void setRadioButtonTo(String fieldName, String fieldValue) {
-		WebElement child = null;
-		String xPathString = "";
-
-		xPathString = "//input[@type='radio' and @value='" + fieldValue + "' and @name='" + fieldName + "']";
-
-		child = driver.findElement(By.xpath(xPathString));
-		highlightWebElement(child, "green");
-		child.click();
-
-		try {
-			Thread.sleep(GlobalVariables.sleepBetweenSteps);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		TestUtilities.sleepTime();
-	}
-
+	
+	
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void setValue(String fieldName, String fieldValue) {
 		// transform input values if special characters are used
@@ -223,6 +225,7 @@ public class TestWebElementCommon {
 		fieldValue = returnValue(fieldValue);
 		
 		setValue(null,fieldName,fieldValue);
+		TestUtilities.sleepTime();
 	}
 	
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -235,6 +238,7 @@ public class TestWebElementCommon {
 			System.out.println("ERROR");
 		}
 		setValue(currentEntry,fieldName,fieldValue);
+		TestUtilities.sleepTime();
 	}
 	
 	// ---------------------------------------------------------------------
@@ -247,23 +251,51 @@ public class TestWebElementCommon {
 		String tagName = currentElement.getTagName();
 		switch(tagName) {
 		case "input":
-			currentElement.sendKeys(fieldValue);
+			String typeName = currentElement.getAttribute("type");
+			System.out.println("TYPE = " + typeName);
+			switch(typeName) {
+			case "radio":
+				String fieldLocation = WebElementMap.getWebElementName(fieldName);
+				if (fieldLocation == null) {
+					fieldLocation = fieldName;
+				}
+				String xPath = "(" + fieldLocation + ")[@value='" + fieldValue + "']";
+				System.out.println("XPATH = " + xPath);
+				currentElement = driver.findElement(By.xpath(xPath));
+				highlightWebElement(currentElement,"green");
+				currentElement.click();
+				
+				break;
+			case "text":
+			case "password":
+			case "date":
+				currentElement.clear();
+				currentElement.sendKeys(fieldValue);
+				highlightWebElement(currentElement,"green");
+				break;
+			default:
+				System.out.println("TYPE NOT RECOGNISED " + typeName);
+			}
 			break;
 		default:
 			System.out.println("SET VALUE = Tag Name not recognised");		
 		}
 	}
 
-	// ####################################################################
+	// --------------------------------------------------------------------
 	private WebElement findElement(String fieldName) {
 		WebElement currentElement = null;
 		String fieldLocation = WebElementMap.getWebElementName(fieldName);
 		//System.out.println("fieldLocation = " + fieldLocation);
 		if(fieldLocation!=null) {
 			currentElement = driver.findElement(By.xpath(fieldLocation));
-			highlightWebElement(currentElement, "green");
+			highlightWebElement(currentElement, "blue");
 			TestUtilities.sleepTime(1000);
 		} else {
+			fieldLocation = fieldName;
+			currentElement = driver.findElement(By.xpath(fieldLocation));
+			highlightWebElement(currentElement, "blue");
+			TestUtilities.sleepTime(1000);
 			//// TODO
 			//// By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
 		}	
@@ -271,8 +303,8 @@ public class TestWebElementCommon {
 		return currentElement;
 	}
 
-	// ####################################################################
-	public void highlightWebElement(WebElement myTest, String highlightColour) {
+	// -------------------------------------------------------------
+	private void highlightWebElement(WebElement myTest, String highlightColour) {
 
 		if (GlobalVariables.highlightWebElementRequired == true) {
 			// System.out.println(myTest.getAttribute("id"));

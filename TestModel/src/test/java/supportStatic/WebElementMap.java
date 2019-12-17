@@ -124,7 +124,7 @@ public class WebElementMap {
 	    	OnError.errorMessage = "FieldMap - logicalWebElementName '" + findLogicalName + "' does not exist in the map";
 			OnError.printMessage();
             System.out.println("Field Map = " + returnString);
-			int i = 1 /0;
+			//int i = 1 /0;
 			return null;	
 	    }
 	    public static void printFieldMap() {

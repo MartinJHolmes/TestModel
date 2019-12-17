@@ -42,10 +42,10 @@ public class AmazonBookSearch {
 		String Collection = "//div[@class=(\"s-expand-height s-include-content-margin s-border-bottom\")]";
 		String Item = 	".//*[@class=\"a-size-base a-color-secondary a-text-normal\"]";
 		String Value = "1987";
-		WebElement eItem = world.myTestWebElement.findCollectionItem(Collection, Item, Value);
-		world.myTestWebElement.checkValue(eItem, "hello", "hello");
+		//WebElement eItem = world.myTestWebElement.findCollectionItem(Collection, Item, Value);
+		//world.myTestWebElement.checkValue(eItem, "hello", "hello");
 		Thread.sleep(3000);
-		eItem.click();
+		//eItem.click();
 //		System.out.println("The class = " + eItem.getAttribute("class"));
 		Thread.sleep(5000);
 	}

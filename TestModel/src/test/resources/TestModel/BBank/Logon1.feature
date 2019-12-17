@@ -16,28 +16,22 @@ Scenario: Successful Logon Basic
 #Scenario 1a
 Scenario: Successful Logon One Step
    When I successfully logon
-
-@BB01-02
-#Scenario 2
-Scenario: Successful Logon
-   When I am on the home page
-   Then I try to click
-   Then I try something different
-   
+  
 @BB01-03
+@Reg
 #Scenario 3
-Scenario: Successful Logon 3
+Scenario: Regression Test
    When I am on the home page
    Then I set "Username" to "holmesm"
    Then I check "Username" is "holmesm"
    Then I set "Password" to "Password"
-   Then chose product
-   Then I find the entry where "text" is "Mortgages"
+   Then I find the "ProductEntry" where "ProductTitle" is "Mortgages"
+   Then I click the entry
    Then I click "Logon"
    Then I check "Title" is "Brentford Building Society"
-   Then page contains "Withdraw"
    Then I set "When" to "06-12-2019"
-   Then I set RadioButton "Speed" to "Quick"
+   Then I set "Speed" to "Quick"
+   Then I set "//input[@name='amount']" to "123"
    
 @BB01-04
 #Scenario 4
@@ -45,3 +39,14 @@ Scenario: Test Set Method
    When I am on the home page
    Then I set "Username" to "holmesm"
    Then I find the "ProductEntry" where "ProductTitle" is "Mortgages"
+   Then I click the entry
+   Then I click "Logon"
+   Then I set "Speed" to "Quick"
+   
+@BB01-99
+#Scenario 99
+Scenario: Test Java Method
+   When I am on the home page
+   Then I click "Logon"
+   Then I test java method
+   

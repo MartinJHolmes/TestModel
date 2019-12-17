@@ -25,11 +25,6 @@ public class Common {
 	public void i_set_field(String fieldName, String fieldValue)  {
 		world.myTestWebElement.setValue(fieldName, fieldValue);
 	}
-	
-	@Then("I set RadioButton {string} to {string}")
-	public void i_set_radiobutton(String fieldName, String fieldValue) {
-		world.myTestWebElement.setRadioButtonTo(fieldName, fieldValue);
-	}
 
 	@Then("I click {string}")
 	public void i_click(String fieldName) {
@@ -43,31 +38,7 @@ public class Common {
 
 	@Then("I see {string} on the page")
 	public void i_see_on_the_page(String fieldValue) {
-		System.out.println(fieldValue);
 		world.myTestWebElement.checkPage(fieldValue);
-	}
-	@Then("chose product")
-	public void chose_product() {
-		WebElement myWE = world.myTestWebElement.driver.findElement(By.xpath("//div[@class='products']"));
-		world.myTestWebElement.highlightWebElement(myWE, "blue");
-		
-		String Collection = "//div[@class='product']";
-
-//		String Item = 	".//*[@src='images/savings.jpg']";
-//		String Item = 	".//*[contains(text(),'Saving')]";
-		String Item = 	".//a";
-		
-		String Value = "Mortgages";
-		myWE = world.myTestWebElement.findCollectionItem(Collection, Item, Value);
-		world.myTestWebElement.highlightWebElement(myWE, "green");
-		myWE.findElement(By.xpath(".//a")).click();
-		System.out.println(myWE.getTagName());
-		TestUtilities.sleepTime(1000);
-	}
-	
-	@Then("I try to click")
-	public void i_try_to_click()  {
-		world.myTestWebElement.clickAble("hello");
 	}
 	
 	@Then("I try something different")
@@ -84,6 +55,17 @@ public class Common {
 	@Then("I find the {string} where {string} is {string}")
 	public void i_find_the_where_is(String string, String string2, String string3) {
 		world.myTestWebElement.findEntry(string, string2, string3);
+	}
+	
+	@Then("I click the entry")
+	public void i_click_the_entry() {
+	    world.myTestWebElement.clickEntry();
+	}
+	
+	@Then("I test java method")
+	public void i_test_java_method() {
+	    // ONLY USED FOR TESTING JAVA METHODS
+	    world.myTestWebElement.setValue("//input[@name='Speed']", "Slow");
 	}
 
 }
