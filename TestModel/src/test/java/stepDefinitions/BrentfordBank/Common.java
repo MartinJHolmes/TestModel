@@ -70,7 +70,9 @@ public class Common {
 	@Then("I test java method")
 	public void i_test_java_method() {
 	    // ONLY USED FOR TESTING JAVA METHODS
-	    world.myTestWebElement.setValue("//input[@name='Speed']", "Slow");
+		world.myTestWebElement.gotoURL("https://www.bbc.co.uk/weather/2643743");
+		TestUtilities.sleepTime(2000);
+	    world.myTestWebElement.findEntry("//li[contains(@class,'wr-day')]", ".//div[contains(@class,'wr-day__title')]", "Sat 21st");
 	}
 
 }

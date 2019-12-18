@@ -51,7 +51,7 @@ public class TestWebElementCommon {
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void checkValue99(WebElement we, String fieldName, String fieldValue) {
+	public void checkItemValue(WebElement we, String fieldName, String fieldValue) {
 		TestUtilities.printDebugMessage("STARTED");
 		WebElement returnWE = we.findElement(By.xpath(".//span[@class=(\"a-color-base\")]"));
 		TestUtilities.printDebugMessage("<<< METHOD NOT WRITTEN >>>");
@@ -127,6 +127,13 @@ public class TestWebElementCommon {
 		String entryLocation = WebElementMap.getWebElementName(entryName);
 		String fieldLocation = WebElementMap.getWebElementName(fieldName);
 		
+		if (entryLocation == null) {
+			entryLocation = entryName;
+		}
+		if (fieldLocation == null) {
+			fieldLocation = fieldName;
+		}
+		
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		List<WebElement> entries = driver.findElements(By.xpath(entryLocation));
 		Iterator<WebElement> iter = entries.iterator();
@@ -146,10 +153,12 @@ public class TestWebElementCommon {
 				String elementValue = null;
 				switch (tagName) {
 				case "a":
+				case "span":
+				case "div":
 					elementValue = element.getText();
 					break;
 				default:
-					TestUtilities.printDebugMessage("<<< TAG NAME NOT RECOGNISED >>>");
+					TestUtilities.printDebugMessage("<<< TAG NAME NOT RECOGNISED >>>  " + tagName);
 				}
 				
 				if (elementValue.equals(fieldValue)) {
@@ -300,7 +309,8 @@ public class TestWebElementCommon {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript(" " + "var btn=document.createElement('DIV');" + "btn.id = 'Hello';"
 					+ "btn.style = 'border:3px solid " + highlightColour + ";" + " position: absolute;" + "width: " + w
-					+ "px; " + "height:" + h + "px; " + "top:" + t + "px; " + "left:" + l + "px';"
+					//+ "px; " + "height:" + h + "px; " + "top:" + t + "px; " + "left:" + l + "px';"
+					+ "px; " + "height:" + h + "px; " + "top:" + t + "px; " + "left:" + l + "px; z-index: 1000';"
 					+ "document.body.appendChild(btn);");
 			TestUtilities.sleepTime(GlobalVariables.highlightTime);
 			js.executeScript(

@@ -50,9 +50,6 @@ Scenario: Test Set Method
 #Scenario 99
 Scenario: Test Java Method
    When I am on the home page
-   Then I click "Logon"
-   Then I set "Username" to "Dorota's Friend"
-   Then I set "Speed" to "Don't Mind"
-   Then I sleep 2000 ms
-   #Then I test java method
+   Then I sleep 100 ms
+   Then I test java method
    
