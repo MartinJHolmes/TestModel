@@ -209,11 +209,11 @@ public class TestWebElementCommon {
 		TestUtilities.printDebugMessage("STARTED");
 		TestUtilities.printDebugMessage(" fieldValue = " + fieldValue);
 		// initialise local values
-		WebElement currentElement = null;
+
 		List<WebElement> elements = findElements(fieldName);
 
 		
-		currentElement = findElement(fieldName);
+		
 		
 		String tagName = elements.get(0).getTagName();
 		switch(tagName) {
@@ -235,17 +235,6 @@ public class TestWebElementCommon {
 						highlightWebElement(entry,"red");
 					}
 				}
-						
-						
-//				String fieldLocation = WebElementMap.getWebElementName(fieldName);
-//				if (fieldLocation == null) {
-//					fieldLocation = fieldName;
-//				}
-//				String xPath = "(" + fieldLocation + ")[@value=\"" + fieldValue + "\"]";
-//				
-//				currentElement = driver.findElement(By.xpath(xPath));
-//				highlightWebElement(currentElement,"green");
-//				currentElement.click();
 				
 				break;
 			case "text":
@@ -253,8 +242,6 @@ public class TestWebElementCommon {
 			case "date":
 				elements.get(0).clear();
 				elements.get(0).sendKeys(fieldValue);
-				//currentElement.clear();
-				//currentElement.sendKeys(fieldValue);
 				highlightWebElement(elements.get(0),"green");
 				break;
 			default:
@@ -265,28 +252,6 @@ public class TestWebElementCommon {
 			TestUtilities.printDebugMessage("<<< TAG NAME NOT RECOGNISED >>>");	
 		}
 		TestUtilities.printDebugMessage("FINISHED");
-	}
-
-	// --------------------------------------------------------------------
-	private WebElement findElement(String fieldName) {
-		TestUtilities.printDebugMessage("STARTED");
-		WebElement currentElement = null;
-		String fieldLocation = WebElementMap.getWebElementName(fieldName);
-		
-		if(fieldLocation!=null) {
-			currentElement = driver.findElement(By.xpath(fieldLocation));
-			highlightWebElement(currentElement, "blue");
-			TestUtilities.sleepTime();
-		} else {
-			fieldLocation = fieldName;
-			currentElement = driver.findElement(By.xpath(fieldLocation));
-			highlightWebElement(currentElement, "blue");
-			TestUtilities.sleepTime();
-			//// TODO
-			//// By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
-		}	
-		TestUtilities.printDebugMessage("FINISHED");
-		return currentElement;
 	}
 	
 	// --------------------------------------------------------------------
