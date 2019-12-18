@@ -3,6 +3,7 @@ package support;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,10 +25,12 @@ public class TestWebElementCommon {
 	public String myName = "Martin";
 	private String myFieldName;
 	private String myFieldValue;
+	
+	//private World world;
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public TestWebElementCommon() {
-
+		//this.world = world;
 	}
 	
 	
@@ -208,6 +211,8 @@ public class TestWebElementCommon {
 		// initialise local values
 		WebElement currentElement = null;
 		
+
+		
 		currentElement = findElement(fieldName);
 		
 		String tagName = currentElement.getTagName();
@@ -217,15 +222,32 @@ public class TestWebElementCommon {
 			
 			switch(typeName) {
 			case "radio":
-				String fieldLocation = WebElementMap.getWebElementName(fieldName);
-				if (fieldLocation == null) {
-					fieldLocation = fieldName;
-				}
-				String xPath = "(" + fieldLocation + ")[@value=\"" + fieldValue + "\"]";
 				
-				currentElement = driver.findElement(By.xpath(xPath));
-				highlightWebElement(currentElement,"green");
-				currentElement.click();
+				List<WebElement> elements = findElements(fieldName);
+				System.out.println(" field " + fieldName + "  testElements = " + elements.size());
+				Iterator<WebElement> iter = elements.iterator();
+				while (iter.hasNext()) {
+					WebElement entry = iter.next();
+					if (entry.getAttribute("value").equals(fieldValue)) {
+						highlightWebElement(entry,"green");
+						entry.click();
+					} else {
+						highlightWebElement(entry,"red");
+					}
+				}
+						
+				
+				
+				
+//				String fieldLocation = WebElementMap.getWebElementName(fieldName);
+//				if (fieldLocation == null) {
+//					fieldLocation = fieldName;
+//				}
+//				String xPath = "(" + fieldLocation + ")[@value=\"" + fieldValue + "\"]";
+//				
+//				currentElement = driver.findElement(By.xpath(xPath));
+//				highlightWebElement(currentElement,"green");
+//				currentElement.click();
 				
 				break;
 			case "text":
@@ -254,17 +276,50 @@ public class TestWebElementCommon {
 		if(fieldLocation!=null) {
 			currentElement = driver.findElement(By.xpath(fieldLocation));
 			highlightWebElement(currentElement, "blue");
-			TestUtilities.sleepTime(1000);
+			TestUtilities.sleepTime();
 		} else {
 			fieldLocation = fieldName;
 			currentElement = driver.findElement(By.xpath(fieldLocation));
 			highlightWebElement(currentElement, "blue");
-			TestUtilities.sleepTime(1000);
+			TestUtilities.sleepTime();
 			//// TODO
 			//// By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
 		}	
 		TestUtilities.printDebugMessage("FINISHED");
 		return currentElement;
+	}
+	
+	// --------------------------------------------------------------------
+	// EXPERIMENTAL
+	private List<WebElement> findElements(String fieldName) {
+		TestUtilities.printDebugMessage("STARTED");
+		WebElement currentElement = null;
+		List<WebElement> entries = new ArrayList<>();
+		String fieldLocation = WebElementMap.getWebElementName(fieldName);
+		
+		if(fieldLocation!=null) {
+			entries = driver.findElements(By.xpath(fieldLocation));
+			Iterator<WebElement> iter = entries.iterator();
+			while (iter.hasNext()) {
+				WebElement entry = iter.next();
+				
+				// highlight each entry
+				highlightWebElement(entry, "blue");
+			}	
+			//return entries;
+				
+
+		} else {
+			fieldLocation = fieldName;
+			currentElement = driver.findElement(By.xpath(fieldLocation));
+			entries.add(currentElement);
+			highlightWebElement(currentElement, "blue");
+			TestUtilities.sleepTime();
+			//// TODO
+			//// By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
+		}	
+		TestUtilities.printDebugMessage("FINISHED");
+		return entries;
 	}
 
 	// -------------------------------------------------------------

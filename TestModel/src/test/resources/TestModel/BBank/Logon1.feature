@@ -32,7 +32,7 @@ Scenario: Regression Test
    Then I set "When" to "06-12-2019"
    Then I set "Speed" to "Don't Mind"
    Then I set "//input[@name='amount']" to "123"
-   Then I sleep 4000 ms
+   Then I sleep 5000 ms
    
 @BB01-04
 #Scenario 4

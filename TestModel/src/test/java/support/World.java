@@ -16,6 +16,9 @@ public class World {
     public DetailsPagePoF detailsPage = new DetailsPagePoF(myTestWebElement.driver);
     public String testWorldScope = "initial"; // used to proving scope of the World Class
     
+    public WebElements myWebElements = new WebElements();
+    
+    
     public World(){
     	//System.out.println("World Created");
     }
