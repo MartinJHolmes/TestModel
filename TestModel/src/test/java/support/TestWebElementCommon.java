@@ -210,24 +210,24 @@ public class TestWebElementCommon {
 		TestUtilities.printDebugMessage(" fieldValue = " + fieldValue);
 		// initialise local values
 		WebElement currentElement = null;
-		
+		List<WebElement> elements = findElements(fieldName);
 
 		
 		currentElement = findElement(fieldName);
 		
-		String tagName = currentElement.getTagName();
+		String tagName = elements.get(0).getTagName();
 		switch(tagName) {
 		case "input":
-			String typeName = currentElement.getAttribute("type");
+			String typeName = elements.get(0).getAttribute("type");
 			
 			switch(typeName) {
 			case "radio":
 				
-				List<WebElement> elements = findElements(fieldName);
 				System.out.println(" field " + fieldName + "  testElements = " + elements.size());
 				Iterator<WebElement> iter = elements.iterator();
 				while (iter.hasNext()) {
 					WebElement entry = iter.next();
+					highlightWebElement(entry,"blue");
 					if (entry.getAttribute("value").equals(fieldValue)) {
 						highlightWebElement(entry,"green");
 						entry.click();
@@ -236,9 +236,7 @@ public class TestWebElementCommon {
 					}
 				}
 						
-				
-				
-				
+						
 //				String fieldLocation = WebElementMap.getWebElementName(fieldName);
 //				if (fieldLocation == null) {
 //					fieldLocation = fieldName;
@@ -253,9 +251,11 @@ public class TestWebElementCommon {
 			case "text":
 			case "password":
 			case "date":
-				currentElement.clear();
-				currentElement.sendKeys(fieldValue);
-				highlightWebElement(currentElement,"green");
+				elements.get(0).clear();
+				elements.get(0).sendKeys(fieldValue);
+				//currentElement.clear();
+				//currentElement.sendKeys(fieldValue);
+				highlightWebElement(elements.get(0),"green");
 				break;
 			default:
 				TestUtilities.printDebugMessage("<<< TYPE NAME NOT RECOGNISED >>>");
@@ -290,7 +290,6 @@ public class TestWebElementCommon {
 	}
 	
 	// --------------------------------------------------------------------
-	// EXPERIMENTAL
 	private List<WebElement> findElements(String fieldName) {
 		TestUtilities.printDebugMessage("STARTED");
 		WebElement currentElement = null;
