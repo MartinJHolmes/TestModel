@@ -67,6 +67,11 @@ public class Common {
 	    TestUtilities.sleepTime(int1);
 	}
 	
+	@Then("I go to the {string} Website")
+	public void i_go_to_the_Website(String url) {
+	    world.myTestWebElement.gotoURL(url);
+	}
+	
 	@Then("I test java method")
 	public void i_test_java_method() {
 	    // ONLY USED FOR TESTING JAVA METHODS

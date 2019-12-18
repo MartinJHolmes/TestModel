@@ -23,7 +23,6 @@ Scenario: Successful Logon One Step
 Scenario: Regression Test
    When I am on the home page
    Then I set "Username" to "holmesm"
-   Then I check "Username" is "holmesm"
    Then I set "Password" to "Password"
    Then I find the "ProductEntry" where "ProductTitle" is "Mortgages"
    Then I click the entry
@@ -50,6 +49,8 @@ Scenario: Test Set Method
 #Scenario 99
 Scenario: Test Java Method
    When I am on the home page
+   Then I go to the "https://www.bbc.co.uk/weather/2643743" Website
    Then I sleep 100 ms
-   Then I test java method
+   #Then I test java method
+   Then I find the "DayEntry" where "DateItem" is "Sun 22nd" 
    

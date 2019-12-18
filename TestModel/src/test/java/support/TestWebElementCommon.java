@@ -270,6 +270,8 @@ public class TestWebElementCommon {
 		List<WebElement> entries = new ArrayList<>();
 		String fieldLocation = WebElementMap.getWebElementName(fieldName);
 		
+		System.out.println(" field location = " + fieldLocation);
+		
 		if(fieldLocation!=null) {
 			entries = driver.findElements(By.xpath(fieldLocation));
 			Iterator<WebElement> iter = entries.iterator();
@@ -284,10 +286,19 @@ public class TestWebElementCommon {
 
 		} else {
 			fieldLocation = fieldName;
-			currentElement = driver.findElement(By.xpath(fieldLocation));
-			entries.add(currentElement);
-			highlightWebElement(currentElement, "blue");
-			TestUtilities.sleepTime();
+			String firstChar = fieldLocation.charAt(0) + "";
+			if (firstChar.equals("/")) {
+				currentElement = driver.findElement(By.xpath(fieldLocation));
+				entries.add(currentElement);
+				highlightWebElement(currentElement, "blue");
+				//TestUtilities.sleepTime();
+			} else {
+				currentElement = driver.findElement(By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldLocation + "')]]" + "/@for)]"));
+				entries.add(currentElement);
+				highlightWebElement(currentElement, "blue");
+				//TestUtilities.sleepTime();
+			}
+			
 			//// TODO
 			//// By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
 		}	
