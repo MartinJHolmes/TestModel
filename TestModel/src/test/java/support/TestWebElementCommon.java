@@ -217,12 +217,8 @@ public class TestWebElementCommon {
 	private void setValue(WebElement currentEntry,String fieldName, String fieldValue) {
 		TestUtilities.printDebugMessage("STARTED");
 		TestUtilities.printDebugMessage(" fieldValue = " + fieldValue);
-		// initialise local values
 
 		List<WebElement> elements = findElements(fieldName);
-
-		
-		
 		
 		String tagName = elements.get(0).getTagName();
 		switch(tagName) {
@@ -231,8 +227,6 @@ public class TestWebElementCommon {
 			
 			switch(typeName) {
 			case "radio":
-				
-				System.out.println(" field " + fieldName + "  testElements = " + elements.size());
 				Iterator<WebElement> iter = elements.iterator();
 				while (iter.hasNext()) {
 					WebElement entry = iter.next();
@@ -240,6 +234,7 @@ public class TestWebElementCommon {
 					if (entry.getAttribute("value").equals(fieldValue)) {
 						highlightWebElement(entry,"green");
 						entry.click();
+						return;
 					} else {
 						highlightWebElement(entry,"red");
 					}
@@ -249,16 +244,38 @@ public class TestWebElementCommon {
 			case "text":
 			case "password":
 			case "date":
+				highlightWebElement(elements.get(0),"blue");
 				elements.get(0).clear();
 				elements.get(0).sendKeys(fieldValue);
 				highlightWebElement(elements.get(0),"green");
 				break;
+			case "checkbox":
+				highlightWebElement(elements.get(0),"blue");
+				if(fieldValue.contentEquals("Checked")) {
+					if(elements.get(0).isSelected()) {
+						// null
+					} else {
+						elements.get(0).click();
+					}
+				} else {
+					if(elements.get(0).isSelected()) {
+						elements.get(0).click();
+					} else {
+						// null
+					}
+				}
+				highlightWebElement(elements.get(0),"green");
 			default:
-				TestUtilities.printDebugMessage("<<< TYPE NAME NOT RECOGNISED >>>");
+				TestUtilities.printDebugMessage("<<< TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
 			}
 			break;
+		case "select":
+			highlightWebElement(elements.get(0),"blue");
+			elements.get(0).sendKeys(fieldValue);
+			highlightWebElement(elements.get(0),"green");
+			break;
 		default:
-			TestUtilities.printDebugMessage("<<< TAG NAME NOT RECOGNISED >>>");	
+			TestUtilities.printDebugMessage("<<< TAG NAME '" + tagName + "' NOT RECOGNISED >>>");	
 		}
 		TestUtilities.printDebugMessage("FINISHED");
 	}
@@ -266,42 +283,21 @@ public class TestWebElementCommon {
 	// --------------------------------------------------------------------
 	private List<WebElement> findElements(String fieldName) {
 		TestUtilities.printDebugMessage("STARTED");
-		WebElement currentElement = null;
+		String fieldLocation;
 		List<WebElement> entries = new ArrayList<>();
-		String fieldLocation = WebElementMap.getWebElementName(fieldName);
 		
-		System.out.println(" field location = " + fieldLocation);
-		
-		if(fieldLocation!=null) {
-			entries = driver.findElements(By.xpath(fieldLocation));
-			Iterator<WebElement> iter = entries.iterator();
-			while (iter.hasNext()) {
-				WebElement entry = iter.next();
-				
-				// highlight each entry
-				highlightWebElement(entry, "blue");
-			}	
-			//return entries;
-				
-
-		} else {
+		String firstChar = fieldName.charAt(0) + "";
+		if (firstChar.equals("/")) {
 			fieldLocation = fieldName;
-			String firstChar = fieldLocation.charAt(0) + "";
-			if (firstChar.equals("/")) {
-				currentElement = driver.findElement(By.xpath(fieldLocation));
-				entries.add(currentElement);
-				highlightWebElement(currentElement, "blue");
-				//TestUtilities.sleepTime();
-			} else {
-				currentElement = driver.findElement(By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldLocation + "')]]" + "/@for)]"));
-				entries.add(currentElement);
-				highlightWebElement(currentElement, "blue");
-				//TestUtilities.sleepTime();
+		} else {
+			fieldLocation = WebElementMap.getWebElementName(fieldName);
+			if(fieldLocation==null) {
+				fieldLocation = "//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]";
 			}
-			
-			//// TODO
-			//// By.xpath("//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]"));
-		}	
+		}
+		
+		entries = driver.findElements(By.xpath(fieldLocation));
+		
 		TestUtilities.printDebugMessage("FINISHED");
 		return entries;
 	}
