@@ -1,3 +1,5 @@
+// © Martin Holmes 2019
+
 // TODO
 // 1 Consider including in LoadData or the other way around
 package support;

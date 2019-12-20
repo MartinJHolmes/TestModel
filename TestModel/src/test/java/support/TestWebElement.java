@@ -1,3 +1,4 @@
+// © Martin Holmes 2019
 package support;
 
 import org.openqa.selenium.WebElement;

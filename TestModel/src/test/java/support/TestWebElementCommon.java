@@ -1,3 +1,4 @@
+// © Martin Holmes 2019
 package support;
 
 import static org.junit.Assert.assertEquals;
@@ -46,6 +47,21 @@ public class TestWebElementCommon {
 	// --------------------------------------------------------------------
 	private String returnValue(String value) {
 		TestUtilities.printDebugMessage("STARTED");
+		
+		String firstChar = value.charAt(0) + "";
+		switch(firstChar) {
+		case "#":
+			// get RunData
+			TestUtilities.printDebugMessage("RunData programming NOT complete");
+			value = "data from memory";
+			break;
+		case "@":
+			// get LoadData
+			TestUtilities.printDebugMessage("LoadData programming NOT complete");
+			value = "data from load";
+		}
+		
+		
 		TestUtilities.printDebugMessage("FINISHED");
 		return value;
 	}
@@ -231,12 +247,17 @@ public class TestWebElementCommon {
 				while (iter.hasNext()) {
 					WebElement entry = iter.next();
 					highlightWebElement(entry,"blue");
-					if (entry.getAttribute("value").equals(fieldValue)) {
-						highlightWebElement(entry,"green");
+					//if (entry.getAttribute("value").equals(fieldValue)) {
+					WebElement entryLabel = entry.findElement(By.xpath("../label"));
+					highlightWebElement(entryLabel,"blue");
+					//String myString = myWeb.getText();
+					if (entryLabel.getText().equals(fieldValue)) {
+						highlightWebElement(entryLabel,"green");
 						entry.click();
+						highlightWebElement(entry,"green");
 						return;
 					} else {
-						highlightWebElement(entry,"red");
+						highlightWebElement(entryLabel,"red");
 					}
 				}
 				
