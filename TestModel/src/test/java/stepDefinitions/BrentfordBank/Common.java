@@ -38,6 +38,9 @@ public class Common {
 	
 	@Then("I check {string} is {string} for entry")
 	public void i_check_entry(String fieldName, String fieldValue) {
+		System.out.println(">>>> " + fieldName + " " + fieldValue);
+		fieldValue = "7°";
+		System.out.println(">>>> " + fieldName + " " + fieldValue);
 		world.myTestWebElement.checkItemValue(fieldName, fieldValue);
 	}
 
