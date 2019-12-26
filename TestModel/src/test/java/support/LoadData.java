@@ -45,10 +45,7 @@ public LoadData() {
     
     public String getItem(String findLogicalName){
     	
-    	// Debug
-    	//for (int j=0; j<testData.length; j++) {
-    	//	System.out.println(testData[j][0]);
-    	//}
+
     	
     	
     	String returnString;

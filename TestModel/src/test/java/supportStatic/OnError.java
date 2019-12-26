@@ -21,7 +21,7 @@ public class OnError {
 		errorOutPut = errorOutPut + errorMessage;
 		
 		 
-		System.out.println(errorOutPut);
+		TestUtilities.printDebugMessage(errorOutPut);
 	}
 
 }

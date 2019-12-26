@@ -73,15 +73,16 @@ public class BeforeAfter {
 	    // Setup the Web Driver
 	    System.setProperty(GlobalVariables.webDriverType,GlobalVariables.webDriverFileLocation);
 	    ChromeOptions options = new ChromeOptions();
+	    Integer windowWidth = 700;
 	    options.addArguments("--window-position=0,900");
 	    options.addArguments("--window-Size=480,100");
 		driver = new ChromeDriver(options);
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
 		//System.out.println(">>>>>>>>> " + logicalThreadId);
-		Integer xPos = (Integer.parseInt(logicalThreadId) * 480) - 480;
+		Integer xPos = (Integer.parseInt(logicalThreadId) * windowWidth) - windowWidth;
 		//System.out.println("The x position = " + Integer.toString(xPos));
 		driver.manage().window().setPosition(new Point(xPos,0));
-		driver.manage().window().setSize(new Dimension(400,1000));
+		driver.manage().window().setSize(new Dimension(windowWidth,1000));
 		
 
 	

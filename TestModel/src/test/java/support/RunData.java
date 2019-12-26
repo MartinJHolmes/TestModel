@@ -26,7 +26,6 @@ public class RunData {
 
 		for (int i=0;i<MapData.length;i++) {
 			String tempValue = MapData[i][0] + "";
-			//System.out.println(tempValue);
 			if (tempValue.equals("null")) {
 				MapData[i][0] = field;
 				MapData[i][1] = fieldValue;

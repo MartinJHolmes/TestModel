@@ -3,11 +3,13 @@ package support;
 
 import org.openqa.selenium.WebElement;
 
+import supportStatic.TestUtilities;
+
 public class TestWebElement extends TestWebElementCommon{
 	
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void doSomething() {
-		System.out.println("doSomething Called by " + myName);
+		TestUtilities.printDebugMessage("doSomething Called by " + myName);
 		WebElement myWE = null;
 		
 		

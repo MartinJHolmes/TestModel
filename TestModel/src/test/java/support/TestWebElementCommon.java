@@ -27,11 +27,11 @@ public class TestWebElementCommon {
 	private String myFieldName;
 	private String myFieldValue;
 	
-	//private World world;
+	
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public TestWebElementCommon() {
-		//this.world = world;
+		
 	}
 	
 	
@@ -67,22 +67,34 @@ public class TestWebElementCommon {
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void checkItemValue(WebElement we, String fieldName, String fieldValue) {
+	public void checkItemValue(String fieldName, String fieldValue) {
 		TestUtilities.printDebugMessage("STARTED");
-		WebElement returnWE = we.findElement(By.xpath(".//span[@class=(\"a-color-base\")]"));
+		String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
+		WebElement returnWE = currentEntry.findElement(By.xpath(fieldXPath));
+		highlightWebElement(returnWE, "blue");
+		System.out.println("VALUE = " + returnWE.getText());
+		if(returnWE.getText().contentEquals(fieldValue)) {
+			highlightWebElement(returnWE, "green");
+		} else {
+			TestUtilities.printDebugMessage("ERROR - Expected Value = " + fieldValue + "   Actual Value = " + returnWE.getText());
+			highlightWebElement(returnWE, "red");
+		}
+		
 		TestUtilities.printDebugMessage("<<< METHOD NOT WRITTEN >>>");
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void checkValue(String fieldName, String fieldValue) {
+	public void checkFieldValue(String fieldName, String fieldValue) {
 		TestUtilities.printDebugMessage("STARTED");
+		TestUtilities.printDebugMessage("<<< METHOD NOT COMPLETED >>>");
 		
 		if (calledOutsideOfTestWebElement()) {
 			myFieldName = returnValue(fieldName);
 			myFieldValue = returnValue(fieldValue);
 		}
+		
 		
 		String fieldXPath = WebElementMap.getWebElementIdentifyBy(myFieldName);
 		WebElement returnWE = driver.findElement(By.xpath(fieldXPath));
@@ -99,6 +111,7 @@ public class TestWebElementCommon {
 
 		default:
 			TestUtilities.printDebugMessage("<<< TAG NAME NOT RECOGNISED >>>");
+			
 
 
 		}
@@ -132,7 +145,7 @@ public class TestWebElementCommon {
 //		WebElement myWE = driver.findElement(By.id(fieldName));
 		
 		String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
-		System.out.println("Xpath = " + fieldXPath);
+		
 		WebElement returnWE = driver.findElement(By.xpath(fieldXPath));
 		highlightWebElement(returnWE, "green");
 		returnWE.click();
@@ -245,6 +258,15 @@ public class TestWebElementCommon {
 		TestUtilities.printDebugMessage(" fieldValue = " + fieldValue);
 
 		List<WebElement> elements = findElements(fieldName);
+		if(elements.size()==0) {
+			TestUtilities.printDebugMessage("ERROR - No Elements found for '" + fieldValue + "'");
+			if (!GlobalVariables.failOnError) {
+				TestUtilities.printDebugMessage(">>>> failOnError set to FALSE");
+				return;
+			} else {
+				
+			}
+		}
 		
 		String tagName = elements.get(0).getTagName();
 		switch(tagName) {
@@ -338,12 +360,12 @@ public class TestWebElementCommon {
 		TestUtilities.printDebugMessage("STARTED");
 
 		if (GlobalVariables.highlightWebElementRequired == true & !GlobalVariables.noSleep) {
-			// System.out.println(myTest.getAttribute("id"));
+			
 			int w = myTest.getSize().getWidth() + 8;
 			int h = myTest.getSize().getHeight() + 8;
 			int t = myTest.getLocation().getY() - 6;
 			int l = myTest.getLocation().getX() - 8;
-			// System.out.println(myTest.getAttribute("id") + "Width = " + w);
+			
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript(" " + "var btn=document.createElement('DIV');" + "btn.id = 'Hello';"
 					+ "btn.style = 'border:3px solid " + highlightColour + ";" + " position: absolute;" + "width: " + w

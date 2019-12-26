@@ -33,7 +33,12 @@ public class Common {
 
 	@Then("I check {string} is {string}")
 	public void i_check(String fieldName, String fieldValue) {
-		world.myTestWebElement.checkValue(fieldName, fieldValue);
+		world.myTestWebElement.checkFieldValue(fieldName, fieldValue);
+	}
+	
+	@Then("I check {string} is {string} for entry")
+	public void i_check_entry(String fieldName, String fieldValue) {
+		world.myTestWebElement.checkItemValue(fieldName, fieldValue);
 	}
 
 	@Then("I see {string} on the page")

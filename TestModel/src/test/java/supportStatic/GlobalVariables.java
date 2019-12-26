@@ -13,5 +13,6 @@ public class GlobalVariables {
 	public static int threadCount = 0;
 	public static String fieldMapLocation = "C:\\Martin_Holmes_Files\\Test HTML\\fieldMap.txt";
 	public static Boolean noSleep = false;
+	public static Boolean failOnError = true;
 
 }

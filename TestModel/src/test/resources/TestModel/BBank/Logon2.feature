@@ -30,6 +30,7 @@ Scenario: BBC Weather Test
    Then I find the "DayEntry" where "DateItem" is "Sun 29th" 
    Then I click the entry
    Then I find the "TimeEntry" where "HourItem" is "08"
+   Then I check "HourTemp" is "7°" for entry
    Then I click the entry
    Then I find the "TimeEntry" where "HourItem" is "09"
    Then I click the entry

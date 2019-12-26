@@ -12,7 +12,7 @@ public class ThreadData {
 		for (int i=0;i<MapData.length;i++) {
 			tempString = tempString + "'" + MapData[i][0] + "','" + MapData[i][1] + "'";
 		}
-		//System.out.println("ThreadData = " + tempString);
+		
 		return;
 	}
 	
@@ -21,7 +21,7 @@ public class ThreadData {
 
 		for (int i=0;i<MapData.length;i++) {
 			String tempValue = MapData[i][0] + "";
-			//System.out.println(tempValue);
+			
 			if (tempValue.equals("null")) {
 				MapData[i][0] = field;
 				MapData[i][1] = fieldValue;
