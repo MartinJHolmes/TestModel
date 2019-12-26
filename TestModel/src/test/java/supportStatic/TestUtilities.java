@@ -5,7 +5,9 @@ public class TestUtilities {
 	
 	public static void sleepTime(int timeMilliseconds) {
         try {
+        	if(!GlobalVariables.noSleep) {
 				Thread.sleep(timeMilliseconds);
+        	}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

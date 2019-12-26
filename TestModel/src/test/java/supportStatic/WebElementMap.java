@@ -89,7 +89,7 @@ public class WebElementMap {
 	    }
 	    
 	    protected static String getWebElement(String findLogicalName, String WebElementProperty) {
-	    	//printFieldMap();
+	    	printFieldMap();
 	    	String returnString;
 	    	int fieldMapColumn = 0;
 	    	
@@ -115,6 +115,7 @@ public class WebElementMap {
 	    	
 
 		    	for (int i=0; i<MapData.length; i++ ) {
+		    		System.out.println("logical name = " + findLogicalName);
 		    		if (findLogicalName.equals(MapData[i][0])) {
 		    			returnString = MapData[i][fieldMapColumn];
 		    			//System.out.println("counter = " + i + " value = " + returnString);

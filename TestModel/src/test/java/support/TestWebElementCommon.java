@@ -129,9 +129,13 @@ public class TestWebElementCommon {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void click(String fieldName) {
 		TestUtilities.printDebugMessage("STARTED");
-		WebElement myWE = driver.findElement(By.id(fieldName));
-		highlightWebElement(myWE, "green");
-		myWE.click();
+//		WebElement myWE = driver.findElement(By.id(fieldName));
+		
+		String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
+		System.out.println("Xpath = " + fieldXPath);
+		WebElement returnWE = driver.findElement(By.xpath(fieldXPath));
+		highlightWebElement(returnWE, "green");
+		returnWE.click();
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
@@ -171,6 +175,7 @@ public class TestWebElementCommon {
 				case "a":
 				case "span":
 				case "div":
+				case "label":
 					elementValue = element.getText();
 					break;
 				default:
@@ -181,6 +186,7 @@ public class TestWebElementCommon {
 					highlightWebElement(element, "green");
 					//save entry as current
 					currentEntry = entry;
+					return;
 				} else {
 					highlightWebElement(element, "red");
 				}
@@ -196,7 +202,11 @@ public class TestWebElementCommon {
 	public void clickEntry() {
 		TestUtilities.printDebugMessage("STARTED");
 
-		currentEntry.findElement(By.xpath(".//a")).click();;
+		try { //// ADDED
+			currentEntry.click();
+		} catch (Exception e) {
+			currentEntry.findElement(By.xpath("..//a")).click();
+		}
 		TestUtilities.sleepTime();	
 		TestUtilities.printDebugMessage("FINISHED");
 		
@@ -327,7 +337,7 @@ public class TestWebElementCommon {
 	private void highlightWebElement(WebElement myTest, String highlightColour) {
 		TestUtilities.printDebugMessage("STARTED");
 
-		if (GlobalVariables.highlightWebElementRequired == true) {
+		if (GlobalVariables.highlightWebElementRequired == true & !GlobalVariables.noSleep) {
 			// System.out.println(myTest.getAttribute("id"));
 			int w = myTest.getSize().getWidth() + 8;
 			int h = myTest.getSize().getHeight() + 8;

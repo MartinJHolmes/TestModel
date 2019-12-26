@@ -11,6 +11,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.cucumber.core.api.Scenario;
 import io.cucumber.java.After;
@@ -71,8 +72,11 @@ public class BeforeAfter {
 	    
 	    // Setup the Web Driver
 	    System.setProperty(GlobalVariables.webDriverType,GlobalVariables.webDriverFileLocation);
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS) ;
+	    ChromeOptions options = new ChromeOptions();
+	    options.addArguments("--window-position=0,900");
+	    options.addArguments("--window-Size=480,100");
+		driver = new ChromeDriver(options);
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
 		//System.out.println(">>>>>>>>> " + logicalThreadId);
 		Integer xPos = (Integer.parseInt(logicalThreadId) * 480) - 480;
 		//System.out.println("The x position = " + Integer.toString(xPos));
