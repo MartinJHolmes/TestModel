@@ -16,7 +16,9 @@ public class TestUtilities {
 	
 	public static void sleepTime() {
         try {
+        	if(!GlobalVariables.noSleep) {
 				Thread.sleep(GlobalVariables.sleepBetweenSteps);
+        	}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

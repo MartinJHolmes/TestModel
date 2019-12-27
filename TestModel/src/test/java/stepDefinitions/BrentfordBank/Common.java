@@ -86,14 +86,25 @@ public class Common {
 	public void i_go_to_the_Website(String url) {
 		world.myTestWebElement.gotoURL(url);
 	}
+	@Then("I check the {string} has the property {string} set to {string}")
+	public void i_check_property_value(String fieldName, String fieldProperty, String fieldPropertyValue) {
+		world.myTestWebElement.checkFieldProperty(fieldName, fieldProperty, fieldPropertyValue);
+	}
 
 	@Then("I test java method")
 	public void i_test_java_method() {
 		// ONLY USED FOR TESTING JAVA METHODS
-		world.myTestWebElement.gotoURL("https://www.bbc.co.uk/weather/2643743");
-		TestUtilities.sleepTime(2000);
-		world.myTestWebElement.findEntry("//li[contains(@class,'wr-day')]", ".//div[contains(@class,'wr-day__title')]",
-				"Sat 21st");
+		world.myTestWebElement.checkFieldProperty("Test1", "value", "Test2");
+		world.myTestWebElement.checkFieldProperty("Test2", "disabled", "true");
+	}
+
+	@Then("I performance test")
+	public void i_test_performance_test() {
+		// ONLY USED FOR TESTING JAVA METHODS
+		for (int i = 0; i < 2; i++) {
+			world.myTestWebElement.setValue("Test1", "Test" + i);
+		}
+
 	}
 
 }

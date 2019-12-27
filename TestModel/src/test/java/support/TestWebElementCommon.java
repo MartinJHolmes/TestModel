@@ -72,6 +72,33 @@ public class TestWebElementCommon {
 		TestUtilities.printDebugMessage("FINISHED");
 		return value;
 	}
+	
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public void checkFieldProperty(String fieldName, String fieldProperty, String fieldPropertyValue) {
+		TestUtilities.printDebugMessage("STARTED");
+		//String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
+		List<WebElement> elements = findElements(fieldName);
+		highlightWebElement(elements.get(0), "blue");
+		String propertyValue = elements.get(0).getAttribute(fieldProperty);
+		if(propertyValue == null) {
+//			switch(fieldProperty) {
+//			case "disabled":
+				propertyValue = "false";
+//			}
+		}
+		System.out.println("Property field: " + fieldName + "; property: " + fieldProperty + ": value=" + propertyValue);
+		if (propertyValue.contentEquals(fieldPropertyValue)) {
+			highlightWebElement(elements.get(0), "green");
+		} else {
+			TestUtilities.printDebugMessage("ERROR - Expected Value = " + propertyValue + "   Actual Value = " + fieldPropertyValue);
+			highlightWebElement(elements.get(0), "red");
+		}
+
+		TestUtilities.printDebugMessage("<<< METHOD NOT WRITTEN >>>");
+		TestUtilities.sleepTime();
+		TestUtilities.printDebugMessage("FINISHED");
+	}
+
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkItemValue(String fieldName, String fieldValue) {

@@ -41,3 +41,23 @@ Scenario: TagName=Input Type=Text
    Then I check for errors
    Then I sleep 3000 ms
    
+@Test-03
+#Scenario 3
+Scenario: Check Property 
+   When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-CheckProperty.html" Website
+   Then I sleep 2000 ms
+   Then I check the "Test1" has the property "disabled" set to "true"
+   Then I check the "Test1" has the property "disabled" set to "false"
+   Then I check the "Test2" has the property "disabled" set to "true"
+   Then I check the "Test2" has the property "disabled" set to "false"
+   Then I check the "Test4" has the property "test_hook" set to "Dorota"
+   Then I check for errors
+   Then I sleep 3000 ms
+   @Test-100
+#Scenario 100
+Scenario: TagName=Input Type=Text 
+   When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-SetField.html" Website
+   Then I sleep 2000 ms
+   Then I performance test
+   Then I sleep 3000 ms
+   
