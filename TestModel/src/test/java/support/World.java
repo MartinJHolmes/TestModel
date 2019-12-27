@@ -16,6 +16,7 @@ public class World {
     public LoadData myLoadData = new LoadData();
     public DetailsPagePoF detailsPage = new DetailsPagePoF(myTestWebElement.driver);
     public String testWorldScope = "initial"; // used to proving scope of the World Class
+    public Boolean failureDetected = false;
     
     
     

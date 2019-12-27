@@ -112,7 +112,7 @@ public class WebElementMap {
 				OnError.printMessage();
 	    	}
 	    	returnString = findLogicalName;
-	    	System.out.println("Map: findLogialName = " + findLogicalName + fieldMapColumn + MapData.length);
+	    	//System.out.println("Map: findLogialName = " + findLogicalName + fieldMapColumn + MapData.length);
 	    	
 
 		    	for (int i=0; i<MapData.length; i++ ) {
