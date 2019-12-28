@@ -53,6 +53,20 @@ Scenario: Check Property
    Then I check the "Test4" has the property "test_hook" set to "Dorota"
    Then I check for errors
    Then I sleep 3000 ms
+   
+@Test-04
+#Scenario 4
+Scenario: Check Transform Input Value 
+   When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-TransformDateValue.html" Website
+   Then I sleep 2000 ms
+   Then I set "Test1" to "25-12-2019"
+   Then I check "Test2" is "25-12-2019"
+   Then I check "Test2A" is "25-12-2019"
+   Then I set "Test3" to "[D]"
+   Then I set "Test4" to "[D]+5d"
+   Then I set "Test5" to "[D]+20d"
+   Then I check for errors
+   Then I sleep 5000 ms
    @Test-100
 #Scenario 100
 Scenario: TagName=Input Type=Text 

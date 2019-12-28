@@ -4,7 +4,11 @@ package support;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -44,16 +48,24 @@ public class TestWebElementCommon {
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void failTest() {
-		//if (failureDetected) {
+		// if (failureDetected) {
 		System.out.println(">>>>>>>>>>> FAILURE DETECTED - CHECK LOG <<<<<<<<<<<<<<<<<<");
-			driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-			String Temp = driver.findElement(By.xpath("/failureDetected")).getText();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		//}
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		String Temp = driver.findElement(By.xpath("/failureDetected")).getText();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		// }
+	}
+	
+	// --------------------------------------------------------------------
+	private String transformOutputDateValue(String value) {
+		String[] date = value.split("-");
+		String newDate = date[2] + "-" + date[1] + "-" + date[0];
+		System.out.println(newDate);
+		return newDate;
 	}
 
 	// --------------------------------------------------------------------
-	private String returnValue(String value) {
+	private String transformInputValue(String value) {
 		TestUtilities.printDebugMessage("STARTED");
 
 		String firstChar = value.charAt(0) + "";
@@ -67,30 +79,67 @@ public class TestWebElementCommon {
 			// get LoadData
 			TestUtilities.printDebugMessage("LoadData programming NOT complete");
 			value = "data from load";
+			break;
+		case "[":
+			String newValue = value.substring(1);
+			System.out.println(newValue);
+			System.out.println(newValue.substring(0, 2));
+			switch (newValue.substring(0, 2)) {
+
+			case "D]":
+				
+				Calendar today = Calendar.getInstance();
+				java.util.Date date = today.getTime();
+				SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+				String date1 = format1.format(date);
+
+				switch (newValue) {
+
+				case "D]":
+					
+					value = date1;
+					break;
+				default:
+					newValue = newValue.substring(2);
+					Integer additionalDays = Integer.parseInt(newValue.substring(1, newValue.length() - 1));
+					today.add(Calendar.DATE, additionalDays);
+					date = today.getTime();
+					date1 = format1.format(date);
+					value = date1;
+
+				}
+				break;
+
+			default:
+
+			}
+
 		}
 
 		TestUtilities.printDebugMessage("FINISHED");
 		return value;
 	}
-	
+
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkFieldProperty(String fieldName, String fieldProperty, String fieldPropertyValue) {
 		TestUtilities.printDebugMessage("STARTED");
-		//String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
+		// String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
 		List<WebElement> elements = findElements(fieldName);
 		highlightWebElement(elements.get(0), "blue");
 		String propertyValue = elements.get(0).getAttribute(fieldProperty);
-		if(propertyValue == null) {
-//			switch(fieldProperty) {
-//			case "disabled":
-				propertyValue = "false";
-//			}
+		if (propertyValue == null) {
+			// switch(fieldProperty) {
+			// case "disabled":
+			propertyValue = "false";
+			// }
 		}
-		System.out.println("Property field: " + fieldName + "; property: " + fieldProperty + ": value=" + propertyValue);
+		System.out
+				.println("Property field: " + fieldName + "; property: " + fieldProperty + ": value=" + propertyValue);
 		if (propertyValue.contentEquals(fieldPropertyValue)) {
 			highlightWebElement(elements.get(0), "green");
 		} else {
-			TestUtilities.printDebugMessage("ERROR - Expected Value = " + propertyValue + "   Actual Value = " + fieldPropertyValue);
+			TestUtilities.printDebugMessage(
+					"ERROR - Expected Value = " + propertyValue + "   Actual Value = " + fieldPropertyValue);
 			highlightWebElement(elements.get(0), "red");
 		}
 
@@ -98,7 +147,6 @@ public class TestWebElementCommon {
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
-
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkItemValue(String fieldName, String fieldValue) {
@@ -122,6 +170,7 @@ public class TestWebElementCommon {
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkFieldValue(String fieldName, String fieldValue) {
+		String actualValue;
 
 		TestUtilities.printDebugMessage("STARTED");
 		TestUtilities.printDebugMessage(" fieldValue = " + fieldValue);
@@ -160,7 +209,7 @@ public class TestWebElementCommon {
 									+ entryLabel.getText());
 							failureDetected = true;
 							highlightWebElement(entryLabel, "red");
-							//failTest();
+							// failTest();
 						}
 					}
 				}
@@ -168,7 +217,7 @@ public class TestWebElementCommon {
 				break;
 			case "text":
 			case "password":
-			case "date":
+			
 				highlightWebElement(elements.get(0), "blue");
 				// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
 				if (elements.get(0).getAttribute("value").contentEquals(fieldValue)) {
@@ -179,9 +228,25 @@ public class TestWebElementCommon {
 					highlightWebElement(elements.get(0), "red");
 				}
 				break;
+			case "date":
+				highlightWebElement(elements.get(0), "blue");
+				// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
+				actualValue = elements.get(0).getAttribute("value");
+				actualValue = transformOutputDateValue(actualValue);
+				
+				if (actualValue.contentEquals(fieldValue)) {
+					highlightWebElement(elements.get(0), "green");
+				} else {
+					System.out.println(">>>> ERROR  " + fieldName + " Expected: " + fieldValue + "  Actual: "
+							+ actualValue);
+					highlightWebElement(elements.get(0), "red");
+				}
+				break;
+				
+				
 			case "checkbox":
 				highlightWebElement(elements.get(0), "blue");
-				String actualValue = "NOT Checked";
+				actualValue = "NOT Checked";
 				if (elements.get(0).isSelected()) {
 					actualValue = "Checked";
 				}
@@ -358,8 +423,8 @@ public class TestWebElementCommon {
 	public void setValue(String fieldName, String fieldValue) {
 		TestUtilities.printDebugMessage("STARTED");
 		// transform input values if special characters are used
-		fieldName = returnValue(fieldName);
-		fieldValue = returnValue(fieldValue);
+		fieldName = transformInputValue(fieldName);
+		fieldValue = transformInputValue(fieldValue);
 
 		setValue(null, fieldName, fieldValue);
 		TestUtilities.sleepTime();
@@ -370,8 +435,8 @@ public class TestWebElementCommon {
 	public void setValueCurrentEntry(String fieldName, String fieldValue) {
 		TestUtilities.printDebugMessage("STARTED");
 		// transform input values if special characters are used
-		fieldName = returnValue(fieldName);
-		fieldValue = returnValue(fieldValue);
+		fieldName = transformInputValue(fieldName);
+		fieldValue = transformInputValue(fieldValue);
 
 		if (currentEntry == null) {
 			TestUtilities.printDebugMessage("<<< ENTRY WAS NOT FOUND BEFORE CALLING THIS METHOD >>>");
