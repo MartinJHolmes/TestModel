@@ -4,7 +4,7 @@ Feature: TestModel - Test Scenarios
 
 @Test-01
 #Scenario 1
-Scenario: TagName=Input Type=Text 
+Scenario: Set Field Value Tests - PASS
    When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-SetField.html" Website
    Then I sleep 2000 ms
    Then I set "Test1" to "Test1"
@@ -21,10 +21,11 @@ Scenario: TagName=Input Type=Text
    
 @Test-02
 #Scenario 2
-Scenario: TagName=Input Type=Text 
+Scenario: Check Field Value Tests - FAIL 
    When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-CheckField.html" Website
    Then I sleep 2000 ms
    Then I check "Test1" is "Test1"
+   Then I add the comment "Next step will fail"
    Then I check "Test1A" is "Test1"
    Then I check "Test2" is "Test2"
    Then I check "//input[@id='test3']" is "Test3"
@@ -35,7 +36,7 @@ Scenario: TagName=Input Type=Text
    Then I check "Test6" is "Option 2"
    Then I check "Test6A" is "Option 2"
    Then I check "Test7" is "16-03-1968"
-   Then I check "Test7A" is "16-03-1968"
+   Then I check "Test7A" is "16-03-1968" 
    Then I check "Test8" is "Test8"
    Then I check "Test8A" is "Test8"
    Then I check for errors
@@ -43,7 +44,7 @@ Scenario: TagName=Input Type=Text
    
 @Test-03
 #Scenario 3
-Scenario: Check Property 
+Scenario: Check Field Property - FAIL 
    When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-CheckProperty.html" Website
    Then I sleep 2000 ms
    Then I check the "Test1" has the property "disabled" set to "true"
@@ -56,7 +57,7 @@ Scenario: Check Property
    
 @Test-04
 #Scenario 4
-Scenario: Check Transform Input Value 
+Scenario: Transform Date Value 
    When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-TransformDateValue.html" Website
    Then I sleep 2000 ms
    Then I set "Test1" to "25-12-2019"
@@ -68,11 +69,4 @@ Scenario: Check Transform Input Value
    Then I check for errors
    Then I sleep 5000 ms
 
-@Test-100
-#Scenario 100
-Scenario: TagName=Input Type=Text 
-   When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-SetField.html" Website
-   Then I sleep 2000 ms
-   Then I performance test
-   Then I sleep 3000 ms
    

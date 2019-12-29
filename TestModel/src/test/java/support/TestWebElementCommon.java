@@ -109,6 +109,9 @@ public class TestWebElementCommon {
 
 				}
 				break;
+				
+			case "o]":
+				value = newValue.substring(2) + "°";
 
 			default:
 
@@ -150,6 +153,7 @@ public class TestWebElementCommon {
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkItemValue(String fieldName, String fieldValue) {
+		fieldValue = transformInputValue(fieldValue);
 		TestUtilities.printDebugMessage("STARTED");
 		String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
 		WebElement returnWE = currentEntry.findElement(By.xpath(fieldXPath));

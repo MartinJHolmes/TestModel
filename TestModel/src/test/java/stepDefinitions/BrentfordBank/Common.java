@@ -45,9 +45,9 @@ public class Common {
 
 	@Then("I check {string} is {string} for entry")
 	public void i_check_entry(String fieldName, String fieldValue) {
-		System.out.println(">>>> " + fieldName + " " + fieldValue);
-		fieldValue = "7°";
-		System.out.println(">>>> " + fieldName + " " + fieldValue);
+		//System.out.println(">>>> " + fieldName + " " + fieldValue);
+		//fieldValue = "7°";
+		//System.out.println(">>>> " + fieldName + " " + fieldValue);
 		world.myTestWebElement.checkItemValue(fieldName, fieldValue);
 	}
 
@@ -86,9 +86,15 @@ public class Common {
 	public void i_go_to_the_Website(String url) {
 		world.myTestWebElement.gotoURL(url);
 	}
+	
 	@Then("I check the {string} has the property {string} set to {string}")
 	public void i_check_property_value(String fieldName, String fieldProperty, String fieldPropertyValue) {
 		world.myTestWebElement.checkFieldProperty(fieldName, fieldProperty, fieldPropertyValue);
+	}
+	
+	@Then("I add the comment {string}")
+	public void i_check_property_value(String message) {
+		System.out.println(message);
 	}
 
 	@Then("I test java method")
