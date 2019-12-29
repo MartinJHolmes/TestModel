@@ -34,8 +34,8 @@ Scenario: TagName=Input Type=Text
    Then I check "Test5A" is "Checked"
    Then I check "Test6" is "Option 2"
    Then I check "Test6A" is "Option 2"
-   Then I check "Test7" is "1968-03-16"
-   Then I check "Test7A" is "1968-03-16"
+   Then I check "Test7" is "16-03-1968"
+   Then I check "Test7A" is "16-03-1968"
    Then I check "Test8" is "Test8"
    Then I check "Test8A" is "Test8"
    Then I check for errors
@@ -67,7 +67,8 @@ Scenario: Check Transform Input Value
    Then I set "Test5" to "[D]+20d"
    Then I check for errors
    Then I sleep 5000 ms
-   @Test-100
+
+@Test-100
 #Scenario 100
 Scenario: TagName=Input Type=Text 
    When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-SetField.html" Website
