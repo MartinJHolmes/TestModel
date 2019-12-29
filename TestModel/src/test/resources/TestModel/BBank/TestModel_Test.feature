@@ -15,8 +15,6 @@ Scenario: Set Field Value Tests - PASS
    Then I set "Test6" to "Option 2"
    Then I set "Test7" to "25-12-2019"
    Then I set "Test8" to "Test8"
-   Then I set "Test9" to "#RunData9"
-   Then I set "Test10" to "@LoadData10"
    Then I sleep 3000 ms
    
 @Test-02
@@ -66,6 +64,18 @@ Scenario: Transform Date Value
    Then I set "Test3" to "[D]"
    Then I set "Test4" to "[D]+5d"
    Then I set "Test5" to "[D]+20d"
+   Then I check for errors
+   Then I sleep 5000 ms
+   
+@Test-05
+#Scenario 5
+Scenario: Data
+   When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-Data.html" Website
+   Then I sleep 2000 ms
+   Then I have the test data in "Test-05-TestData.txt"
+   Then I set "Test1" to "@Test1"
+   Then I remember for later the value of "Test2" as "#Remembered"
+   Then I set "Test2A" to "#Remembered"
    Then I check for errors
    Then I sleep 5000 ms
 

@@ -9,7 +9,7 @@ public class GlobalVariables {
 	public static int sleepBetweenSteps = 500; //000;
 	public static boolean highlightWebElementRequired = true;
 	public static int highlightTime = 500;
-	public static Boolean debugOn = true;
+	public static Boolean debugOn = false;
 	public static int threadCount = 0;
 	public static String fieldMapLocation = "C:\\Martin_Holmes_Files\\Test HTML\\fieldMap.txt";
 	public static Boolean noSleep = false;

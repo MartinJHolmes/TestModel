@@ -96,6 +96,16 @@ public class Common {
 	public void i_check_property_value(String message) {
 		System.out.println(message);
 	}
+	
+	@Then("I have the test data in {string}")
+	public void i_have_the_test_data_in(String string) {
+	    world.myTestWebElement.myLoadData.insertData(string);
+	}
+	
+	@Then("I remember for later the value of {string} as {string}")
+	public void i_remember_for_later_the_value_of_as(String fieldName, String remember) {
+	    world.myTestWebElement.setRememberPair(fieldName, remember);
+	}
 
 	@Then("I test java method")
 	public void i_test_java_method() {

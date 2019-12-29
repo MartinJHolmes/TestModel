@@ -30,7 +30,13 @@ public class TestWebElementCommon {
 	public String myName = "Martin";
 	private String myFieldName;
 	private String myFieldValue;
+	private String actualValue;
 	public Boolean failureDetected = false;
+	
+	public LoadData myLoadData = new LoadData();
+	public RunData myRunData = new RunData();
+	
+	
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public TestWebElementCommon() {
@@ -73,12 +79,12 @@ public class TestWebElementCommon {
 		case "#":
 			// get RunData
 			TestUtilities.printDebugMessage("RunData programming NOT complete");
-			value = "data from memory";
+			value = myRunData.getValuePair(value);
 			break;
 		case "@":
 			// get LoadData
 			TestUtilities.printDebugMessage("LoadData programming NOT complete");
-			value = "data from load";
+			value = myLoadData.getItem(value.substring(1));
 			break;
 		case "[":
 			String newValue = value.substring(1);
@@ -172,9 +178,83 @@ public class TestWebElementCommon {
 		TestUtilities.printDebugMessage("FINISHED");
 	}
 
+	
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public void setRememberPair(String fieldName, String remember){
+		myRunData.setValuePair(getFieldValue(fieldName), remember);
+	}
+	
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public String getFieldValue(String fieldName) {
+		actualValue = "";
+
+		TestUtilities.printDebugMessage("STARTED");
+		
+		List<WebElement> elements = findElements(fieldName);
+		if (elements.size() == 0) {
+			TestUtilities.printDebugMessage("ERROR - No Elements found for '" + fieldName + "'");
+			if (!GlobalVariables.failOnError) {
+				TestUtilities.printDebugMessage(">>>> failOnError set to FALSE");
+				return null;
+			} else {
+
+			}
+		}
+
+		String tagName = elements.get(0).getTagName();
+		switch (tagName) {
+		case "input":
+			String typeName = elements.get(0).getAttribute("type");
+
+			switch (typeName) {
+
+			case "text":
+			case "password":
+				highlightWebElement(elements.get(0), "blue");
+				// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
+				actualValue = elements.get(0).getAttribute("value");
+				break;
+			case "date":
+				highlightWebElement(elements.get(0), "blue");
+				// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
+				actualValue = elements.get(0).getAttribute("value");
+				actualValue = transformOutputDateValue(actualValue);
+				
+				break;
+				
+			
+			default:
+				TestUtilities.printDebugMessage("<<< TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
+			}
+			break;
+		case "select":
+			WebElement select = elements.get(0);
+			List<WebElement> options = select.findElements(By.xpath("./option"));
+			Iterator<WebElement> iter = options.iterator();
+			while (iter.hasNext()) {
+				WebElement option = iter.next();
+				if (option.isSelected()) {
+					actualValue = option.getText();
+					highlightWebElement(elements.get(0), "blue");	
+				}
+			}
+
+			break;
+		default:
+			TestUtilities.printDebugMessage("<<< TAG NAME '" + tagName + "' NOT RECOGNISED >>>");
+		}
+		TestUtilities.printDebugMessage("FINISHED");
+		return actualValue;
+
+	}
+	
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkFieldValue(String fieldName, String fieldValue) {
-		String actualValue;
+		actualValue = "";
+		
+		if(!calledOutsideOfTestWebElement()) {
+			System.out.println("Ignore error");
+		}
 
 		TestUtilities.printDebugMessage("STARTED");
 		TestUtilities.printDebugMessage(" fieldValue = " + fieldValue);
@@ -224,6 +304,7 @@ public class TestWebElementCommon {
 			
 				highlightWebElement(elements.get(0), "blue");
 				// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
+				actualValue = elements.get(0).getAttribute("value");
 				if (elements.get(0).getAttribute("value").contentEquals(fieldValue)) {
 					highlightWebElement(elements.get(0), "green");
 				} else {
