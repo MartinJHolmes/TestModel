@@ -15,7 +15,7 @@ import io.cucumber.junit.Cucumber;;
 		//glue = {"classpath:TestModel"},
 		glue = {"classpath:stepDefinitions"},
 		//tags = {"@BB01-01a or @BB01-01"},
-		tags = "@Test or @BB",
+		tags = "@Test-05",
 		plugin = {"pretty","html:C:/TestFolder"}
 		//tags = {"@Bank4"}
 		

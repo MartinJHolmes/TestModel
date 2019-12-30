@@ -15,6 +15,7 @@ Scenario: Set Field Value Tests - PASS
    Then I set "Test6" to "Option 2"
    Then I set "Test7" to "25-12-2019"
    Then I set "Test8" to "Test8"
+   Then I check for errors
    Then I sleep 3000 ms
    
 @Test-02
@@ -46,10 +47,11 @@ Scenario: Check Field Property - FAIL
    When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-CheckProperty.html" Website
    Then I sleep 2000 ms
    Then I check the "Test1" has the property "disabled" set to "true"
-   Then I check the "Test1" has the property "disabled" set to "false"
+   Then I check the "Test1A" has the property "disabled" set to "false"
    Then I check the "Test2" has the property "disabled" set to "true"
-   Then I check the "Test2" has the property "disabled" set to "false"
-   Then I check the "Test4" has the property "test_hook" set to "Dorota"
+   Then I check the "Test2A" has the property "disabled" set to "false"
+   Then I check the "Test3" has the property "test_hook" set to "Test3"
+   Then I check the "Test3A" has the property "test_hook" set to "Test3"
    Then I check for errors
    Then I sleep 3000 ms
    
@@ -76,6 +78,7 @@ Scenario: Data
    Then I set "Test1" to "@Test1"
    Then I remember for later the value of "Test2" as "#Remembered"
    Then I set "Test2A" to "#Remembered"
+   Then I set "Test3" to "[o]15"
    Then I check for errors
    Then I sleep 5000 ms
 

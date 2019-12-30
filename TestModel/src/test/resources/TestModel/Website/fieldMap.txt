@@ -1,0 +1,14 @@
+Password,//input[@id="p_word"],INPUT,xpath,_main1
+Test2,//input[@id="test2"],abc,abc,abc
+Title,//h1,Text,xpath,_main
+ProductEntry,//div[@class='product'],DIV,xpath,_main
+ProductTitle,.//label,A,xpath,_main
+Logon,//a[@id='Logon'],abc,abc,abc
+When,//input[@name='txn_date'],input,xpath,_main
+WeatherSearch,//input[@id='ls-c-search__input-label'],abc,abc,abc
+WeatherSearchGo,//input[@class='ls-c-search__submit'],abc,abc,abc
+DayEntry,//li[contains(@class~'wr-day')],abc,abc,abc
+DateItem,.//div[contains(@class~'wr-day__title')],abc,abc,abc
+TimeEntry,//li[contains(@class~'wr-time-slot')],abc,abc,abc
+HourItem,.//span[contains(@class~'wr-time-slot-primary__hours')],abc,abc,abc
+HourTemp,.//span[contains(@class~'wr-value--temperature--c')],abc,abc,abc
