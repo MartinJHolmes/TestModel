@@ -18,9 +18,7 @@ public class Common {
 
 	@Then("I check for errors")
 	public void i_check_for_errors() {
-		if (world.myTestWebElement.failureDetected) {
-			world.myTestWebElement.failTest();
-		}
+		world.myTestWebElement.failTest();
 	}
 
 	@When("I am on the home page")
@@ -31,6 +29,11 @@ public class Common {
 	@Then("I set {string} to {string}")
 	public void i_set_field(String fieldName, String fieldValue) {
 		world.myTestWebElement.setValue(fieldName, fieldValue);
+	}
+	
+	@Then("I set {string} to {string} for the entry")
+	public void i_set_field_for_entry(String fieldName, String fieldValue) {
+		world.myTestWebElement.setValueCurrentEntry(fieldName, fieldValue);
 	}
 
 	@Then("I click {string}")
@@ -107,20 +110,5 @@ public class Common {
 	    world.myTestWebElement.setRememberFieldPair(fieldName, remember);
 	}
 
-	@Then("I test java method")
-	public void i_test_java_method() {
-		// ONLY USED FOR TESTING JAVA METHODS
-		world.myTestWebElement.checkFieldProperty("Test1", "value", "Test2");
-		world.myTestWebElement.checkFieldProperty("Test2", "disabled", "true");
-	}
-
-	@Then("I performance test")
-	public void i_test_performance_test() {
-		// ONLY USED FOR TESTING JAVA METHODS
-		for (int i = 0; i < 2; i++) {
-			world.myTestWebElement.setValue("Test1", "Test" + i);
-		}
-
-	}
 
 }

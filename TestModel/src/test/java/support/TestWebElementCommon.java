@@ -32,11 +32,9 @@ public class TestWebElementCommon {
 	private String myFieldValue;
 	private String actualValue;
 	public Boolean failureDetected = false;
-	
+
 	public LoadData myLoadData = new LoadData();
 	public RunData myRunData = new RunData();
-	
-	
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public TestWebElementCommon() {
@@ -54,14 +52,14 @@ public class TestWebElementCommon {
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void failTest() {
-		// if (failureDetected) {
-		System.out.println(">>>>>>>>>>> FAILURE DETECTED - CHECK LOG <<<<<<<<<<<<<<<<<<");
-		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-		String Temp = driver.findElement(By.xpath("/failureDetected")).getText();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		// }
+		if (failureDetected) {
+			System.out.println(">>>>>>>>>>> FAILURE DETECTED - CHECK LOG <<<<<<<<<<<<<<<<<<");
+			driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+			String Temp = driver.findElement(By.xpath("/failureDetected")).getText();
+			// driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		}
 	}
-	
+
 	// --------------------------------------------------------------------
 	private String transformOutputDateValue(String value) {
 		String[] date = value.split("-");
@@ -93,7 +91,7 @@ public class TestWebElementCommon {
 			switch (newValue.substring(0, 2)) {
 
 			case "D]":
-				
+
 				Calendar today = Calendar.getInstance();
 				java.util.Date date = today.getTime();
 				SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
@@ -102,7 +100,7 @@ public class TestWebElementCommon {
 				switch (newValue) {
 
 				case "D]":
-					
+
 					value = date1;
 					break;
 				default:
@@ -115,7 +113,7 @@ public class TestWebElementCommon {
 
 				}
 				break;
-				
+
 			case "o]":
 				value = newValue.substring(2) + "°";
 
@@ -164,13 +162,14 @@ public class TestWebElementCommon {
 		String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
 		WebElement returnWE = currentEntry.findElement(By.xpath(fieldXPath));
 		highlightWebElement(returnWE, "blue");
-		System.out.println("VALUE = " + returnWE.getText());
+		//System.out.println("VALUE = " + returnWE.getText());
 		if (returnWE.getText().contentEquals(fieldValue)) {
 			highlightWebElement(returnWE, "green");
 		} else {
-			TestUtilities.printDebugMessage(
-					"ERROR - Expected Value = " + fieldValue + "   Actual Value = " + returnWE.getText());
+			System.out.println(
+					">>>> ERROR - Expected Value = " + fieldValue + "   Actual Value = " + returnWE.getText());
 			highlightWebElement(returnWE, "red");
+			failureDetected = true;
 		}
 
 		TestUtilities.printDebugMessage("<<< METHOD NOT WRITTEN >>>");
@@ -178,26 +177,27 @@ public class TestWebElementCommon {
 		TestUtilities.printDebugMessage("FINISHED");
 	}
 
-	
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void setRememberFieldPair(String fieldName, String remember){
+	public void setRememberFieldPair(String fieldName, String remember) {
 		myRunData.setValuePair(getFieldValue(fieldName), remember);
 	}
-	
+
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public String getFieldValue(String fieldName) {
 		actualValue = "";
 
 		TestUtilities.printDebugMessage("STARTED");
-		
+
 		List<WebElement> elements = findElements(fieldName);
+		System.out.println(elements.size());
 		if (elements.size() == 0) {
 			TestUtilities.printDebugMessage("ERROR - No Elements found for '" + fieldName + "'");
 			if (!GlobalVariables.failOnError) {
 				TestUtilities.printDebugMessage(">>>> failOnError set to FALSE");
 				return null;
 			} else {
-
+				// TODO catch error
+				return null;
 			}
 		}
 
@@ -219,12 +219,12 @@ public class TestWebElementCommon {
 				// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
 				actualValue = elements.get(0).getAttribute("value");
 				actualValue = transformOutputDateValue(actualValue);
-				
+
 				break;
-				
-			
+
 			default:
 				TestUtilities.printDebugMessage("<<< TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
+				failureDetected = true;
 			}
 			break;
 		case "select":
@@ -235,24 +235,25 @@ public class TestWebElementCommon {
 				WebElement option = iter.next();
 				if (option.isSelected()) {
 					actualValue = option.getText();
-					highlightWebElement(elements.get(0), "blue");	
+					highlightWebElement(elements.get(0), "blue");
 				}
 			}
 
 			break;
 		default:
 			TestUtilities.printDebugMessage("<<< TAG NAME '" + tagName + "' NOT RECOGNISED >>>");
+			failureDetected = true;
 		}
 		TestUtilities.printDebugMessage("FINISHED");
 		return actualValue;
 
 	}
-	
+
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkFieldValue(String fieldName, String fieldValue) {
 		actualValue = "";
-		
-		if(!calledOutsideOfTestWebElement()) {
+
+		if (!calledOutsideOfTestWebElement()) {
 			System.out.println("Ignore error");
 		}
 
@@ -301,7 +302,7 @@ public class TestWebElementCommon {
 				break;
 			case "text":
 			case "password":
-			
+
 				highlightWebElement(elements.get(0), "blue");
 				// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
 				actualValue = elements.get(0).getAttribute("value");
@@ -318,17 +319,16 @@ public class TestWebElementCommon {
 				// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
 				actualValue = elements.get(0).getAttribute("value");
 				actualValue = transformOutputDateValue(actualValue);
-				
+
 				if (actualValue.contentEquals(fieldValue)) {
 					highlightWebElement(elements.get(0), "green");
 				} else {
-					System.out.println(">>>> ERROR  " + fieldName + " Expected: " + fieldValue + "  Actual: "
-							+ actualValue);
+					System.out.println(
+							">>>> ERROR  " + fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
 					highlightWebElement(elements.get(0), "red");
 				}
 				break;
-				
-				
+
 			case "checkbox":
 				highlightWebElement(elements.get(0), "blue");
 				actualValue = "NOT Checked";
@@ -346,6 +346,7 @@ public class TestWebElementCommon {
 				// highlightWebElement(elements.get(0), "yellow");
 			default:
 				TestUtilities.printDebugMessage("<<< TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
+				failureDetected = true;
 			}
 			break;
 		case "select":
@@ -385,6 +386,7 @@ public class TestWebElementCommon {
 			break;
 		default:
 			TestUtilities.printDebugMessage("<<< TAG NAME '" + tagName + "' NOT RECOGNISED >>>");
+			failureDetected = true;
 		}
 		TestUtilities.printDebugMessage("FINISHED");
 
@@ -405,6 +407,18 @@ public class TestWebElementCommon {
 		String xPathString = "//*[contains(.,'" + fieldValue + "')]";
 
 		List<WebElement> elements = driver.findElements(By.xpath(xPathString));
+		if (elements.size() == 0) {
+			System.out.println(">>>> ERROR  '" + fieldValue + "' Not Found on the page");
+			failureDetected = true;
+		} else {
+			Iterator<WebElement> iter = elements.iterator();
+			// Integer i = 0;
+			while (iter.hasNext()) {
+				WebElement element = iter.next();
+				highlightWebElement(element, "green");
+				// i = i + 1;
+			}
+		}
 		TestUtilities.printDebugMessage("<<< METHOD NOT COMPLETE >>>");
 
 		TestUtilities.sleepTime();
@@ -425,6 +439,9 @@ public class TestWebElementCommon {
 		// WebElement myWE = driver.findElement(By.id(fieldName));
 
 		String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
+		if(fieldXPath == null) {
+			fieldXPath = fieldName;
+		}
 
 		WebElement returnWE = driver.findElement(By.xpath(fieldXPath));
 		highlightWebElement(returnWE, "green");
@@ -472,12 +489,15 @@ public class TestWebElementCommon {
 					break;
 				default:
 					TestUtilities.printDebugMessage("<<< TAG NAME NOT RECOGNISED >>>  " + tagName);
+					failureDetected = true;
 				}
 
 				if (elementValue.equals(fieldValue)) {
 					highlightWebElement(element, "green");
 					// save entry as current
 					currentEntry = entry;
+					TestUtilities.sleepTime();
+					TestUtilities.printDebugMessage("FINISHED");
 					return;
 				} else {
 					highlightWebElement(element, "red");
@@ -486,6 +506,8 @@ public class TestWebElementCommon {
 				TestUtilities.printDebugMessage("<<< METHOD NOT COMPLETE >>>");
 			}
 		}
+		System.out.println(">>>> ERROR  '" + fieldValue + "' Entry Value not found");
+		failureDetected = true;
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
@@ -524,8 +546,10 @@ public class TestWebElementCommon {
 		fieldValue = transformInputValue(fieldValue);
 
 		if (currentEntry == null) {
-			TestUtilities.printDebugMessage("<<< ENTRY WAS NOT FOUND BEFORE CALLING THIS METHOD >>>");
+			System.out.println("<<< ENTRY WAS NOT FOUND BEFORE CALLING THIS METHOD >>>");
+			failureDetected = true;
 		}
+		
 		setValue(currentEntry, fieldName, fieldValue);
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
@@ -599,6 +623,7 @@ public class TestWebElementCommon {
 				highlightWebElement(elements.get(0), "green");
 			default:
 				TestUtilities.printDebugMessage("<<< TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
+				failureDetected = true;
 			}
 			break;
 		case "select":
@@ -608,18 +633,33 @@ public class TestWebElementCommon {
 			break;
 		default:
 			TestUtilities.printDebugMessage("<<< TAG NAME '" + tagName + "' NOT RECOGNISED >>>");
+			failureDetected = true;
 		}
 		TestUtilities.printDebugMessage("FINISHED");
 	}
 
 	// --------------------------------------------------------------------
+//	private List<WebElement> findElements(String fieldName) {
+//		return findElements(null, fieldName);
+//		
+//	}
+	
+	// --------------------------------------------------------------------
+//	private List<WebElement> findEntryElements(WebElement currentEntry, String fieldName) {
+//		return findElements(currentEntry, fieldName);
+//		
+//	}
+	
+	
+	// --------------------------------------------------------------------
+	//private List<WebElement> findElements(WebElement currentEntry, String fieldName) {
 	private List<WebElement> findElements(String fieldName) {
 		TestUtilities.printDebugMessage("STARTED");
 		String fieldLocation;
 		List<WebElement> entries = new ArrayList<>();
 
 		String firstChar = fieldName.charAt(0) + "";
-		if (firstChar.equals("/")) {
+		if ((firstChar.equals("/")) | (firstChar.equals(".")) ) {
 			fieldLocation = fieldName;
 		} else {
 			fieldLocation = WebElementMap.getWebElementName(fieldName);
