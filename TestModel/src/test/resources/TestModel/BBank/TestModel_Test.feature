@@ -81,5 +81,17 @@ Scenario: Data
    Then I set "Test3" to "[o]15"
    Then I check for errors
    Then I sleep 5000 ms
+   
+@Test-06
+#Scenario 6
+Scenario: Entries and Items
+   When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-Entries.html" Website
+   Then I sleep 2000 ms
+   Then I find the "BookEntry" where "BookTitle" is "Child44"
+   Then I check "BookPrice" is "12.99" for entry
+   Then I find the "BookEntry" where "BookTitle" is "Hitch-hikers guide to the Galaxy"
+   Then I check "BookPrice" is "7.50" for entry
+   Then I check for errors
+   Then I sleep 5000 ms
 
    

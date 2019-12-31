@@ -180,7 +180,7 @@ public class TestWebElementCommon {
 
 	
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void setRememberPair(String fieldName, String remember){
+	public void setRememberFieldPair(String fieldName, String remember){
 		myRunData.setValuePair(getFieldValue(fieldName), remember);
 	}
 	

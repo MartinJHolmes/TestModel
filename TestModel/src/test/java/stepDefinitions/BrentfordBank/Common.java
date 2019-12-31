@@ -104,7 +104,7 @@ public class Common {
 	
 	@Then("I remember for later the value of {string} as {string}")
 	public void i_remember_for_later_the_value_of_as(String fieldName, String remember) {
-	    world.myTestWebElement.setRememberPair(fieldName, remember);
+	    world.myTestWebElement.setRememberFieldPair(fieldName, remember);
 	}
 
 	@Then("I test java method")
