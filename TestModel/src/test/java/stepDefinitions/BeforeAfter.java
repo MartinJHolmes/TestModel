@@ -1,5 +1,5 @@
-// © Martin Holmes 2019
 package stepDefinitions;
+// © Martin Holmes 2019
 
 import static org.junit.Assert.assertEquals;
 
@@ -28,12 +28,13 @@ public class BeforeAfter {
 	// private Integer myThreadCount = 0;
 	// private Long myThreadId = (long) 0;
 	private Long realThreadId;
+	WebDriver driver = null;
 
 	public BeforeAfter(World world) {
 		this.world = world;
 	}
 
-	WebDriver driver = null;
+	
 
 	@Before
 	public void before(Scenario scenario) throws InterruptedException {
