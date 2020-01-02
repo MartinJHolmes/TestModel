@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -344,8 +345,10 @@ public class TestWebElementCommon {
 					highlightWebElement(elements.get(0), "red");
 				}
 				// highlightWebElement(elements.get(0), "yellow");
+				break;
+			
 			default:
-				TestUtilities.printDebugMessage("<<< TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
+				System.out.println("<<< TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
 				failureDetected = true;
 			}
 			break;
@@ -384,8 +387,20 @@ public class TestWebElementCommon {
 			// highlightWebElement(elements.get(0), "red");
 			// }
 			break;
+		case "li":
+			highlightWebElement(elements.get(0), "blue");
+			// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
+			actualValue = elements.get(0).getText();
+			if (actualValue.contentEquals(fieldValue)) {
+				highlightWebElement(elements.get(0), "green");
+			} else {
+				System.out.println(">>>> ERROR  " + fieldName + " Expected: " + fieldValue + "  Actual: "
+						+ actualValue);
+				highlightWebElement(elements.get(0), "red");
+			}
+			break;
 		default:
-			TestUtilities.printDebugMessage("<<< TAG NAME '" + tagName + "' NOT RECOGNISED >>>");
+			System.out.println("<<< TAG NAME '" + tagName + "' NOT RECOGNISED >>>");
 			failureDetected = true;
 		}
 		TestUtilities.printDebugMessage("FINISHED");
@@ -602,6 +617,11 @@ public class TestWebElementCommon {
 			case "date":
 				highlightWebElement(elements.get(0), "blue");
 				elements.get(0).clear();
+				// Code below is required for React type applications
+//				while( !elements.get(0).getAttribute("value").contentEquals("")) {
+//					elements.get(0).sendKeys(Keys.BACK_SPACE);
+//				}
+				   
 				elements.get(0).sendKeys(fieldValue);
 				highlightWebElement(elements.get(0), "green");
 				break;
@@ -659,7 +679,7 @@ public class TestWebElementCommon {
 		List<WebElement> entries = new ArrayList<>();
 
 		String firstChar = fieldName.charAt(0) + "";
-		if ((firstChar.equals("/")) | (firstChar.equals(".")) ) {
+		if ((firstChar.equals("/")) | (firstChar.equals(".")) | firstChar.equals("(") ) {
 			fieldLocation = fieldName;
 		} else {
 			fieldLocation = WebElementMap.getWebElementName(fieldName);
