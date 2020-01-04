@@ -81,7 +81,7 @@ public class BeforeAfter {
 		options.addArguments("--window-position=0,900");
 		options.addArguments("--window-Size=480,100");
 		driver = new ChromeDriver(options);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(GlobalVariables.implicitWait, TimeUnit.SECONDS);
 		// System.out.println(">>>>>>>>> " + logicalThreadId);
 		Integer xPos = (Integer.parseInt(logicalThreadId) * windowWidth) - windowWidth;
 		// System.out.println("The x position = " + Integer.toString(xPos));

@@ -72,21 +72,25 @@ public class WebElementMap {
 	       
 	   }
 	
-	    public static String getWebElementName(String findLogicalName){
-	    	return getWebElement(findLogicalName,"Name");
+	    public static String getIdentifyByValue(String findLogicalName){
+	    	return getWebElement(findLogicalName,"IdentifyByValue");
 	    }
-	    
-	    public static String getWebElementType(String findLogicalName){
-	    	return getWebElement(findLogicalName,"Type");
-	    }
-	    
-	    public static String getWebElementIdentifyBy(String findLogicalName){
-		    return getWebElement(findLogicalName,"IdentifyBy");
-	    }
-	    
-	    public static String getWebElementFrame(String findLogicalName){
-		    return getWebElement(findLogicalName,"Frame");
-	    }
+	   
+//	    public static String getWebElementName(String findLogicalName){
+//	    	return getWebElement(findLogicalName,"Name");
+//	    }
+//	    
+//	    public static String getWebElementType(String findLogicalName){
+//	    	return getWebElement(findLogicalName,"Type");
+//	    }
+//	    
+//	    public static String getWebElementIdentifyBy(String findLogicalName){
+//		    return getWebElement(findLogicalName,"IdentifyBy");
+//	    }
+//	    
+//	    public static String getWebElementFrame(String findLogicalName){
+//		    return getWebElement(findLogicalName,"Frame");
+//	    }
 	    
 	    protected static String getWebElement(String findLogicalName, String WebElementProperty) {
 	    	//printFieldMap();
@@ -95,18 +99,38 @@ public class WebElementMap {
 	    	int fieldMapColumn = 0;
 	    	
 	    	switch (WebElementProperty) {
-	    	case "Name":
+	    	case "LogicalName":
+	    		fieldMapColumn = 0;
+	    		break;
+	    	case "IdentifyByValue":
 	    		fieldMapColumn = 1;
 	    		break;
-	    	case "Type":
-	    		fieldMapColumn = 2;
-	    		break;
-	    	case "IdentifyBy":
-	    		fieldMapColumn = 1;
-	    		break;
-	    	case "Frame":
-	    		fieldMapColumn = 4;
-	    		break;
+//	    	case "TagName":
+//	    		fieldMapColumn = 2;
+//	    		break;
+//	    	case "IdentifyByType":
+//	    		fieldMapColumn = 3;
+//	    		break;
+//	    	case "PageName":
+//	    		fieldMapColumn = 4;
+//	    		break;
+//	    	case "iFrameName":
+//	    		fieldMapColumn = 5;
+//	    		break;
+//	    		
+//	    		
+//	    	case "Name":
+//	    		fieldMapColumn = 1;
+//	    		break;
+//	    	case "Type":
+//	    		fieldMapColumn = 2;
+//	    		break;
+//	    	case "IdentifyBy":
+//	    		fieldMapColumn = 1;
+//	    		break;
+//	    	case "Frame":
+//	    		fieldMapColumn = 4;
+//	    		break;
 	    	default:
 	    		OnError.errorMessage = "FieldMap - property '" + WebElementProperty + "' is not a valid option";
 				OnError.printMessage();

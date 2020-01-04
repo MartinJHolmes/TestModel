@@ -131,7 +131,7 @@ public class TestWebElementCommon {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkFieldProperty(String fieldName, String fieldProperty, String fieldPropertyValue) {
 		TestUtilities.printDebugMessage("STARTED");
-		// String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
+		// String fieldXPath = WebElementMap.getIdentifyByValue(fieldName);
 		List<WebElement> elements = findElements(fieldName);
 		highlightWebElement(elements.get(0), "blue");
 		String propertyValue = elements.get(0).getAttribute(fieldProperty);
@@ -160,7 +160,7 @@ public class TestWebElementCommon {
 	public void checkItemValue(String fieldName, String fieldValue) {
 		fieldValue = transformInputValue(fieldValue);
 		TestUtilities.printDebugMessage("STARTED");
-		String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
+		String fieldXPath = WebElementMap.getIdentifyByValue(fieldName);
 		WebElement returnWE = currentEntry.findElement(By.xpath(fieldXPath));
 		highlightWebElement(returnWE, "blue");
 		// System.out.println("VALUE = " + returnWE.getText());
@@ -453,7 +453,7 @@ public class TestWebElementCommon {
 		TestUtilities.printDebugMessage("STARTED");
 		// WebElement myWE = driver.findElement(By.id(fieldName));
 
-		String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
+		String fieldXPath = WebElementMap.getIdentifyByValue(fieldName);
 		if (fieldXPath == null) {
 			fieldXPath = fieldName;
 		}
@@ -468,8 +468,8 @@ public class TestWebElementCommon {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void findEntry(String entryName, String fieldName, String fieldValue) {
 		TestUtilities.printDebugMessage("STARTED");
-		String entryLocation = WebElementMap.getWebElementName(entryName);
-		String fieldLocation = WebElementMap.getWebElementName(fieldName);
+		String entryLocation = WebElementMap.getIdentifyByValue(entryName);
+		String fieldLocation = WebElementMap.getIdentifyByValue(fieldName);
 
 		if (entryLocation == null) {
 			entryLocation = entryName;
@@ -478,7 +478,7 @@ public class TestWebElementCommon {
 			fieldLocation = fieldName;
 		}
 
-		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(GlobalVariables.implicitWait, TimeUnit.SECONDS);
 		List<WebElement> entries = driver.findElements(By.xpath(entryLocation));
 		Iterator<WebElement> iter = entries.iterator();
 		while (iter.hasNext()) {
@@ -685,7 +685,7 @@ public class TestWebElementCommon {
 		if ((firstChar.equals("/")) | (firstChar.equals(".")) | firstChar.equals("(")) {
 			fieldLocation = fieldName;
 		} else {
-			fieldLocation = WebElementMap.getWebElementName(fieldName);
+			fieldLocation = WebElementMap.getIdentifyByValue(fieldName);
 			if (fieldLocation == null) {
 				fieldLocation = "//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]";
 			}
