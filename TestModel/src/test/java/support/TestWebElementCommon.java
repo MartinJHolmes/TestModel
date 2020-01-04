@@ -163,12 +163,12 @@ public class TestWebElementCommon {
 		String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
 		WebElement returnWE = currentEntry.findElement(By.xpath(fieldXPath));
 		highlightWebElement(returnWE, "blue");
-		//System.out.println("VALUE = " + returnWE.getText());
+		// System.out.println("VALUE = " + returnWE.getText());
 		if (returnWE.getText().contentEquals(fieldValue)) {
 			highlightWebElement(returnWE, "green");
 		} else {
-			System.out.println(
-					">>>> ERROR - Expected Value = " + fieldValue + "   Actual Value = " + returnWE.getText());
+			System.out
+					.println(">>>> ERROR - Expected Value = " + fieldValue + "   Actual Value = " + returnWE.getText());
 			highlightWebElement(returnWE, "red");
 			failureDetected = true;
 		}
@@ -346,7 +346,7 @@ public class TestWebElementCommon {
 				}
 				// highlightWebElement(elements.get(0), "yellow");
 				break;
-			
+
 			default:
 				System.out.println("<<< TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
 				failureDetected = true;
@@ -394,8 +394,8 @@ public class TestWebElementCommon {
 			if (actualValue.contentEquals(fieldValue)) {
 				highlightWebElement(elements.get(0), "green");
 			} else {
-				System.out.println(">>>> ERROR  " + fieldName + " Expected: " + fieldValue + "  Actual: "
-						+ actualValue);
+				System.out
+						.println(">>>> ERROR  " + fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
 				highlightWebElement(elements.get(0), "red");
 			}
 			break;
@@ -454,7 +454,7 @@ public class TestWebElementCommon {
 		// WebElement myWE = driver.findElement(By.id(fieldName));
 
 		String fieldXPath = WebElementMap.getWebElementIdentifyBy(fieldName);
-		if(fieldXPath == null) {
+		if (fieldXPath == null) {
 			fieldXPath = fieldName;
 		}
 
@@ -564,7 +564,7 @@ public class TestWebElementCommon {
 			System.out.println("<<< ENTRY WAS NOT FOUND BEFORE CALLING THIS METHOD >>>");
 			failureDetected = true;
 		}
-		
+
 		setValue(currentEntry, fieldName, fieldValue);
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
@@ -574,8 +574,12 @@ public class TestWebElementCommon {
 	private void setValue(WebElement currentEntry, String fieldName, String fieldValue) {
 		TestUtilities.printDebugMessage("STARTED");
 		TestUtilities.printDebugMessage(" fieldValue = " + fieldValue);
-
-		List<WebElement> elements = findElements(fieldName);
+		List<WebElement> elements = null;
+		if (currentEntry == null) {
+			elements = findElements(fieldName);
+		} else {
+			elements = findEntryElements(currentEntry, fieldName);
+		}
 		if (elements.size() == 0) {
 			TestUtilities.printDebugMessage("ERROR - No Elements found for '" + fieldValue + "'");
 			if (!GlobalVariables.failOnError) {
@@ -618,10 +622,10 @@ public class TestWebElementCommon {
 				highlightWebElement(elements.get(0), "blue");
 				elements.get(0).clear();
 				// Code below is required for React type applications
-//				while( !elements.get(0).getAttribute("value").contentEquals("")) {
-//					elements.get(0).sendKeys(Keys.BACK_SPACE);
-//				}
-				   
+				// while( !elements.get(0).getAttribute("value").contentEquals("")) {
+				// elements.get(0).sendKeys(Keys.BACK_SPACE);
+				// }
+
 				elements.get(0).sendKeys(fieldValue);
 				highlightWebElement(elements.get(0), "green");
 				break;
@@ -659,27 +663,26 @@ public class TestWebElementCommon {
 	}
 
 	// --------------------------------------------------------------------
-//	private List<WebElement> findElements(String fieldName) {
-//		return findElements(null, fieldName);
-//		
-//	}
-	
-	// --------------------------------------------------------------------
-//	private List<WebElement> findEntryElements(WebElement currentEntry, String fieldName) {
-//		return findElements(currentEntry, fieldName);
-//		
-//	}
-	
-	
-	// --------------------------------------------------------------------
-	//private List<WebElement> findElements(WebElement currentEntry, String fieldName) {
 	private List<WebElement> findElements(String fieldName) {
+		return findElements(null, fieldName);
+
+	}
+
+	// --------------------------------------------------------------------
+	private List<WebElement> findEntryElements(WebElement currentEntry, String fieldName) {
+		return findElements(currentEntry, fieldName);
+
+	}
+
+	// --------------------------------------------------------------------
+	private List<WebElement> findElements(WebElement currentEntry, String fieldName) {
+		// private List<WebElement> findElements(String fieldName) {
 		TestUtilities.printDebugMessage("STARTED");
 		String fieldLocation;
 		List<WebElement> entries = new ArrayList<>();
 
 		String firstChar = fieldName.charAt(0) + "";
-		if ((firstChar.equals("/")) | (firstChar.equals(".")) | firstChar.equals("(") ) {
+		if ((firstChar.equals("/")) | (firstChar.equals(".")) | firstChar.equals("(")) {
 			fieldLocation = fieldName;
 		} else {
 			fieldLocation = WebElementMap.getWebElementName(fieldName);
@@ -687,11 +690,15 @@ public class TestWebElementCommon {
 				fieldLocation = "//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]";
 			}
 		}
-
-		entries = driver.findElements(By.xpath(fieldLocation));
+		if (currentEntry == null) {
+			entries = driver.findElements(By.xpath(fieldLocation));
+		} else {
+			entries = currentEntry.findElements(By.xpath(fieldLocation));
+		}
 
 		TestUtilities.printDebugMessage("FINISHED");
 		return entries;
+
 	}
 
 	// -------------------------------------------------------------

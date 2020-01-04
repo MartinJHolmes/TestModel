@@ -29,7 +29,7 @@ Scenario: Check Field Value Tests - FAIL
    When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-CheckField.html" Website
    Then I sleep 2000 ms
    Then I check "Test1" is "Test1"
-   Then I add the comment "Next step will fail"
+    # Next step will fail
    Then I check "Test1A" is "Test1"
    Then I check "Test2" is "Test2"
    Then I check "//input[@id='test3']" is "Test3"
@@ -86,10 +86,10 @@ Scenario: Data
    Then I set "Test2A" to "#Remembered"
    Then I set "Test3" to "[o]15"
    Then I remember for later the value of "//Hello" as "#Failed"
-   Then I remember for later the value of "Test4" as "#Date"
-   Then I set "Test4A" to "#Date"
-   Then I remember for later the value of "Test5" as "#Select"
-   Then I set "Test5A" to "#Select"
+   Then I remember for later the value of "Test5" as "#Date"
+   Then I set "Test5A" to "#Date"
+   Then I remember for later the value of "Test6" as "#Select"
+   Then I set "Test6A" to "#Select"
    Then I check for errors
    Then I sleep 5000 ms
    
@@ -108,12 +108,14 @@ Scenario: Entries and Items
    Then I check "BookPrice" is "10.00" for entry
    Then I set ".//input[@class='book_quantity']" to "3" for the entry
    Then I click the entry
-   #Then I see "Douglas Adams" on the page
-   #Then I see "Martin Healey" on the page
-   #Then I click "//div[@class='product']//a"
-   #Then I find the "//div[@class='product']" where ".//Label[@class='book_title']" is "Hitch-hikers guide to the Galaxy"
-   #Then I click the entry
-   #Then I find the "BookEntry" where "BookTitle" is "The Bible"
+   Then I see "Douglas Adams" on the page
+    # Next step will fail
+   Then I see "Martin Healey" on the page
+   Then I click "//div[@class='product']//a"
+   Then I find the "//div[@class='product']" where ".//Label[@class='book_title']" is "Hitch-hikers guide to the Galaxy"
+   Then I click the entry
+    # Next step will fail
+   Then I find the "BookEntry" where "BookTitle" is "The Bible"
    Then I check for errors
    Then I sleep 5000 ms
 
