@@ -161,7 +161,7 @@ public class TestWebElementCommon {
 		fieldValue = transformInputValue(fieldValue);
 		TestUtilities.printDebugMessage("STARTED");
 		String fieldXPath = WebElementMap.getIdentifyByValue(fieldName);
-		WebElement returnWE = currentEntry.findElement(By.xpath(fieldXPath));
+		WebElement returnWE = currentEntry.findElement(By.xpath("." + fieldXPath));
 		highlightWebElement(returnWE, "blue");
 		// System.out.println("VALUE = " + returnWE.getText());
 		if (returnWE.getText().contentEquals(fieldValue)) {
@@ -489,7 +489,7 @@ public class TestWebElementCommon {
 
 			try {
 				// find the field
-				WebElement element = entry.findElement(By.xpath(fieldLocation));
+				WebElement element = entry.findElement(By.xpath("." + fieldLocation));
 				highlightWebElement(element, "blue");
 
 				// check the value is correct
@@ -580,10 +580,11 @@ public class TestWebElementCommon {
 		} else {
 			elements = findEntryElements(currentEntry, fieldName);
 		}
+		// System.out.println("size " + elements.size());
 		if (elements.size() == 0) {
-			TestUtilities.printDebugMessage("ERROR - No Elements found for '" + fieldValue + "'");
+			System.out.println("ERROR - No Elements found for '" + fieldName + "'");
 			if (!GlobalVariables.failOnError) {
-				TestUtilities.printDebugMessage(">>>> failOnError set to FALSE");
+				System.out.println(">>>> failOnError set to FALSE");
 				return;
 			} else {
 
@@ -693,7 +694,7 @@ public class TestWebElementCommon {
 		if (currentEntry == null) {
 			entries = driver.findElements(By.xpath(fieldLocation));
 		} else {
-			entries = currentEntry.findElements(By.xpath(fieldLocation));
+			entries = currentEntry.findElements(By.xpath("." + fieldLocation));
 		}
 
 		TestUtilities.printDebugMessage("FINISHED");

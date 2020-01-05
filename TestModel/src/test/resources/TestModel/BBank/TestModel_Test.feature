@@ -99,7 +99,7 @@ Scenario: Entries and Items
    When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-Entries.html" Website
    Then I sleep 2000 ms
     # Next step will fail
-   Then I set "BookPrice" to "7.50" for the entry
+   #Then I set "BookPrice" to "7.50" for the entry
    Then I find the "BookEntry" where "BookTitle" is "Child44"
    Then I check "BookPrice" is "12.99" for entry
    Then I find the "BookEntry" where "BookTitle" is "Hitch-hikers guide to the Galaxy"
