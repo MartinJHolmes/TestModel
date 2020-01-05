@@ -15,5 +15,6 @@ public class GlobalVariables {
 	public static Boolean noSleep = false;
 	public static Boolean failOnError = true;
 	public static int implicitWait = 1;
+	public static String applicationType = "REACT";
 
 }

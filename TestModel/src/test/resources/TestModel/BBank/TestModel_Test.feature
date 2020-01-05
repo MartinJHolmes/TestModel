@@ -11,8 +11,12 @@ Scenario: Set Field Value Tests - FAIL
    Then I set "Test2" to "Test2"
    Then I set "//input[@id='test3']" to "Test3"
    Then I set "Test4" to "Option 2"
+    # Next step will fail
+   Then I set "Test4A" to "Option 4"
    Then I set "Test5" to "Checked"
    Then I set "Test5A" to "Not Checked"
+   Then I set "Test5B" to "Checked"
+   Then I set "Test5C" to "Not Checked"
    Then I set "Test6" to "Option 2"
    Then I set "Test7" to "25-12-2019"
    Then I set "Test8" to "Test8"
@@ -44,6 +48,10 @@ Scenario: Check Field Value Tests - FAIL
    Then I check "Test8" is "Test8"
    Then I check "Test8A" is "Test8"
    Then I check "//Hello" is "Test9"
+   Then I check "Test10" is "Test10"
+   Then I check "Test11" is "Test11"
+   Then I check "(//li)[1]" is "Test12"
+   Then I check "(//li)[2]" is "Test12a"
    Then I check for errors
    Then I sleep 3000 ms
    
@@ -90,6 +98,8 @@ Scenario: Data
    Then I set "Test5A" to "#Date"
    Then I remember for later the value of "Test6" as "#Select"
    Then I set "Test6A" to "#Select"
+   Then I remember for later the value of "Test7" as "#Failed"
+   Then I remember for later the value of "Test8" as "#Failed"
    Then I check for errors
    Then I sleep 5000 ms
    
@@ -99,7 +109,7 @@ Scenario: Entries and Items
    When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-Entries.html" Website
    Then I sleep 2000 ms
     # Next step will fail
-   #Then I set "BookPrice" to "7.50" for the entry
+   Then I set "BookPrice" to "7.50" for the entry
    Then I find the "BookEntry" where "BookTitle" is "Child44"
    Then I check "BookPrice" is "12.99" for entry
    Then I find the "BookEntry" where "BookTitle" is "Hitch-hikers guide to the Galaxy"
@@ -116,6 +126,7 @@ Scenario: Entries and Items
    Then I click the entry
     # Next step will fail
    Then I find the "BookEntry" where "BookTitle" is "The Bible"
+   Then I find the "BookEntry" where "//AAA" is "Add"
    Then I check for errors
    Then I sleep 5000 ms
 

@@ -1,6 +1,8 @@
 // © Martin Holmes 2019
 package supportStatic;
 
+import gherkin.ast.Scenario;
+
 public class TestUtilities {
 	
 	public static void sleepTime(int timeMilliseconds) {
@@ -32,6 +34,12 @@ public class TestUtilities {
 			
 			System.out.println("Debug:" + currentMethod + "() " + debugMessage);
 		}
+	}
+	
+	//####################################################################
+	public static void printErrorMessage(String errorMessage) {
+			String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+			System.out.println(">>>>ERROR>>>>:" + currentMethod + "() " + errorMessage);
 	}
 
 }

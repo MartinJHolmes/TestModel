@@ -73,6 +73,8 @@ public class BeforeAfter {
 
 		Integer lines = scenario.getLine();
 		System.out.println("The scenario = " + scenario.getName() + " " + lines);
+		
+		world.myTestWebElement.scenario = scenario.getName();
 
 		// Setup the Web Driver
 		System.setProperty(GlobalVariables.webDriverType, GlobalVariables.webDriverFileLocation);
