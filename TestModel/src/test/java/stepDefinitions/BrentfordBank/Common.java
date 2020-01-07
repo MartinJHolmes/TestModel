@@ -40,6 +40,11 @@ public class Common {
 	public void i_click(String fieldName) {
 		world.myTestWebElement.click(fieldName);
 	}
+	
+	@Then("I click {string} followed by {string}")
+	public void i_click_followed_by(String topMenu, String bottomMenu) {
+		world.myTestWebElement.clickMenu(topMenu,bottomMenu);
+	}
 
 	@Then("I check {string} is {string}")
 	public void i_check(String fieldName, String fieldValue) {

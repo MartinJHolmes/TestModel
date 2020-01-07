@@ -373,6 +373,7 @@ public class TestWebElementCommon {
 	
 			break;
 		case "li":
+		case "h1":
 			highlightWebElement(elements.get(0), "blue");
 			// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
 			actualValue = elements.get(0).getText();
@@ -439,6 +440,50 @@ public class TestWebElementCommon {
 		WebElement returnWE = driver.findElement(By.xpath(fieldXPath));
 		highlightWebElement(returnWE, "green");
 		returnWE.click();
+		TestUtilities.sleepTime();
+		TestUtilities.printDebugMessage("FINISHED");
+	}
+	
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public void clickMenu(String topMenu,String bottomMenu) {
+		TestUtilities.printDebugMessage("STARTED");
+		// WebElement myWE = driver.findElement(By.id(fieldName));
+
+		String fieldXPathTop = WebElementMap.getIdentifyByValue(topMenu);
+		if (fieldXPathTop == null) {
+			fieldXPathTop = topMenu;
+		}
+
+		WebElement eTopMenu = driver.findElement(By.xpath(fieldXPathTop));
+		highlightWebElement(eTopMenu, "blue");
+		highlightWebElement(eTopMenu, "green");
+		eTopMenu.click();
+		
+		WebElement eContainer = eTopMenu.findElement(By.xpath("../div"));
+		System.out.println("eContainer tag Name = " + eContainer.getTagName());
+		highlightWebElement(eContainer, "blue");
+		
+		List<WebElement> elements = eContainer.findElements(By.xpath("./a"));
+		if (elements.size() == 0) {
+			TestUtilities.printErrorMessage("Sub Menu does not exist for '" + topMenu + "'");
+			failureDetected = true;
+		} else {
+			Iterator<WebElement> iter = elements.iterator();
+			// Integer i = 0;
+			while (iter.hasNext()) {
+				WebElement element = iter.next();
+				highlightWebElement(element, "blue");
+				if(element.getText().contentEquals(bottomMenu)) {
+					highlightWebElement(element, "green");
+					element.click();
+					return;
+				} else {
+					highlightWebElement(element, "red");
+				}
+				// i = i + 1;
+			}
+		}
+		
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}

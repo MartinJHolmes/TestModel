@@ -24,7 +24,7 @@ Scenario: Successful Logon One Step
 #Scenario 3
 Scenario: Regression Test
    When I am on the home page
-   Then I sleep 2000 ms
+   Then I sleep 2000 ms   
    Then I set "Username" to "holmesm"
    Then I set "Password" to "Password"
    Then I find the "ProductEntry" where "ProductTitle" is "Mortgages"
@@ -33,7 +33,8 @@ Scenario: Regression Test
    Then I check "Title" is "Brentford Building Society"
    Then I set "When" to "06-12-2019"
    Then I set "Speed" to "Don't Mind"
-   Then I set "//input[@name='amount']" to "123"
+   Then I set "Amount" to "123"
+   Then I click "StatementMenu" followed by "Town Crier"
    Then I sleep 3000 ms
    
 @BB01-04
