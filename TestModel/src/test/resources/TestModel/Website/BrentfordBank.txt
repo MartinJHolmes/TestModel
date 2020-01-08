@@ -238,7 +238,9 @@ document.getElementById("MenuSelected").innerHTML = "Statement option changed to
   <SPAN><input type="radio" id="Speed" name="Speed" value="Quick"> <Label>Quick</label></SPAN>
   <SPAN><input type="radio" id="Speed" name="Speed" value="Slow"> <Label>Slow</label></SPAN>
   <SPAN><input type="radio" id="Speed" name="Speed" value="Don't Mind"> <Label>Don't Mind</label></SPAN><br>  
-<input type="checkbox" name="email" value="email"> Send Confirmation Email
+<Label for=confirmation>Email Confirmation</label>
+
+	<input type="checkbox" id="confirmation" value="email">
 </DIV>
 
 
