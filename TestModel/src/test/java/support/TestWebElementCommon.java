@@ -460,7 +460,7 @@ public class TestWebElementCommon {
 		eTopMenu.click();
 		
 		WebElement eContainer = eTopMenu.findElement(By.xpath("../div"));
-		System.out.println("eContainer tag Name = " + eContainer.getTagName());
+		//System.out.println("eContainer tag Name = " + eContainer.getTagName());
 		highlightWebElement(eContainer, "blue");
 		
 		List<WebElement> elements = eContainer.findElements(By.xpath("./a"));
@@ -641,6 +641,7 @@ public class TestWebElementCommon {
 			case "text":
 			case "password":
 			case "date":
+			case "email":
 				highlightWebElement(elements.get(0), "blue");
 				if (GlobalVariables.applicationType.contentEquals("REACT")) {
 					while (!elements.get(0).getAttribute("value").contentEquals("")) {
@@ -670,7 +671,7 @@ public class TestWebElementCommon {
 				}
 				highlightWebElement(elements.get(0), "green");
 			default:
-				TestUtilities.printDebugMessage("TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
+				TestUtilities.printErrorMessage("TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
 				failureDetected = true;
 			}
 			break;
