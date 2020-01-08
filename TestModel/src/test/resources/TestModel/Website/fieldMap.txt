@@ -1,14 +1,31 @@
-Password,//input[@id="p_word"],INPUT,xpath,_main1
-Test2,//input[@id="test2"],abc,abc,abc
+---BRENTFORD BANK---,,,,a
 Title,//h1,Text,xpath,_main
 ProductEntry,//div[@class='product'],DIV,xpath,_main
-ProductTitle,.//label,A,xpath,_main
+ProductTitle,//label,A,xpath,_main
 Logon,//a[@id='Logon'],abc,abc,abc
-When,//input[@name='txn_date'],input,xpath,_main
+StatementMenu,//button[@id='Menu_Top'],button,xpath,_main
+---BBC---,,,,a
 WeatherSearch,//input[@id='ls-c-search__input-label'],abc,abc,abc
 WeatherSearchGo,//input[@class='ls-c-search__submit'],abc,abc,abc
 DayEntry,//li[contains(@class~'wr-day')],abc,abc,abc
-DateItem,.//div[contains(@class~'wr-day__title')],abc,abc,abc
+DateItem,//div[contains(@class~'wr-day__title')],abc,abc,abc
 TimeEntry,//li[contains(@class~'wr-time-slot')],abc,abc,abc
-HourItem,.//span[contains(@class~'wr-time-slot-primary__hours')],abc,abc,abc
-HourTemp,.//span[contains(@class~'wr-value--temperature--c')],abc,abc,abc
+HourItem,//span[contains(@class~'wr-time-slot-primary__hours')],abc,abc,abc
+HourTemp,//span[contains(@class~'wr-value--temperature--c')],abc,abc,abc
+---TEST MODEL---,,,,a
+BookEntry,//div[@class='product'],DIV,xpath,_main
+BookTitle,//label[@class='book_title'],abc,abc,abc
+BookPrice,//label[@class='book_price'],abc,abc,abc
+---ANGULAR---,,,,a
+todoList.todoText,,,model,a,a
+---ANGULAR 8---,,,,a
+Username,//input[@name='email'],input,xpath,_main
+Password,//input[@name='password'],input,xpath,_main
+Login,//input[@name='submit'],input,xpath,_main
+CityEntry,//app-weather-card,tbd,xpath,_main
+CityNameItem,//span[@class='city-name__text'],span,xpath,_main
+CurrentCityTemp,//span[@class='temperature__text'],span,xpath,_main
+ForecastEntry,//div[@class='day-weather__container'],div,xpath,_main
+ForecastDay,//span[@class='day-name__text'],span,xpath,_main
+ForecastTemp,//span[@class='day-temp__text'],span,xpath,_main
+
