@@ -122,10 +122,11 @@ Scenario: Entries and Items
     # Next step will fail
    Then I see "Martin Healey" on the page
    Then I click "//div[@class='product']//a"
-   Then I find the "//div[@class='product']" where ".//Label[@class='book_title']" is "Hitch-hikers guide to the Galaxy"
+   Then I find the "//div[@class='product']" where "//Label[@class='book_title']" is "Hitch-hikers guide to the Galaxy"
    Then I click the entry
     # Next step will fail
    Then I find the "BookEntry" where "BookTitle" is "The Bible"
+    # Next step will fail
    Then I find the "BookEntry" where "//AAA" is "Add"
    Then I check for errors
    Then I sleep 5000 ms

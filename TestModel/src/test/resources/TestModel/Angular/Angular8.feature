@@ -1,15 +1,24 @@
-@ANG
-Feature: Angular Tests
+@ANG8
+Feature: Sample Test of Angular 8 application
 #This is a comment
-@ANG-01
+@ANG8-02
 #Scenario 1
-Scenario: Todo List
-   When I go to the "https://angularjs.org/" Website
-   Then I sleep 5000 ms
-   Then I set "todoList.todoText" to "Test Angular"
-   #Then I set "//*[@ng-model='todoList.todoText']" to "Test Angular"
-   Then I click "//*[@value='add']"
-   Then I check "(//*[@ng-repeat='todo in todoList.todos'])[3]" is "Test Angular"
-   Then I click "(//*[@ng-repeat='todo in todoList.todos'])[3]"
-   Then I sleep 2000 ms
+Scenario: Weather App1
+   When I go to the "https://minimus-weather.web.app/login" Website
+   Then I sleep 3000 ms
+   Then I set "Username" to "abc@hotmail.com"
+   Then I set "Password" to "abcdef"
+   Then I click "Login"
+   
+   Then I sleep 3000 ms
+   Then I find the "CityEntry" where "CityNameItem" is "PARIS"
+   Then I click the entry
+   
+   Then I sleep 1000 ms
+   Then I check "CurrentCityTemp" is "[o]12"
+   Then I find the "ForecastEntry" where "ForecastDay" is "SAT"
+   Then I check "ForecastTemp" is "[o]5" for entry
+   Then I check for errors
+   Then I sleep 3000 ms
+   
    

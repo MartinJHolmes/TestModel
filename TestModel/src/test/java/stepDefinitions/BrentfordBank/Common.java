@@ -1,6 +1,12 @@
 package stepDefinitions.BrentfordBank;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import io.cucumber.java.en.Then;
@@ -88,6 +94,23 @@ public class Common {
 	@Then("I sleep {int} ms")
 	public void i_sleep_ms(Integer int1) {
 		TestUtilities.sleepTime(int1);
+	}
+	
+	@Then("I zoom {int}")
+	public void i_zoom(Integer int1) {
+//		WebElement html = world.myTestWebElement.driver.findElement(By.tagName("html"));
+//		html.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
+//		html.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
+//		html.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
+//		html.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
+		
+//		WebElement html = world.myTestWebElement.driver.findElement(By.tagName("html"));
+//		html.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
+		JavascriptExecutor executor = (JavascriptExecutor)world.myTestWebElement.driver;
+		executor.executeScript("document.body.style.zoom = '0.5'");
+		
+
+		
 	}
 
 	@Then("I go to the {string} Website")

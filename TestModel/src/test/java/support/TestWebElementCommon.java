@@ -1,7 +1,6 @@
 // © Martin Holmes 2019
 package support;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +13,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import supportStatic.GlobalVariables;
 import supportStatic.TestUtilities;
@@ -38,13 +38,13 @@ public class TestWebElementCommon {
 	}
 
 	// --------------------------------------------------------------------
-//	private static Boolean calledOutsideOfTestWebElement() {
-//		StackTraceElement[] stElements = Thread.currentThread().getStackTrace();
-//		if (stElements[3].getClassName().contains("TestWebElement")) {
-//			return false;
-//		}
-//		return true;
-//	}
+	// private static Boolean calledOutsideOfTestWebElement() {
+	// StackTraceElement[] stElements = Thread.currentThread().getStackTrace();
+	// if (stElements[3].getClassName().contains("TestWebElement")) {
+	// return false;
+	// }
+	// return true;
+	// }
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void failTest() {
@@ -60,7 +60,7 @@ public class TestWebElementCommon {
 	private String transformOutputDateValue(String value) {
 		String[] date = value.split("-");
 		String newDate = date[2] + "-" + date[1] + "-" + date[0];
-		//System.out.println(newDate);
+		// System.out.println(newDate);
 		return newDate;
 	}
 
@@ -136,11 +136,13 @@ public class TestWebElementCommon {
 			propertyValue = "false";
 			// }
 		}
-		//System.out.println("Property field: " + fieldName + "; property: " + fieldProperty + ": value=" + propertyValue);
+		// System.out.println("Property field: " + fieldName + "; property: " +
+		// fieldProperty + ": value=" + propertyValue);
 		if (propertyValue.contentEquals(fieldPropertyValue)) {
 			highlightWebElement(elements.get(0), "green");
 		} else {
-			TestUtilities.printErrorMessage("Expected Value = " + propertyValue + "   Actual Value = " + fieldPropertyValue);
+			TestUtilities
+					.printErrorMessage("Expected Value = " + propertyValue + "   Actual Value = " + fieldPropertyValue);
 			highlightWebElement(elements.get(0), "red");
 			failureDetected = true;
 		}
@@ -161,7 +163,8 @@ public class TestWebElementCommon {
 		if (returnWE.getText().contentEquals(fieldValue)) {
 			highlightWebElement(returnWE, "green");
 		} else {
-			TestUtilities.printErrorMessage("Expected Value = " + fieldValue + "   Actual Value = " + returnWE.getText());
+			TestUtilities
+					.printErrorMessage("Expected Value = " + fieldValue + "   Actual Value = " + returnWE.getText());
 			highlightWebElement(returnWE, "red");
 			failureDetected = true;
 		}
@@ -247,8 +250,7 @@ public class TestWebElementCommon {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkFieldValue(String fieldName, String fieldValue) {
 		actualValue = "";
-
-	
+		fieldValue = transformInputValue(fieldValue);
 
 		TestUtilities.printDebugMessage("STARTED");
 		TestUtilities.printDebugMessage(" fieldValue = " + fieldValue);
@@ -258,7 +260,7 @@ public class TestWebElementCommon {
 			TestUtilities.printErrorMessage("No Elements found for '" + fieldName + "'");
 			failureDetected = true;
 			return;
-	
+
 		}
 
 		String tagName = elements.get(0).getTagName();
@@ -280,8 +282,8 @@ public class TestWebElementCommon {
 
 							highlightWebElement(entryLabel, "green");
 						} else {
-							TestUtilities.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: "
-									+ entryLabel.getText());
+							TestUtilities.printErrorMessage(
+									fieldName + " Expected: " + fieldValue + "  Actual: " + entryLabel.getText());
 							failureDetected = true;
 							highlightWebElement(entryLabel, "red");
 							// failTest();
@@ -313,8 +315,8 @@ public class TestWebElementCommon {
 				if (actualValue.contentEquals(fieldValue)) {
 					highlightWebElement(elements.get(0), "green");
 				} else {
-					TestUtilities.printErrorMessage(
-							fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
+					TestUtilities
+							.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
 					highlightWebElement(elements.get(0), "red");
 				}
 				break;
@@ -329,8 +331,8 @@ public class TestWebElementCommon {
 				if (fieldValue.contentEquals(actualValue)) {
 					highlightWebElement(elements.get(0), "green");
 				} else {
-					TestUtilities.printErrorMessage(
-							fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
+					TestUtilities
+							.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
 					highlightWebElement(elements.get(0), "red");
 				}
 				// highlightWebElement(elements.get(0), "yellow");
@@ -361,8 +363,8 @@ public class TestWebElementCommon {
 						highlightWebElement(elements.get(0), "green");
 					} else {
 						highlightWebElement(elements.get(0), "blue");
-						TestUtilities.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: "
-								+ option.getText());
+						TestUtilities.printErrorMessage(
+								fieldName + " Expected: " + fieldValue + "  Actual: " + option.getText());
 						highlightWebElement(elements.get(0), "red");
 					}
 					// System.out.println(tagName + " = '" + option.getText()+ "'");
@@ -370,10 +372,10 @@ public class TestWebElementCommon {
 				}
 			}
 
-	
 			break;
 		case "li":
 		case "h1":
+		case"span":
 			highlightWebElement(elements.get(0), "blue");
 			// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
 			actualValue = elements.get(0).getText();
@@ -391,7 +393,6 @@ public class TestWebElementCommon {
 			failureDetected = true;
 		}
 		TestUtilities.printDebugMessage("FINISHED");
-
 
 	}
 
@@ -443,9 +444,9 @@ public class TestWebElementCommon {
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
-	
+
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public void clickMenu(String topMenu,String bottomMenu) {
+	public void clickMenu(String topMenu, String bottomMenu) {
 		TestUtilities.printDebugMessage("STARTED");
 		// WebElement myWE = driver.findElement(By.id(fieldName));
 
@@ -458,11 +459,11 @@ public class TestWebElementCommon {
 		highlightWebElement(eTopMenu, "blue");
 		highlightWebElement(eTopMenu, "green");
 		eTopMenu.click();
-		
+
 		WebElement eContainer = eTopMenu.findElement(By.xpath("../div"));
-		//System.out.println("eContainer tag Name = " + eContainer.getTagName());
+		// System.out.println("eContainer tag Name = " + eContainer.getTagName());
 		highlightWebElement(eContainer, "blue");
-		
+
 		List<WebElement> elements = eContainer.findElements(By.xpath("./a"));
 		if (elements.size() == 0) {
 			TestUtilities.printErrorMessage("Sub Menu does not exist for '" + topMenu + "'");
@@ -473,7 +474,7 @@ public class TestWebElementCommon {
 			while (iter.hasNext()) {
 				WebElement element = iter.next();
 				highlightWebElement(element, "blue");
-				if(element.getText().contentEquals(bottomMenu)) {
+				if (element.getText().contentEquals(bottomMenu)) {
 					highlightWebElement(element, "green");
 					element.click();
 					return;
@@ -483,7 +484,7 @@ public class TestWebElementCommon {
 				// i = i + 1;
 			}
 		}
-		
+
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
@@ -557,7 +558,18 @@ public class TestWebElementCommon {
 		try { //// ADDED
 			currentEntry.click();
 		} catch (Exception e) {
-			currentEntry.findElement(By.xpath("..//a")).click();
+			TestUtilities.printDebugMessage("WARNING: element could no be clicked. Alternative will be sought");
+
+			try {
+				currentEntry.findElement(By.xpath("..//a")).click();
+			} catch (Exception e1) {
+				TestUtilities
+						.printDebugMessage("WARNING: element could no be clicked. Alternative will be sought (again)");
+				WebElement item2 = currentEntry.findElement(By.xpath(".//span"));
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", item2);
+			}
+
 		}
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");

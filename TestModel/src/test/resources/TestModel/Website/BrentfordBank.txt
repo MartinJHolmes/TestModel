@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<STYLE TYPE="text/css">
+
+.dummy
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 35px;
+    LINE-HEIGHT: 20px;
+    FONT-FAMILY: Verdana,Helvetica,Arial;
+    TEXT-DECORATION: none;
+    font-color: #FFFFFF
+}
+h1
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 25px;
+    LINE-HEIGHT: 25px;
+    FONT-FAMILY: 'Trebuchet MS',Arial;
+    TEXT-DECORATION: none;
+    color: #303685
+}
+body
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 14px;
+    LINE-HEIGHT: 20px;
+    FONT-FAMILY: 'Trebuchet MS',Arial;
+    TEXT-DECORATION: none;
+    color: #770000
+}
+
+p
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 14px;
+    LINE-HEIGHT: 14px;
+    FONT-FAMILY: 'Trebuchet MS',Arial;
+    TEXT-DECORATION: none;
+    color: #000000
+}
+a
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 14px;
+    LINE-HEIGHT: 25px;
+    FONT-FAMILY: 'Trebuchet MS',Arial;
+    TEXT-DECORATION: none;
+    color: #555555
+}
+td
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 14px;
+    LINE-HEIGHT: 25px;
+    FONT-FAMILY: 'Trebuchet MS',Arial;
+    TEXT-DECORATION: none;
+    color: #555555
+}
+
+.h2
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 18px;
+    LINE-HEIGHT: 22px;
+    FONT-FAMILY: 'Trebuchet MS',Arial;
+    TEXT-DECORATION: none;
+    color: #00b2ec
+}
+.product
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 16px;
+    LINE-HEIGHT: 18px;
+    FONT-FAMILY: 'Trebuchet MS',Arial;
+    TEXT-DECORATION: none;
+    color: #303685
+}
+text1
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 16px;
+    LINE-HEIGHT: 18px;
+    FONT-FAMILY: 'Trebuchet MS',Arial;
+    TEXT-DECORATION: none;
+    color: #303685
+}
+.text2
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 16px;
+    LINE-HEIGHT: 18px;
+    FONT-FAMILY: 'Trebuchet MS',Arial;
+    TEXT-DECORATION: none;
+    color: #ffffff;
+}
+.text3
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 14px;
+    LINE-HEIGHT: 16px;
+    FONT-FAMILY: 'Trebuchet MS',Arial;
+    TEXT-DECORATION: none;
+    color: #000000;
+}
+.text4
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 14px;
+    LINE-HEIGHT: 16px;
+    FONT-FAMILY: 'Trebuchet MS',Arial;
+    TEXT-DECORATION: none;
+    color: #000000;
+}
+</STYLE>
+<style>
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: relative;
+    //display: inline-block;
+    display: none;
+}
+.accounts {
+    display: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+
+
+.dropdown a:hover {
+   background-color: #f1f1f1;
+}
+
+.show {display:block;}
+</style>
+
+<SCRIPT LANGUAGE="JavaScript">
+//=======================================================================
+//  Java Script
+//=======================================================================
+function onSubmit() {
+
+
+    var y = document.getElementById("Accounts");
+    y.style.display = "block";
+	document.getElementById("txn_date").defaultValue = "2019-03-29";
+	var today = new Date();
+	var date = "" + (today.getDate() + 1);
+	if(date.length < 2) {
+		date = "0" + date;
+	}
+	var month = "" + (today.getMonth() + 1);
+	if(month.length < 2) {
+		month = "0" + month;
+	}
+
+	//alert(month);
+	var fulldate = today.getFullYear() + "-" + month + "-" + date;
+	document.getElementById("txn_date").defaultValue = fulldate;
+
+    var x = document.getElementById("Div_Menu");
+    x.style.display = "block";
+
+    var z = document.getElementById("u_name");
+    var prop = z.hasAttribute("spare1");
+    //alert(prop);
+ 
+
+}
+
+
+function myMenuSelected(item)
+{
+document.getElementById("MenuSelected").innerHTML = "Statement option changed to '" + item + "'";
+}
+
+</SCRIPT>
+
+<body>
+
+<h1>Brentford Building Society</h1>
+<p>Please logon below</p>
+</TABLE>
+<form name="MainForm">
+<TABLE>
+<TR>
+<TD><Label for=u_name>Username</label> </TD><TD><INPUT id="u_name" name="email" type="text" value=""></TD>
+</TR>
+<TR>
+<TD><Label for=p_word>Password</label> </TD><TD><input id="p_word" name="password" type="password" value=""></TD>
+</TR>
+<TR>
+<TD></TD><TD><A id="Logon" href="javascript:onSubmit();"><img src="images/logon.jpg" width=100></A></TD>
+</TR>
+</TABLE>
+</form>
+
+<DIV CLASS=accounts ID=Accounts>
+<P ID=WelcomeMessage>Welcome back Martin</P>
+<TABLE ID="Tbl-Accounts">
+<TR><TD>Current Account </TD><TD ID=CurrentBalance>24.76</TD></TR>
+<TR><TD>Savings Account </TD><TD ID=SavingsBalance>5,049.17</TD></TR>
+</TABLE>
+<p>Withdraw money</p>
+
+
+<Label for=amount>Amount</label> <input id="amount" name="amount" type="text" value=""><BR>
+<Label for=txn_date>When</label> <input id="txn_date" name="txn_date" type="date" value=""><BR>
+
+<Label for=Speed>Speed</Label>
+  <SPAN><input type="radio" id="Speed" name="Speed" value="Quick"> <Label>Quick</label></SPAN>
+  <SPAN><input type="radio" id="Speed" name="Speed" value="Slow"> <Label>Slow</label></SPAN>
+  <SPAN><input type="radio" id="Speed" name="Speed" value="Don't Mind"> <Label>Don't Mind</label></SPAN><br>  
+<input type="checkbox" name="email" value="email"> Send Confirmation Email
+</DIV>
+
+
+<ABC ID=Account_Details></ABC>
+
+<P ID=MenuSelected></P>
+<div class="dropdown" ID=Div_Menu>
+<Button onclick="myFunction()" class="dropbtn" ID=Menu_Top>Change Statement Option</Button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="javascript:myMenuSelected('Email')" ID=Menu_Home>Email</a>
+    <a href="javascript:myMenuSelected('Paper')">Paper</a>
+    <a href="javascript:myMenuSelected('Town Crier')">Town Crier</a>
+  </div>
+</div>
+
+<P>&copy; Brentford Building Society 2019</P>
+
+<DIV class=productsAndBasket Style='border:2px solid; position: absolute; left:300px; top:80px; padding:10px'>
+<DIV class=products>
+
+<A href="javascript:myProduct('basket-savings');">
+<DIV class=product>
+<Label>Saving Accounts</Label><BR>
+<img src="images/savings.jpg" width=50>
+</DIV>
+</A>
+
+<A href="javascript:myProduct('basket-mortgage');">
+<DIV class=product>
+<Label>Mortgages</Label><BR>
+<img src="images/mortgages.jpg" width=50>
+</DIV>
+</A>
+
+</DIV>
+
+<DIV class=text1>
+<BR>Chosen product is: <img id=basket src="images/basket-empty.jpg" width=70>
+</DIV>
+
+
+<DIV class=text1>
+<BR> <A onClick="alert('Call us on 020 8254 600')";>Want to talk to someone? <img id=basket src="images/phone.png" width=30 ></A>
+</DIV>
+</DIV>
+
+<SCRIPT>
+function myProduct(Product) {
+ //alert("Chosen product = " + Product);
+ document.getElementById("basket").src = "images/" + Product + ".jpg";
+}
+
+</SCRIPT>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+
+</body>
+</html> 

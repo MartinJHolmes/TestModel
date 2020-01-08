@@ -165,6 +165,8 @@ public class WebElementMap {
 
 	private static String getFieldMapValue(String findLogicalName, int fieldMapColumn) {
 		String returnString;
+		String temp;
+		temp = "hello";
 		for (int i = 0; i < MapData.length; i++) {
 			if (findLogicalName.equals(MapData[i][0])) {
 				returnString = MapData[i][fieldMapColumn];
