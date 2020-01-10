@@ -54,8 +54,9 @@ public class TestWebElementCommon {
 	public void failTest() {
 		if (failureDetected) {
 			System.out.println(">>>>>>>>>>> SCENARIO FAILED - CHECK LOG <<<<<<<<<<<<<<<<<<");
-			driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-			String Temp = driver.findElement(By.xpath("/failureDetected")).getText();
+			//driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+			assert !failureDetected;
+			//String Temp = driver.findElement(By.xpath("/failureDetected")).getText();
 			// driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		}
 	}
@@ -147,11 +148,9 @@ public class TestWebElementCommon {
 		} else {
 			TestUtilities
 					.printErrorMessage("Expected Value = " + propertyValue + "   Actual Value = " + fieldPropertyValue);
-			highlightWebElement(elements.get(0), "red");
+			highlightWebElement(elements.get(0), "fail");
 			failureDetected = true;
 		}
-
-		TestUtilities.printDebugMessage("<<< METHOD NOT WRITTEN >>>");
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
@@ -169,11 +168,10 @@ public class TestWebElementCommon {
 		} else {
 			TestUtilities
 					.printErrorMessage("Expected Value = " + fieldValue + "   Actual Value = " + returnWE.getText());
-			highlightWebElement(returnWE, "red");
+			highlightWebElement(returnWE, "fail");
 			failureDetected = true;
 		}
 
-		TestUtilities.printDebugMessage("<<< METHOD NOT WRITTEN >>>");
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
@@ -193,6 +191,7 @@ public class TestWebElementCommon {
 		// System.out.println(elements.size());
 		if (elements.size() == 0) {
 			TestUtilities.printErrorMessage("No Elements found for '" + fieldName + "'");
+			highlightWebElement(nullElement, "fail");
 			failureDetected = true;
 			return null;
 
@@ -222,7 +221,7 @@ public class TestWebElementCommon {
 			default:
 				TestUtilities.printErrorMessage("TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
 				highlightWebElement(elements.get(0), "blue");
-				highlightWebElement(elements.get(0), "red");
+				highlightWebElement(elements.get(0), "fail");
 				failureDetected = true;
 				return "";
 			}
@@ -243,7 +242,7 @@ public class TestWebElementCommon {
 		default:
 			TestUtilities.printErrorMessage("TAG NAME '" + tagName + "' NOT RECOGNISED >>>");
 			highlightWebElement(elements.get(0), "blue");
-			highlightWebElement(elements.get(0), "red");
+			highlightWebElement(elements.get(0), "fail");
 			failureDetected = true;
 		}
 		TestUtilities.printDebugMessage("FINISHED");
@@ -262,7 +261,7 @@ public class TestWebElementCommon {
 		List<WebElement> elements = findElements(fieldName);
 		if (elements.size() == 0) {
 			TestUtilities.printErrorMessage("No Elements found for '" + fieldName + "'");
-			highlightWebElement(nullElement, "red");
+			highlightWebElement(nullElement, "fail");
 			failureDetected = true;
 			return;
 
@@ -290,7 +289,7 @@ public class TestWebElementCommon {
 							TestUtilities.printErrorMessage(
 									fieldName + " Expected: " + fieldValue + "  Actual: " + entryLabel.getText());
 							failureDetected = true;
-							highlightWebElement(entryLabel, "red");
+							highlightWebElement(entryLabel, "fail");
 							// failTest();
 						}
 					}
@@ -308,7 +307,8 @@ public class TestWebElementCommon {
 				} else {
 					TestUtilities.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: "
 							+ elements.get(0).getAttribute("value"));
-					highlightWebElement(elements.get(0), "red");
+					failureDetected = true;
+					highlightWebElement(elements.get(0), "fail");
 				}
 				break;
 			case "date":
@@ -322,7 +322,8 @@ public class TestWebElementCommon {
 				} else {
 					TestUtilities
 							.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
-					highlightWebElement(elements.get(0), "red");
+					failureDetected = true;
+					highlightWebElement(elements.get(0), "fail");
 				}
 				break;
 
@@ -338,7 +339,8 @@ public class TestWebElementCommon {
 				} else {
 					TestUtilities
 							.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
-					highlightWebElement(elements.get(0), "red");
+					failureDetected = true;
+					highlightWebElement(elements.get(0), "fail");
 				}
 				// highlightWebElement(elements.get(0), "yellow");
 				break;
@@ -346,7 +348,7 @@ public class TestWebElementCommon {
 			default:
 				TestUtilities.printErrorMessage("TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
 				highlightWebElement(elements.get(0), "blue");
-				highlightWebElement(elements.get(0), "red");
+				highlightWebElement(elements.get(0), "fail");
 				failureDetected = true;
 			}
 			break;
@@ -370,7 +372,8 @@ public class TestWebElementCommon {
 						highlightWebElement(elements.get(0), "blue");
 						TestUtilities.printErrorMessage(
 								fieldName + " Expected: " + fieldValue + "  Actual: " + option.getText());
-						highlightWebElement(elements.get(0), "red");
+						failureDetected = true;
+						highlightWebElement(elements.get(0), "fail");
 					}
 					// System.out.println(tagName + " = '" + option.getText()+ "'");
 					// highlightWebElement(elements.get(0), "green");
@@ -388,13 +391,14 @@ public class TestWebElementCommon {
 				highlightWebElement(elements.get(0), "green");
 			} else {
 				TestUtilities.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
-				highlightWebElement(elements.get(0), "red");
+				failureDetected = true;
+				highlightWebElement(elements.get(0), "fail");
 			}
 			break;
 		default:
 			TestUtilities.printErrorMessage("TAG NAME '" + tagName + "' NOT RECOGNISED ");
 			highlightWebElement(elements.get(0), "blue");
-			highlightWebElement(elements.get(0), "red");
+			highlightWebElement(elements.get(0), "fail");
 			failureDetected = true;
 		}
 		TestUtilities.printDebugMessage("FINISHED");
@@ -409,6 +413,7 @@ public class TestWebElementCommon {
 		List<WebElement> elements = driver.findElements(By.xpath(xPathString));
 		if (elements.size() == 0) {
 			TestUtilities.printErrorMessage(fieldValue + "' Not Found on the page");
+			highlightWebElement(nullElement, "fail");
 			failureDetected = true;
 		} else {
 			Iterator<WebElement> iter = elements.iterator();
@@ -489,7 +494,8 @@ public class TestWebElementCommon {
 				// i = i + 1;
 			}
 		}
-
+		failureDetected = true;
+		highlightWebElement(elements.get(0), "fail");
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
@@ -547,11 +553,14 @@ public class TestWebElementCommon {
 					highlightWebElement(element, "red");
 				}
 			} catch (Exception e) {
-				TestUtilities.printErrorMessage("<<< METHOD NOT COMPLETE >>>");
+				TestUtilities.printErrorMessage("The Item '" + fieldLocation + "' does not exist");
 			}
+			
+			
 		}
 		TestUtilities.printErrorMessage("'" + fieldValue + "' Entry Value not found");
 		failureDetected = true;
+		highlightWebElement(entries.get(0), "fail");
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
@@ -602,6 +611,7 @@ public class TestWebElementCommon {
 
 		if (currentEntry == null) {
 			TestUtilities.printErrorMessage("ENTRY WAS NOT FOUND BEFORE CALLING THIS METHOD");
+			highlightWebElement(nullElement, "fail");
 			failureDetected = true;
 		} else {
 			setValue(currentEntry, fieldName, fieldValue);
@@ -623,7 +633,7 @@ public class TestWebElementCommon {
 		// System.out.println("size " + elements.size());
 		if (elements.size() == 0) {
 			TestUtilities.printErrorMessage("No Elements found for '" + fieldName + "'");
-			highlightWebElement(nullElement, "red");
+			highlightWebElement(nullElement, "fail");
 			failureDetected = true;
 			return;
 
@@ -653,6 +663,7 @@ public class TestWebElementCommon {
 						highlightWebElement(entryLabel, "red");
 					}
 				}
+				highlightWebElement(elements.get(0), "fail");
 				TestUtilities.printErrorMessage("radio option: " + fieldValue + " does not exist");
 				failureDetected = true;
 				break;
@@ -691,6 +702,7 @@ public class TestWebElementCommon {
 				break;
 			default:
 				TestUtilities.printErrorMessage("TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
+				highlightWebElement(elements.get(0), "fail");
 				failureDetected = true;
 			}
 			break;
@@ -702,7 +714,7 @@ public class TestWebElementCommon {
 		default:
 			highlightWebElement(elements.get(0), "blue");
 			TestUtilities.printErrorMessage("TAG NAME '" + tagName + "' NOT RECOGNISED >>>");
-			highlightWebElement(elements.get(0), "red");
+			highlightWebElement(elements.get(0), "fail");
 			failureDetected = true;
 		}
 		TestUtilities.printDebugMessage("FINISHED");
@@ -762,7 +774,7 @@ public class TestWebElementCommon {
 			l = myTest.getLocation().getX();
 		}
 
-		if (highlightColour.contentEquals("red")) {
+		if (highlightColour.contentEquals("fail")) {
 
 			// l = l + (w/2) - 30;
 			// t = t + (h/2) - 30;
@@ -794,6 +806,13 @@ public class TestWebElementCommon {
 
 			int l2 = l + (w / 2) - (r2 / 2) - (b2);
 			int t2 = t + (h / 2) - (r2 / 2) - (b2);
+			
+			 try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			 js.executeScript("var element = document.getElementById('Circle');"
 			 + "element.style.transition = 'all 0.3s';"
