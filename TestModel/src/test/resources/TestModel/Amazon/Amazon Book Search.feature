@@ -5,7 +5,9 @@ Feature: Amazon Book Search
 @Amazon-01
 #Scenario 3
 Scenario: Search Child44
-   When I am on the Amazon Page
-   Then I search for Child44 book
-   Then I select the 1987 Item
+   When I go to the "https://www.amazon.co.uk" Website
+   Then I sleep 10000 ms
+   Then I set "SearchBox" to "Child44 book"
+   Then I click "SearchGo"
+   Then I find the "AmazonBookEntry" where "YearItem" is "1987"
 

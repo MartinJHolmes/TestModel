@@ -1,4 +1,4 @@
-package stepDefinitions.BrentfordBank;
+package stepDefinitions.TestModel;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

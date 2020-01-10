@@ -1,9 +1,11 @@
 // © Martin Holmes 2019
 package support;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -31,6 +33,8 @@ public class TestWebElementCommon {
 
 	public LoadData myLoadData = new LoadData();
 	public RunData myRunData = new RunData();
+
+	private WebElement nullElement = null;
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public TestWebElementCommon() {
@@ -258,6 +262,7 @@ public class TestWebElementCommon {
 		List<WebElement> elements = findElements(fieldName);
 		if (elements.size() == 0) {
 			TestUtilities.printErrorMessage("No Elements found for '" + fieldName + "'");
+			highlightWebElement(nullElement, "red");
 			failureDetected = true;
 			return;
 
@@ -375,7 +380,7 @@ public class TestWebElementCommon {
 			break;
 		case "li":
 		case "h1":
-		case"span":
+		case "span":
 			highlightWebElement(elements.get(0), "blue");
 			// System.out.println(tagName + " = " + elements.get(0).getAttribute("value"));
 			actualValue = elements.get(0).getText();
@@ -618,6 +623,7 @@ public class TestWebElementCommon {
 		// System.out.println("size " + elements.size());
 		if (elements.size() == 0) {
 			TestUtilities.printErrorMessage("No Elements found for '" + fieldName + "'");
+			highlightWebElement(nullElement, "red");
 			failureDetected = true;
 			return;
 
@@ -682,6 +688,7 @@ public class TestWebElementCommon {
 					}
 				}
 				highlightWebElement(elements.get(0), "green");
+				break;
 			default:
 				TestUtilities.printErrorMessage("TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
 				failureDetected = true;
@@ -693,7 +700,9 @@ public class TestWebElementCommon {
 			highlightWebElement(elements.get(0), "green");
 			break;
 		default:
+			highlightWebElement(elements.get(0), "blue");
 			TestUtilities.printErrorMessage("TAG NAME '" + tagName + "' NOT RECOGNISED >>>");
+			highlightWebElement(elements.get(0), "red");
 			failureDetected = true;
 		}
 		TestUtilities.printDebugMessage("FINISHED");
@@ -742,25 +751,105 @@ public class TestWebElementCommon {
 	private void highlightWebElement(WebElement myTest, String highlightColour) {
 		TestUtilities.printDebugMessage("STARTED");
 
-		if (GlobalVariables.highlightWebElementRequired == true & !GlobalVariables.noSleep) {
+		int w = 0;
+		int h = 0;
+		int t = 50;
+		int l = 300;
+		if (myTest != null) {
+			w = myTest.getSize().getWidth();
+			h = myTest.getSize().getHeight();
+			t = myTest.getLocation().getY();
+			l = myTest.getLocation().getX();
+		}
 
-			int w = myTest.getSize().getWidth() + 8;
-			int h = myTest.getSize().getHeight() + 8;
-			int t = myTest.getLocation().getY() - 6;
-			int l = myTest.getLocation().getX() - 8;
+		if (highlightColour.contentEquals("red")) {
+
+			// l = l + (w/2) - 30;
+			// t = t + (h/2) - 30;
+			
+			t = t + 2;
+
+			int b1 = 10;
+			int r1 = 24;
+
+			int l1 = l + (w / 2) - (r1 / 2) - (b1);
+			int t1 = t + (h / 2) - (r1 / 2) - (b1);
 
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript(" " + "var btn=document.createElement('DIV');" + "btn.id = 'Hello';"
-					+ "btn.style = 'border:3px solid " + highlightColour + ";" + " position: absolute;" + "width: " + w
-					// + "px; " + "height:" + h + "px; " + "top:" + t + "px; " + "left:" + l +
-					// "px';"
-					+ "px; " + "height:" + h + "px; " + "top:" + t + "px; " + "left:" + l + "px; z-index: 1000';"
+			js.executeScript("var btn=document.createElement('DIV');" + "btn.id = 'Circle';"
+					+ "btn.style.position = 'absolute';"
+					+ "btn.style.backgroundColor= 'red';"
+					+ "btn.style.border='" + b1 + "px solid red';"
+					+ "btn.style.width='" + r1 + "px';" 
+					+ "btn.style.height='" + r1 + "px';"
+					+ "btn.style.left='" + l1 + "px';" 
+					+ "btn.style.top='" + t1 + "px';"
+					+ "btn.style.borderRadius='100px';" 
+					+ "btn.style.zIndex='1000';"
 					+ "document.body.appendChild(btn);");
-			TestUtilities.sleepTime(GlobalVariables.highlightTime);
-			js.executeScript(
-					"var element = document.getElementById('Hello');" + "element.parentNode.removeChild(element);");
 
+
+			int b2 = 4;
+			int r2 = 60;
+
+			int l2 = l + (w / 2) - (r2 / 2) - (b2);
+			int t2 = t + (h / 2) - (r2 / 2) - (b2);
+
+			 js.executeScript("var element = document.getElementById('Circle');"
+			 + "element.style.transition = 'all 0.3s';"
+			 + "element.style.position = 'absolute';"
+			 + "element.style.backgroundColor = 'transparent';"
+				+ "element.style.border='" + b2 + "px solid red';"
+				+ "element.style.width='" + r2 + "px';" 
+				+ "element.style.height='" + r2 + "px';"
+				+ "element.style.left='" + l2 + "px';" 
+				+ "element.style.top='" + t2 + "px';"
+				+ "element.style.borderRadius='100px';" 
+			 );
+			 try {
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+			 Date date = Calendar.getInstance().getTime();  
+			 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hhmmss");  
+			 String strDate = dateFormat.format(date);  
+			 
+			 try {
+				TestUtilities.takeSnapShot(driver, "c://TestFolder//" + strDate + "-screenshot.jpg") ;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+			 
+			js.executeScript(
+					"var element = document.getElementById('Circle');" + "element.parentNode.removeChild(element);");
+
+		} else {
+
+			if (GlobalVariables.highlightWebElementRequired == true & !GlobalVariables.noSleep) {
+
+				w = w + 8;
+				h = h + 8;
+				t = t - 6;
+				l = l - 6;
+						
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript(" " + "var btn=document.createElement('DIV');"
+				+ "btn.id = 'Hello';"
+						+ "btn.style = 'border:3px solid " + highlightColour + ";" + " position: absolute;" + "width: "
+						+ w
+						+ "px; " + "height:" + h + "px; " + "top:" + t + "px; " + "left:" + l + "px; z-index: 1000';"
+						+ "document.body.appendChild(btn);");
+				TestUtilities.sleepTime(GlobalVariables.highlightTime);
+				js.executeScript(
+						"var element = document.getElementById('Hello');" + "element.parentNode.removeChild(element);");
+
+			}
 		}
+
 		TestUtilities.printDebugMessage("FINISHED");
 	}
 

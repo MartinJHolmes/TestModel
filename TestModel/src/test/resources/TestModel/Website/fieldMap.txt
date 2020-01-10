@@ -12,7 +12,13 @@ DateItem,//div[contains(@class~'wr-day__title')],abc,abc,abc
 TimeEntry,//li[contains(@class~'wr-time-slot')],abc,abc,abc
 HourItem,//span[contains(@class~'wr-time-slot-primary__hours')],abc,abc,abc
 HourTemp,//span[contains(@class~'wr-value--temperature--c')],abc,abc,abc
+---AMAZON--,,,,a
+SearchBox,//*[@id='twotabsearchtextbox'],a,xpath,_main
+SearchGo,//input[@class=('nav-input')],a,xpath,_main
+AmazonBookEntry,//div[contains(@class~'s-include-content-margin')],div,xpath,_main
+YearItem,//span[contains(@class~'a-size-base a-color-secondary a-text-normal')],a,xpath,_main
 ---TEST MODEL---,,,,a
+Test2,//input[@id='test2'],input,xpath,_main
 BookEntry,//div[@class='product'],DIV,xpath,_main
 BookTitle,//label[@class='book_title'],abc,abc,abc
 BookPrice,//label[@class='book_price'],abc,abc,abc

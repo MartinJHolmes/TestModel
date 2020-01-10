@@ -1,4 +1,4 @@
-package stepDefinitions.BrentfordBank;
+package stepDefinitions.TestModel;
 
 import java.awt.AWTException;
 import java.awt.Robot;

@@ -27,7 +27,7 @@ Scenario: BBC Weather Test
    Then I sleep 2000 ms
    Then I set "WeatherSearch" to "LE5 6JJ"
    Then I click "WeatherSearchGo"
-   Then I find the "DayEntry" where "DateItem" is "Sat 11th" 
+   Then I find the "DayEntry" where "DateItem" is "Sun 12th" 
    Then I click the entry
    Then I find the "TimeEntry" where "HourItem" is "08"
    Then I check "HourTemp" is "[o]5" for entry
@@ -36,6 +36,6 @@ Scenario: BBC Weather Test
    Then I click the entry
    Then I find the "TimeEntry" where "HourItem" is "10"
    Then I click the entry
-   Then I find the "DayEntry" where "DateItem" is "Fri 10th"
+   Then I find the "DayEntry" where "DateItem" is "Sat 11th"
    Then I click the entry
    Then I sleep 2000 ms
