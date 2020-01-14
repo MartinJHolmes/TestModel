@@ -9,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
+import io.cucumber.core.api.Scenario;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import support.World;
@@ -108,8 +109,6 @@ public class Common {
 //		html.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
 		JavascriptExecutor executor = (JavascriptExecutor)world.myTestWebElement.driver;
 		executor.executeScript("document.body.style.zoom = '0.5'");
-		
-
 		
 	}
 

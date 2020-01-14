@@ -19,6 +19,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import support.World;
 import supportStatic.GlobalVariables;
+import supportStatic.TestUtilities;
 import supportStatic.WebElementMap;
 
 public class BeforeAfter {
@@ -73,8 +74,12 @@ public class BeforeAfter {
 
 		Integer lines = scenario.getLine();
 		System.out.println("The scenario = " + scenario.getName() + " " + lines);
+		TestUtilities.writeToFile("The scenario = " + scenario.getName() + " " + lines);
 		
-		world.myTestWebElement.scenario = scenario.getName();
+		world.myTestWebElement.scenarioName = scenario.getName();
+		world.myTestWebElement.lineNumber = scenario.getLine();
+		world.myTestWebElement.featureName = scenario.getId().split(":")[0];
+		System.out.println(scenario.getId());
 
 		// Setup the Web Driver
 		System.setProperty(GlobalVariables.webDriverType, GlobalVariables.webDriverFileLocation);
@@ -103,6 +108,8 @@ public class BeforeAfter {
 
 		world.myTestWebElement.driver.close();
 		System.out.println(">>>>>>>> SCENARIO FINISHED <<<<<<<<<<<<");
+		TestUtilities.writeToFile(scenario.getName() + " - " + scenario.getStatus());
+		TestUtilities.writeToFile("");
 	}
 
 };

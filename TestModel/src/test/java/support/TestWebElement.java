@@ -13,8 +13,10 @@ public class TestWebElement extends TestWebElementCommon{
 		TestUtilities.printDebugMessage("doSomething Called by " + myName);
 		WebElement myWE = null;
 		
-		
-		
+	}
+	
+	public void highlightWebElement99(WebElement myTest, String highlightColour) {
+		//System.out.println("Called");
 	}
 
 }

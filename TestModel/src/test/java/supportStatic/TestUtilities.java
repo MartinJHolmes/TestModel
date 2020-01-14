@@ -2,7 +2,9 @@
 package supportStatic;
 
 import java.io.File;
-
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -50,6 +52,7 @@ public class TestUtilities {
 			System.out.println(">>>>ERROR>>>>:" + currentMethod + "() " + errorMessage);
 	}
 	
+	//####################################################################
     public static void takeSnapShot(WebDriver webdriver,String fileWithPath) throws Exception{
 
         //Convert web driver object to TakeScreenshot
@@ -69,6 +72,28 @@ public class TestUtilities {
                 //FileUtils.copyFile(SrcFile, DestFile);
                 FileHandler.copy(SrcFile, DestFile);
 
+    }
+    
+	//####################################################################
+    public static void writeToFile(String writeLine) {
+    	String fileName = "c:/TestFolder/report.txt";
+    	
+//    	File f = new File(fileName);
+//    	if(f.exists() && !f.isDirectory()) { 
+//    	    System.out.println("File Already exists");
+//    	}
+    	
+    	FileWriter write = null;
+		try {
+			write = new FileWriter(fileName,true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	PrintWriter printLine = new PrintWriter(write);
+    	printLine.printf("%s" + "%n", writeLine);
+    	printLine.close();
+    	
     }
 
 }
