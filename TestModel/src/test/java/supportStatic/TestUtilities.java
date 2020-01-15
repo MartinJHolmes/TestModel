@@ -15,6 +15,7 @@ import gherkin.ast.Scenario;
 
 public class TestUtilities {
 	
+	//####################################################################
 	public static void sleepTime(int timeMilliseconds) {
         try {
         	if(!GlobalVariables.noSleep) {
@@ -26,13 +27,22 @@ public class TestUtilities {
 			}
 	}
 	
+	//####################################################################
 	public static void sleepTime() {
         try {
         	if(!GlobalVariables.noSleep) {
 				Thread.sleep(GlobalVariables.sleepBetweenSteps);
         	}
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	//####################################################################
+	public static void waitTime(int timeMilliseconds) {
+        try {
+				Thread.sleep(timeMilliseconds);
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 	}

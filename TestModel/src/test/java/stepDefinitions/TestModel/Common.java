@@ -136,6 +136,16 @@ public class Common {
 	public void i_remember_for_later_the_value_of_as(String fieldName, String remember) {
 	    world.myTestWebElement.setRememberFieldPair(fieldName, remember);
 	}
+	
+	@Then("I focus on {string}")
+	public void i_focus_on(String string) {
+	    world.myTestWebElement.setCurrentFocus(string);
+	}
+	
+	@Then("I focus on the whole page")
+	public void i_focus_on_the_whole_page() {
+		world.myTestWebElement.resetCurrentFocus();
+	}
 
 
 }

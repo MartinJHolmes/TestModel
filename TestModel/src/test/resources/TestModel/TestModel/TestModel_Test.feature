@@ -50,8 +50,8 @@ Scenario: Check Field Value Tests - FAIL
    Then I check "//Hello" is "Test9"
    Then I check "Test10" is "Test10"
    Then I check "Test11" is "Test11"
-   Then I check "(//li)[1]" is "Test12"
-   Then I check "(//li)[2]" is "Test12a"
+   Then I check "//li[1]" is "Test12"
+   Then I check "//li[2]" is "Test12a"
    Then I check for errors
    Then I sleep 3000 ms
    

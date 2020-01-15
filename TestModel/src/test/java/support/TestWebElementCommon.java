@@ -24,9 +24,12 @@ import supportStatic.TestUtilities;
 import supportStatic.WebElementMap;
 
 public class TestWebElementCommon {
+	// TODO simplify all the errorDetected
+	// TODO include the currentFocus approach
 
 	public WebDriver driver;
 	private WebElement currentEntry;
+	private WebElement currentFocus;
 	public String scenarioName;
 	public String featureName;
 	public Integer lineNumber;
@@ -63,6 +66,18 @@ public class TestWebElementCommon {
 			//String Temp = driver.findElement(By.xpath("/failureDetected")).getText();
 			// driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		}
+	}
+	
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public void setCurrentFocus(String currentFocusPath) {
+		currentFocus = driver.findElement(By.xpath(currentFocusPath));
+		highlightWebElement(currentFocus, "green");
+	}
+	
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public void resetCurrentFocus() {
+		currentFocus = driver.findElement(By.xpath("/html/body"));
+		highlightWebElement(currentFocus, "green");
 	}
 
 	// --------------------------------------------------------------------
@@ -135,47 +150,47 @@ public class TestWebElementCommon {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkFieldProperty(String fieldName, String fieldProperty, String fieldPropertyValue) {
 		TestUtilities.printDebugMessage("STARTED");
-		// String fieldXPath = WebElementMap.getIdentifyByValue(fieldName);
+
 		List<WebElement> elements = findElements(fieldName);
 		highlightWebElement(elements.get(0), "blue");
 		String propertyValue = elements.get(0).getAttribute(fieldProperty);
 		if (propertyValue == null) {
-			// switch(fieldProperty) {
-			// case "disabled":
 			propertyValue = "false";
-			// }
 		}
-		// System.out.println("Property field: " + fieldName + "; property: " +
-		// fieldProperty + ": value=" + propertyValue);
 		if (propertyValue.contentEquals(fieldPropertyValue)) {
 			highlightWebElement(elements.get(0), "green");
 		} else {
 			String errorMessage = "Expected Value = " + propertyValue + "   Actual Value = " + fieldPropertyValue;
-			TestUtilities
-					.printErrorMessage("Expected Value = " + propertyValue + "   Actual Value = " + fieldPropertyValue);
-			highlightWebElement(elements.get(0), "fail");
-//			TestUtilities.writeToFile(errorMessage);
-			failureDetected = true;
+			errorDetected(elements.get(0),errorMessage);
+			return;
 		}
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
+	
+	// --------------------------------------------------------------------
+	private void errorDetected(WebElement currentElement,String errorMessage) {
+		TestUtilities.printErrorMessage(errorMessage);
+		TestUtilities.writeToFile(errorMessage);
+		highlightWebElement(currentElement, "fail");
+		failureDetected = true;
+	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkItemValue(String fieldName, String fieldValue) {
-		fieldValue = transformInputValue(fieldValue);
+		// TODO combine with checkFIeldValue
 		TestUtilities.printDebugMessage("STARTED");
+		
+		fieldValue = transformInputValue(fieldValue);
 		String fieldXPath = WebElementMap.getIdentifyByValue(fieldName);
 		WebElement returnWE = currentEntry.findElement(By.xpath("." + fieldXPath));
 		highlightWebElement(returnWE, "blue");
-		// System.out.println("VALUE = " + returnWE.getText());
+		
 		if (returnWE.getText().contentEquals(fieldValue)) {
 			highlightWebElement(returnWE, "green");
 		} else {
-			TestUtilities
-					.printErrorMessage("Expected Value = " + fieldValue + "   Actual Value = " + returnWE.getText());
-			highlightWebElement(returnWE, "fail");
-			failureDetected = true;
+			String errorMessage = "Expected Value = " + fieldValue + "   Actual Value = " + returnWE.getText();
+			errorDetected(returnWE,errorMessage);
 		}
 
 		TestUtilities.sleepTime();
@@ -189,6 +204,7 @@ public class TestWebElementCommon {
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public String getFieldValue(String fieldName) {
+		// TODO combine this with checkFieldValue
 		actualValue = "";
 
 		TestUtilities.printDebugMessage("STARTED");
@@ -196,9 +212,8 @@ public class TestWebElementCommon {
 		List<WebElement> elements = findElements(fieldName);
 		// System.out.println(elements.size());
 		if (elements.size() == 0) {
-			TestUtilities.printErrorMessage("No Elements found for '" + fieldName + "'");
-			highlightWebElement(nullElement, "fail");
-			failureDetected = true;
+			String errorMessage = "No Elements found for '" + fieldName + "'";
+			errorDetected(nullElement,errorMessage);
 			return null;
 
 		}
@@ -225,10 +240,9 @@ public class TestWebElementCommon {
 				break;
 
 			default:
-				TestUtilities.printErrorMessage("TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
 				highlightWebElement(elements.get(0), "blue");
-				highlightWebElement(elements.get(0), "fail");
-				failureDetected = true;
+				String errorMessage = "TYPE NAME '" + typeName + "' NOT RECOGNISED >>>";
+				errorDetected(elements.get(0),errorMessage);
 				return "";
 			}
 			break;
@@ -246,10 +260,9 @@ public class TestWebElementCommon {
 
 			break;
 		default:
-			TestUtilities.printErrorMessage("TAG NAME '" + tagName + "' NOT RECOGNISED >>>");
 			highlightWebElement(elements.get(0), "blue");
-			highlightWebElement(elements.get(0), "fail");
-			failureDetected = true;
+			String errorMessage = "TAG NAME '" + tagName + "' NOT RECOGNISED >>>";
+			errorDetected(elements.get(0),errorMessage);
 		}
 		TestUtilities.printDebugMessage("FINISHED");
 		return actualValue;
@@ -258,10 +271,10 @@ public class TestWebElementCommon {
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public void checkFieldValue(String fieldName, String fieldValue) {
+		TestUtilities.printDebugMessage("STARTED");
 		actualValue = "";
 		fieldValue = transformInputValue(fieldValue);
-
-		TestUtilities.printDebugMessage("STARTED");
+		
 		TestUtilities.printDebugMessage(" fieldValue = " + fieldValue);
 
 		List<WebElement> elements = findElements(fieldName);
@@ -295,12 +308,8 @@ public class TestWebElementCommon {
 							highlightWebElement(entryLabel, "green");
 						} else {
 							String errorMessage = fieldName + " Expected: " + fieldValue + "  Actual: " + entryLabel.getText();
-							TestUtilities.printErrorMessage(
-									fieldName + " Expected: " + fieldValue + "  Actual: " + entryLabel.getText());
-							failureDetected = true;
-							highlightWebElement(entryLabel, "fail");
-							TestUtilities.writeToFile(errorMessage);
-							// failTest();
+							errorDetected(elements.get(0),errorMessage);
+							return;
 						}
 					}
 				}
@@ -317,11 +326,7 @@ public class TestWebElementCommon {
 				} else {
 					String errorMessage = fieldName + " Expected: " + fieldValue + "  Actual: "
 							+ elements.get(0).getAttribute("value");
-					TestUtilities.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: "
-							+ elements.get(0).getAttribute("value"));
-					failureDetected = true;
-					highlightWebElement(elements.get(0), "fail");
-					TestUtilities.writeToFile(errorMessage);
+					errorDetected(elements.get(0),errorMessage);
 				}
 				break;
 			case "date":
@@ -334,11 +339,8 @@ public class TestWebElementCommon {
 					highlightWebElement(elements.get(0), "green");
 				} else {
 					String errorMessage = fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue;
-					TestUtilities
-							.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
-					failureDetected = true;
-					highlightWebElement(elements.get(0), "fail");
-					TestUtilities.writeToFile(errorMessage);
+					errorDetected(elements.get(0),errorMessage);
+					return;
 				}
 				break;
 
@@ -353,22 +355,16 @@ public class TestWebElementCommon {
 					highlightWebElement(elements.get(0), "green");
 				} else {
 					String errorMessage = fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue;
-					TestUtilities
-							.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
-					failureDetected = true;
-					highlightWebElement(elements.get(0), "fail");
-					TestUtilities.writeToFile(errorMessage);
+					errorDetected(elements.get(0),errorMessage);
+					return;
 				}
-				// highlightWebElement(elements.get(0), "yellow");
 				break;
 
 			default:
-				String errorMessage = "TYPE NAME '" + typeName + "' NOT RECOGNISED >>>";
-				TestUtilities.printErrorMessage("TYPE NAME '" + typeName + "' NOT RECOGNISED >>>");
 				highlightWebElement(elements.get(0), "blue");
-				highlightWebElement(elements.get(0), "fail");
-				failureDetected = true;
-				TestUtilities.writeToFile(errorMessage);
+				String errorMessage = "TYPE NAME '" + typeName + "' NOT RECOGNISED >>>";
+				errorDetected(elements.get(0),errorMessage);
+				return;
 			}
 			break;
 		case "select":
@@ -390,15 +386,9 @@ public class TestWebElementCommon {
 					} else {
 						highlightWebElement(elements.get(0), "blue");
 						String errorMessage = fieldName + " Expected: " + fieldValue + "  Actual: " + option.getText();
-						TestUtilities.printErrorMessage(
-								fieldName + " Expected: " + fieldValue + "  Actual: " + option.getText());
-						failureDetected = true;
-						highlightWebElement(elements.get(0), "fail");
-						
-						TestUtilities.writeToFile(errorMessage);
+						errorDetected(elements.get(0),errorMessage);
+						return;
 					}
-					// System.out.println(tagName + " = '" + option.getText()+ "'");
-					// highlightWebElement(elements.get(0), "green");
 				}
 			}
 
@@ -413,19 +403,15 @@ public class TestWebElementCommon {
 				highlightWebElement(elements.get(0), "green");
 			} else {
 				String errorMessage = fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue;
-				TestUtilities.printErrorMessage(fieldName + " Expected: " + fieldValue + "  Actual: " + actualValue);
-				failureDetected = true;
-				highlightWebElement(elements.get(0), "fail");
-				TestUtilities.writeToFile(errorMessage);
+				errorDetected(elements.get(0),errorMessage);
+				return;
 			}
 			break;
 		default:
-			String errorMessage = "TAG NAME '" + tagName + "' NOT RECOGNISED ";
-			TestUtilities.printErrorMessage("TAG NAME '" + tagName + "' NOT RECOGNISED ");
 			highlightWebElement(elements.get(0), "blue");
-			highlightWebElement(elements.get(0), "fail");
-			failureDetected = true;
-			TestUtilities.writeToFile(errorMessage);
+			String errorMessage = "TAG NAME '" + tagName + "' NOT RECOGNISED ";
+			errorDetected(elements.get(0),errorMessage);
+			return;
 		}
 		TestUtilities.printDebugMessage("FINISHED");
 
@@ -443,7 +429,7 @@ public class TestWebElementCommon {
 			failureDetected = true;
 		} else {
 			Iterator<WebElement> iter = elements.iterator();
-			// Integer i = 0;
+			// TODO remove iterations when noSleep
 			while (iter.hasNext()) {
 				WebElement element = iter.next();
 				highlightWebElement(element, "green");
@@ -460,6 +446,7 @@ public class TestWebElementCommon {
 	public void gotoURL(String URL) {
 		TestUtilities.printDebugMessage("STARTED");
 		driver.get(URL);
+		currentFocus = driver.findElement(By.xpath("/html/body"));
 		TestUtilities.sleepTime();
 		TestUtilities.printDebugMessage("FINISHED");
 	}
@@ -775,7 +762,8 @@ public class TestWebElementCommon {
 			}
 		}
 		if (currentEntry == null) {
-			entries = driver.findElements(By.xpath(fieldLocation));
+//			entries = driver.findElements(By.xpath(fieldLocation));
+			entries = currentFocus.findElements(By.xpath("." + fieldLocation));
 		} else {
 			entries = currentEntry.findElements(By.xpath("." + fieldLocation));
 		}
@@ -784,10 +772,17 @@ public class TestWebElementCommon {
 		return entries;
 
 	}
+	
+	
 
 	// -------------------------------------------------------------
+	// TODO Consider moving this to TestUtilities
 	public void highlightWebElement(WebElement myTest, String highlightColour) {
 		TestUtilities.printDebugMessage("STARTED");
+		
+		if(GlobalVariables.noSleep) {
+			return;
+		}
 
 		int w = 0;
 		int h = 0;
@@ -833,12 +828,7 @@ public class TestWebElementCommon {
 			int l2 = l + (w / 2) - (r2 / 2) - (b2);
 			int t2 = t + (h / 2) - (r2 / 2) - (b2);
 			
-			 try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			TestUtilities.waitTime(100);
 
 			 js.executeScript("var element = document.getElementById('Circle');"
 			 + "element.style.transition = 'all 0.3s';"
@@ -851,12 +841,7 @@ public class TestWebElementCommon {
 				+ "element.style.top='" + t2 + "px';"
 				+ "element.style.borderRadius='100px';" 
 			 );
-			 try {
-				Thread.sleep(400);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			 TestUtilities.waitTime(400);
 			 
 			 Date date = Calendar.getInstance().getTime();  
 			 DateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd hhmmss");  

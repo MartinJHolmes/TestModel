@@ -34,4 +34,3 @@ CurrentCityTemp,//span[@class='temperature__text'],span,xpath,_main
 ForecastEntry,//div[@class='day-weather__container'],div,xpath,_main
 ForecastDay,//span[@class='day-name__text'],span,xpath,_main
 ForecastTemp,//span[@class='day-temp__text'],span,xpath,_main
-

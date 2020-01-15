@@ -52,4 +52,15 @@ Scenario: Entries and Items
    Then I check for errors
    Then I sleep 5000 ms
 
+@Test-07
+#Scenario 7
+Scenario: Current Focus
+   When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-CurrentFocus.html" Website
+   Then I focus on "//App-section1"
+   Then I set "Test2" to "Hello"
+   Then I focus on "//App-section2"
+   Then I set "Test2" to "Hello"
+   Then I focus on the whole page
+   Then I set "Test2" to "Hello"
+   
    
