@@ -759,11 +759,18 @@ public class TestWebElementCommon {
 			fieldLocation = WebElementMap.getIdentifyByValue(fieldName);
 			if (fieldLocation == null) {
 				fieldLocation = "//*[@id=(" + "//label[text()[(normalize-space(.)='" + fieldName + "')]]" + "/@for)]";
+				//System.out.println("--> fieldLocation = " +fieldLocation);
 			}
 		}
 		if (currentEntry == null) {
 //			entries = driver.findElements(By.xpath(fieldLocation));
 			entries = currentFocus.findElements(By.xpath("." + fieldLocation));
+			System.out.println("number of elements = " + entries.size());
+			if (entries.size() == 0) {
+				entries = currentFocus.findElements(By.xpath("//label[text()='" + fieldName + "']"));
+				//entries = currentFocus.findElements(By.xpath("//*[contains(@aria-labelledby,'" + entries.get(0).getAttribute("id") + "')]")); Something to do with accessibility
+				
+			}
 		} else {
 			entries = currentEntry.findElements(By.xpath("." + fieldLocation));
 		}

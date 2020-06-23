@@ -29,10 +29,10 @@ Scenario: Regression Test
    Then I set "Username" to "holmesm"
    Then I set "Password" to "Password"
    Then I click "Logon"
-   
    Then I set "Amount" to "123"
    Then I set "When" to "06-12-2019"
-   Then I set "Speed" to "Don't Mind"
+   # Then I set "Speed" to "Don't Mind"
+   Then I set "Choose a delivery speed:" to "Don't Mind"
    Then I click "StatementMenu" followed by "Town Crier"
    Then I find the "ProductEntry" where "ProductTitle" is "Mortgages"
    Then I click the entry
