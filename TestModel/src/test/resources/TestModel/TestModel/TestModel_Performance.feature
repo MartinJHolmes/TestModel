@@ -7,7 +7,7 @@ Feature: TestModel - Performance Tests
 Scenario: Simple Performance Test 
    When I go to the "file:///C:/Martin_Holmes_Files/Test%20HTML/Website/Test-SetField.html" Website
    Then I sleep 2000 ms
-   Then I performance test 500
+   Then I performance test 1000
    Then I sleep 3000 ms
    
 @Performance-02
